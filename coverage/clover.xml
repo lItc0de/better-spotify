@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1529827425853" clover="3.2.0">
+  <project timestamp="1529827425854" name="All files">
+    <metrics statements="16" coveredstatements="16" conditionals="8" coveredconditionals="8" methods="0" coveredmethods="0" elements="24" coveredelements="24" complexity="0" loc="16" ncloc="16" packages="1" files="1" classes="1">
+      <file name="player.js" path="/Users/basti/Documents/projects/player/src/store/modules/player.js">
+        <metrics statements="16" coveredstatements="16" conditionals="8" coveredconditionals="8" methods="0" coveredmethods="0"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="34" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="46" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="52" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="53" count="1" type="stmt"/>
+      </file>
+    </metrics>
+  </project>
+</coverage>
