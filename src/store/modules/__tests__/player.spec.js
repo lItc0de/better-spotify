@@ -1,14 +1,13 @@
 import player from '@/store/modules/player';
-import fetchFromSpotify from '@/utils/fetchFromSpotify';
-
-jest.mock('@/utils/fetchFromSpotify', () => jest.fn());
+import * as client from '@/utils/fetchFromSpotify';
 
 describe('player module', () => {
   beforeEach(() => {
-    fetchFromSpotify.mockClear();
+    client.fetchFromSpotify = jest.fn();
+    client.putToSpotify = jest.fn();
   });
 
-  describe('devices', () => {
+  describe('GET devices', () => {
     it('has a default state', () => {
       expect(player.state.devices).toEqual([]);
     });
@@ -23,7 +22,7 @@ describe('player module', () => {
     it('commits the fetched items', async () => {
       const commit = jest.fn();
       const devices = ['device'];
-      fetchFromSpotify.mockReturnValueOnce(devices);
+      client.fetchFromSpotify.mockReturnValueOnce(devices);
       await player.actions.fetchDevices({ commit });
       expect(commit).toHaveBeenCalledWith('setDevices', devices);
     });
@@ -35,7 +34,7 @@ describe('player module', () => {
     });
   });
 
-  describe('playback', () => {
+  describe('GET playback', () => {
     it('has a default state', () => {
       expect(player.state.playback).toEqual({});
     });
@@ -50,7 +49,7 @@ describe('player module', () => {
     it('commits the fetched items', async () => {
       const commit = jest.fn();
       const playback = { playback: 'playback' };
-      fetchFromSpotify.mockReturnValueOnce(playback);
+      client.fetchFromSpotify.mockReturnValueOnce(playback);
       await player.actions.fetchPlayback({ commit });
       expect(commit).toHaveBeenCalledWith('setPlayback', playback);
     });
@@ -62,7 +61,7 @@ describe('player module', () => {
     });
   });
 
-  describe('history', () => {
+  describe('GET history', () => {
     it('has a default state', () => {
       expect(player.state.history).toEqual([]);
     });
@@ -77,7 +76,7 @@ describe('player module', () => {
     it('commits the fetched items', async () => {
       const commit = jest.fn();
       const history = { history: 'history' };
-      fetchFromSpotify.mockReturnValueOnce(history);
+      client.fetchFromSpotify.mockReturnValueOnce(history);
       await player.actions.fetchHistory({ commit });
       expect(commit).toHaveBeenCalledWith('setHistory', history);
     });
@@ -89,7 +88,7 @@ describe('player module', () => {
     });
   });
 
-  describe('currentTrack', () => {
+  describe('GET currentTrack', () => {
     it('has a default state', () => {
       expect(player.state.currentTrack).toEqual({});
     });
@@ -104,7 +103,7 @@ describe('player module', () => {
     it('commits the fetched items', async () => {
       const commit = jest.fn();
       const currentTrack = { currentTrack: 'currentTrack' };
-      fetchFromSpotify.mockReturnValueOnce(currentTrack);
+      client.fetchFromSpotify.mockReturnValueOnce(currentTrack);
       await player.actions.fetchCurrentTrack({ commit });
       expect(commit).toHaveBeenCalledWith('setCurrentTrack', currentTrack);
     });
@@ -112,6 +111,31 @@ describe('player module', () => {
     it('does not call the commit method when there is a fetch error', async () => {
       const commit = jest.fn();
       await player.actions.fetchCurrentTrack({ commit });
+      expect(commit).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('PUT pause', () => {
+    it('has a default state', () => {
+      expect(player.state.playing).toBe(false);
+    });
+
+    it('sets the state', () => {
+      const state = { playing: true };
+      player.mutations.setPause(state);
+      expect(state.playing).toBe(false);
+    });
+
+    it('commits when fetch result', async () => {
+      const commit = jest.fn();
+      client.putToSpotify.mockReturnValueOnce(true);
+      await player.actions.putPause({ commit });
+      expect(commit).toHaveBeenCalledWith('setPause');
+    });
+
+    it('does not call the commit method when there is a put error', async () => {
+      const commit = jest.fn();
+      await player.actions.putPause({ commit });
       expect(commit).not.toHaveBeenCalled();
     });
   });

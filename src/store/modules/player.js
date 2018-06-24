@@ -1,4 +1,4 @@
-import fetchFromSpotify from '@/utils/fetchFromSpotify';
+import { fetchFromSpotify, putToSpotify } from '@/utils/fetchFromSpotify';
 
 export default {
   state: {
@@ -6,6 +6,7 @@ export default {
     playback: {},
     history: [],
     currentTrack: {},
+    playing: false,
   },
 
   /* eslint-disable no-param-reassign */
@@ -24,6 +25,10 @@ export default {
 
     setCurrentTrack(state, currentTrack) {
       state.currentTrack = currentTrack;
+    },
+
+    setPause(state) {
+      state.playing = false;
     },
   },
   /* eslint-enabel no-param-reassign */
@@ -51,6 +56,12 @@ export default {
       const res = await fetchFromSpotify('/me/player/currently-playing');
       if (!res) return;
       commit('setCurrentTrack', res);
+    },
+
+    async putPause({ commit }) {
+      const res = await putToSpotify('/me/player/pause');
+      if (!res) return;
+      commit('setPause');
     },
   },
 };
