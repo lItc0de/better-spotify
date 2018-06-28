@@ -230,4 +230,46 @@ describe('player module', () => {
       expect(dispatch).toHaveBeenCalledWith('putRepeat', 'context');
     });
   });
+
+  describe('PUT volume', () => {
+    it('has a default state', () => {
+      expect(player.state.volume).toBe(100);
+    });
+
+    it('sets the state', () => {
+      const state = { volume: 0 };
+      const volume = 50;
+      player.mutations.setVolume(state, volume);
+      expect(state.volume).toBe(volume);
+    });
+
+    it('commits when fetch result', async () => {
+      const commit = jest.fn();
+      const volume = 50;
+      client.putToSpotify.mockReturnValueOnce(true);
+      await player.actions.putVolume({ commit }, volume);
+      expect(client.putToSpotify).toHaveBeenCalledWith(`/me/player/volume?volume_percent=${volume}`);
+      expect(commit).toHaveBeenCalledWith('setVolume', volume);
+    });
+
+    it('does not call the commit method when there is a put error', async () => {
+      const commit = jest.fn();
+      await player.actions.putVolume({ commit });
+      expect(commit).not.toHaveBeenCalled();
+    });
+
+    it('sets default volume to 100 when not provided', async () => {
+      const commit = jest.fn();
+      client.putToSpotify.mockReturnValueOnce(true);
+      await player.actions.putVolume({ commit });
+      expect(commit).toHaveBeenCalledWith('setVolume', 100);
+    });
+
+    it('sets the maximum volume to 100', async () => {
+      const commit = jest.fn();
+      client.putToSpotify.mockReturnValueOnce(true);
+      await player.actions.putVolume({ commit }, 1000);
+      expect(commit).toHaveBeenCalledWith('setVolume', 100);
+    });
+  });
 });

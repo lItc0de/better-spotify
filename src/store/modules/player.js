@@ -9,6 +9,7 @@ export default {
     playing: false,
     seek: 0,
     repeat: 'off',
+    volume: 100,
   },
 
   /* eslint-disable no-param-reassign */
@@ -39,6 +40,10 @@ export default {
 
     setRepeat(state, repeat) {
       state.repeat = repeat;
+    },
+
+    setVolume(state, volume) {
+      state.volume = volume;
     },
   },
   /* eslint-enabel no-param-reassign */
@@ -96,6 +101,13 @@ export default {
 
     repeatContext({ dispatch }) {
       dispatch('putRepeat', 'context');
+    },
+
+    async putVolume({ commit }, volume = 100) {
+      if (volume > 100) volume = 100;
+      const res = await putToSpotify(`/me/player/volume?volume_percent=${volume}`);
+      if (!res) return;
+      commit('setVolume', volume);
     },
   },
 };
