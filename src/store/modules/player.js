@@ -7,6 +7,7 @@ export default {
     history: [],
     currentTrack: {},
     playing: false,
+    seek: 0,
   },
 
   /* eslint-disable no-param-reassign */
@@ -29,6 +30,10 @@ export default {
 
     setPause(state) {
       state.playing = false;
+    },
+
+    setSeek(state, ms) {
+      state.seek = ms;
     },
   },
   /* eslint-enabel no-param-reassign */
@@ -62,6 +67,12 @@ export default {
       const res = await putToSpotify('/me/player/pause');
       if (!res) return;
       commit('setPause');
+    },
+
+    async putSeek({ commit }, seek = 0) {
+      const res = await putToSpotify(`/me/player/seek?position_ms=${seek}`);
+      if (!res) return;
+      commit('setSeek', seek);
     },
   },
 };

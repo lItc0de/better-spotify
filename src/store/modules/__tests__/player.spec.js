@@ -139,4 +139,38 @@ describe('player module', () => {
       expect(commit).not.toHaveBeenCalled();
     });
   });
+
+  describe('PUT seek', () => {
+    it('has a default state', () => {
+      expect(player.state.seek).toBe(0);
+    });
+
+    it('sets the state', () => {
+      const state = { seek: 0 };
+      const ms = 2500;
+      player.mutations.setSeek(state, ms);
+      expect(state.seek).toBe(ms);
+    });
+
+    it('commits when fetch result', async () => {
+      const commit = jest.fn();
+      const seek = 500;
+      client.putToSpotify.mockReturnValueOnce(true);
+      await player.actions.putSeek({ commit }, seek);
+      expect(commit).toHaveBeenCalledWith('setSeek', seek);
+    });
+
+    it('does not call the commit method when there is a put error', async () => {
+      const commit = jest.fn();
+      await player.actions.putSeek({ commit });
+      expect(commit).not.toHaveBeenCalled();
+    });
+
+    it('sets default seek to 0 when not provided', async () => {
+      const commit = jest.fn();
+      client.putToSpotify.mockReturnValueOnce(true);
+      await player.actions.putSeek({ commit });
+      expect(commit).toHaveBeenCalledWith('setSeek', 0);
+    });
+  });
 });
