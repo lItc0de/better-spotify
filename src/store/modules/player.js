@@ -8,6 +8,7 @@ export default {
     currentTrack: {},
     playing: false,
     seek: 0,
+    repeat: 'off',
   },
 
   /* eslint-disable no-param-reassign */
@@ -34,6 +35,10 @@ export default {
 
     setSeek(state, ms) {
       state.seek = ms;
+    },
+
+    setRepeat(state, repeat) {
+      state.repeat = repeat;
     },
   },
   /* eslint-enabel no-param-reassign */
@@ -73,6 +78,24 @@ export default {
       const res = await putToSpotify(`/me/player/seek?position_ms=${seek}`);
       if (!res) return;
       commit('setSeek', seek);
+    },
+
+    async putRepeat({ commit }, repeat = 'off') {
+      const res = await putToSpotify(`/me/player/repeat?state=${repeat}`);
+      if (!res) return;
+      commit('setRepeat', repeat);
+    },
+
+    repeatOff({ dispatch }) {
+      dispatch('putRepeat', 'off');
+    },
+
+    repeatTrack({ dispatch }) {
+      dispatch('putRepeat', 'track');
+    },
+
+    repeatContext({ dispatch }) {
+      dispatch('putRepeat', 'context');
     },
   },
 };

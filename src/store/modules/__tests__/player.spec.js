@@ -24,6 +24,7 @@ describe('player module', () => {
       const devices = ['device'];
       client.fetchFromSpotify.mockReturnValueOnce(devices);
       await player.actions.fetchDevices({ commit });
+      expect(client.fetchFromSpotify).toHaveBeenCalledWith('/me/player/devices');
       expect(commit).toHaveBeenCalledWith('setDevices', devices);
     });
 
@@ -51,6 +52,7 @@ describe('player module', () => {
       const playback = { playback: 'playback' };
       client.fetchFromSpotify.mockReturnValueOnce(playback);
       await player.actions.fetchPlayback({ commit });
+      expect(client.fetchFromSpotify).toHaveBeenCalledWith('/me/player');
       expect(commit).toHaveBeenCalledWith('setPlayback', playback);
     });
 
@@ -78,6 +80,7 @@ describe('player module', () => {
       const history = { history: 'history' };
       client.fetchFromSpotify.mockReturnValueOnce(history);
       await player.actions.fetchHistory({ commit });
+      expect(client.fetchFromSpotify).toHaveBeenCalledWith('/me/player/recently-played');
       expect(commit).toHaveBeenCalledWith('setHistory', history);
     });
 
@@ -105,6 +108,7 @@ describe('player module', () => {
       const currentTrack = { currentTrack: 'currentTrack' };
       client.fetchFromSpotify.mockReturnValueOnce(currentTrack);
       await player.actions.fetchCurrentTrack({ commit });
+      expect(client.fetchFromSpotify).toHaveBeenCalledWith('/me/player/currently-playing');
       expect(commit).toHaveBeenCalledWith('setCurrentTrack', currentTrack);
     });
 
@@ -130,6 +134,7 @@ describe('player module', () => {
       const commit = jest.fn();
       client.putToSpotify.mockReturnValueOnce(true);
       await player.actions.putPause({ commit });
+      expect(client.putToSpotify).toHaveBeenCalledWith('/me/player/pause');
       expect(commit).toHaveBeenCalledWith('setPause');
     });
 
@@ -157,6 +162,7 @@ describe('player module', () => {
       const seek = 500;
       client.putToSpotify.mockReturnValueOnce(true);
       await player.actions.putSeek({ commit }, seek);
+      expect(client.putToSpotify).toHaveBeenCalledWith('/me/player/seek?position_ms=500');
       expect(commit).toHaveBeenCalledWith('setSeek', seek);
     });
 
@@ -171,6 +177,57 @@ describe('player module', () => {
       client.putToSpotify.mockReturnValueOnce(true);
       await player.actions.putSeek({ commit });
       expect(commit).toHaveBeenCalledWith('setSeek', 0);
+    });
+  });
+
+  describe('PUT repeat', () => {
+    it('has a default state', () => {
+      expect(player.state.repeat).toBe('off');
+    });
+
+    it('sets the state', () => {
+      const state = { repeat: 'off' };
+      player.mutations.setRepeat(state, 'track');
+      expect(state.repeat).toBe('track');
+    });
+
+    it('commits when fetch result', async () => {
+      const commit = jest.fn();
+      client.putToSpotify.mockReturnValueOnce(true);
+      await player.actions.putRepeat({ commit }, 'track');
+      expect(client.putToSpotify).toHaveBeenCalledWith('/me/player/repeat?state=track');
+      expect(commit).toHaveBeenCalledWith('setRepeat', 'track');
+    });
+
+    it('does not call the commit method when there is a put error', async () => {
+      const commit = jest.fn();
+      await player.actions.putRepeat({ commit });
+      expect(commit).not.toHaveBeenCalled();
+    });
+
+    it('sets default repeat to 0 when not provided', async () => {
+      const commit = jest.fn();
+      client.putToSpotify.mockReturnValueOnce(true);
+      await player.actions.putRepeat({ commit });
+      expect(commit).toHaveBeenCalledWith('setRepeat', 'off');
+    });
+
+    it('has an action for repeat: "off"', async () => {
+      const dispatch = jest.fn();
+      player.actions.repeatOff({ dispatch });
+      expect(dispatch).toHaveBeenCalledWith('putRepeat', 'off');
+    });
+
+    it('has an action for repeat: "track"', async () => {
+      const dispatch = jest.fn();
+      player.actions.repeatTrack({ dispatch });
+      expect(dispatch).toHaveBeenCalledWith('putRepeat', 'track');
+    });
+
+    it('has an action for repeat: "context"', async () => {
+      const dispatch = jest.fn();
+      player.actions.repeatContext({ dispatch });
+      expect(dispatch).toHaveBeenCalledWith('putRepeat', 'context');
     });
   });
 });
