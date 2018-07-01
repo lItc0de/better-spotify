@@ -1,4 +1,4 @@
-import { fetchFromSpotify, putToSpotify } from '@/utils/fetchFromSpotify';
+import { fetchFromSpotify, putToSpotify, postToSpotify } from '@/utils/fetchFromSpotify';
 
 export default {
   state: {
@@ -10,6 +10,7 @@ export default {
     seek: 0,
     repeat: 'off',
     volume: 100,
+    shuffle: false,
   },
 
   /* eslint-disable no-param-reassign */
@@ -44,6 +45,10 @@ export default {
 
     setVolume(state, volume) {
       state.volume = volume;
+    },
+
+    setShuffle(state, shuffle) {
+      state.shuffle = shuffle;
     },
   },
   /* eslint-enabel no-param-reassign */
@@ -108,6 +113,28 @@ export default {
       const res = await putToSpotify(`/me/player/volume?volume_percent=${volume}`);
       if (!res) return;
       commit('setVolume', volume);
+    },
+
+    async postNext() {
+      await postToSpotify('/me/player/next');
+    },
+
+    async postPrevious() {
+      await postToSpotify('/me/player/previous');
+    },
+
+    async putPlay(context, options) {
+      await putToSpotify('/me/player/play', JSON.stringify(options));
+    },
+
+    async putShuffle({ commit }, state) {
+      const res = await putToSpotify(`/me/player/shuffle?state=${state}`);
+      if (!res) return;
+      commit('setShuffle', state);
+    },
+
+    async putPlayback(context, deviceId, play = true) {
+      await putToSpotify('/me/player', JSON.stringify({ device_id: deviceId, play }));
     },
   },
 };

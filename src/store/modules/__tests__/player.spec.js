@@ -5,6 +5,7 @@ describe('player module', () => {
   beforeEach(() => {
     client.fetchFromSpotify = jest.fn();
     client.putToSpotify = jest.fn();
+    client.postToSpotify = jest.fn();
   });
 
   describe('GET devices', () => {
@@ -270,6 +271,68 @@ describe('player module', () => {
       client.putToSpotify.mockReturnValueOnce(true);
       await player.actions.putVolume({ commit }, 1000);
       expect(commit).toHaveBeenCalledWith('setVolume', 100);
+    });
+  });
+
+  describe('POST next', () => {
+    it('calls the api to play the next song', async () => {
+      client.postToSpotify.mockReturnValueOnce(true);
+      await player.actions.postNext();
+      expect(client.postToSpotify).toHaveBeenCalledWith('/me/player/next');
+    });
+  });
+
+  describe('POST previous', () => {
+    it('calls the api to play the previous song', async () => {
+      client.postToSpotify.mockReturnValueOnce(true);
+      await player.actions.postPrevious();
+      expect(client.postToSpotify).toHaveBeenCalledWith('/me/player/previous');
+    });
+  });
+
+  describe('PUT play', () => {
+    it('requests to play from context_uri', async () => {
+      const options = { context_uri: 'context_uri' };
+      client.putToSpotify.mockReturnValueOnce(true);
+      await player.actions.putPlay({}, options);
+      expect(client.putToSpotify)
+        .toHaveBeenCalledWith('/me/player/play', JSON.stringify(options));
+    });
+  });
+
+  describe('PUT shuffle', () => {
+    it('has a default state', () => {
+      expect(player.state.shuffle).toBe(false);
+    });
+
+    it('sets the state', () => {
+      const state = { shuffle: false };
+      player.mutations.setShuffle(state, true);
+      expect(state.shuffle).toBe(true);
+    });
+
+    it('commits when fetch result', async () => {
+      const commit = jest.fn();
+      client.putToSpotify.mockReturnValueOnce(true);
+      await player.actions.putShuffle({ commit }, true);
+      expect(client.putToSpotify).toHaveBeenCalledWith('/me/player/shuffle?state=true');
+      expect(commit).toHaveBeenCalledWith('setShuffle', true);
+    });
+
+    it('does not call the commit method when there is a put error', async () => {
+      const commit = jest.fn();
+      await player.actions.putShuffle({ commit });
+      expect(commit).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('PUT playback', () => {
+    it('sets the new playback device', async () => {
+      const deviceId = 'test';
+      const play = false;
+      client.putToSpotify.mockReturnValueOnce(true);
+      await player.actions.putPlayback({}, deviceId, play);
+      expect(client.putToSpotify).toHaveBeenCalledWith('/me/player', JSON.stringify({ device_id: deviceId, play }));
     });
   });
 });
