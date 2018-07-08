@@ -1,26 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1529827425853" clover="3.2.0">
-  <project timestamp="1529827425854" name="All files">
-    <metrics statements="16" coveredstatements="16" conditionals="8" coveredconditionals="8" methods="0" coveredmethods="0" elements="24" coveredelements="24" complexity="0" loc="16" ncloc="16" packages="1" files="1" classes="1">
-      <file name="player.js" path="/Users/basti/Documents/projects/player/src/store/modules/player.js">
-        <metrics statements="16" coveredstatements="16" conditionals="8" coveredconditionals="8" methods="0" coveredmethods="0"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="34" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
-        <line num="40" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="41" count="1" type="stmt"/>
-        <line num="45" count="2" type="stmt"/>
-        <line num="46" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="51" count="2" type="stmt"/>
-        <line num="52" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="53" count="1" type="stmt"/>
-      </file>
+<coverage generated="1531044880553" clover="3.2.0">
+  <project timestamp="1531044880554" name="All files">
+    <metrics statements="59" coveredstatements="59" conditionals="32" coveredconditionals="31" methods="3" coveredmethods="0" elements="94" coveredelements="90" complexity="0" loc="59" ncloc="59" packages="2" files="3" classes="3">
+      <package name="store.modules">
+        <metrics statements="56" coveredstatements="56" conditionals="32" coveredconditionals="31" methods="0" coveredmethods="0"/>
+        <file name="album.js" path="/Users/basti/Documents/projects/player/src/store/modules/album.js">
+          <metrics statements="12" coveredstatements="12" conditionals="8" coveredconditionals="8" methods="0" coveredmethods="0"/>
+          <line num="13" count="1" type="stmt"/>
+          <line num="17" count="1" type="stmt"/>
+          <line num="21" count="1" type="stmt"/>
+          <line num="28" count="2" type="stmt"/>
+          <line num="29" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="30" count="1" type="stmt"/>
+          <line num="34" count="3" type="stmt"/>
+          <line num="35" count="3" type="cond" truecount="2" falsecount="0"/>
+          <line num="36" count="1" type="stmt"/>
+          <line num="40" count="2" type="stmt"/>
+          <line num="41" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="42" count="1" type="stmt"/>
+        </file>
+        <file name="player.js" path="/Users/basti/Documents/projects/player/src/store/modules/player.js">
+          <metrics statements="44" coveredstatements="44" conditionals="24" coveredconditionals="23" methods="0" coveredmethods="0"/>
+          <line num="19" count="1" type="stmt"/>
+          <line num="23" count="1" type="stmt"/>
+          <line num="27" count="1" type="stmt"/>
+          <line num="31" count="1" type="stmt"/>
+          <line num="35" count="1" type="stmt"/>
+          <line num="39" count="1" type="stmt"/>
+          <line num="43" count="1" type="stmt"/>
+          <line num="47" count="1" type="stmt"/>
+          <line num="51" count="1" type="stmt"/>
+          <line num="58" count="2" type="stmt"/>
+          <line num="59" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="60" count="1" type="stmt"/>
+          <line num="64" count="2" type="stmt"/>
+          <line num="65" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="66" count="1" type="stmt"/>
+          <line num="70" count="2" type="stmt"/>
+          <line num="71" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="72" count="1" type="stmt"/>
+          <line num="76" count="2" type="stmt"/>
+          <line num="77" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="78" count="1" type="stmt"/>
+          <line num="82" count="2" type="stmt"/>
+          <line num="83" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="84" count="1" type="stmt"/>
+          <line num="88" count="3" type="stmt"/>
+          <line num="89" count="3" type="cond" truecount="2" falsecount="0"/>
+          <line num="90" count="2" type="stmt"/>
+          <line num="94" count="3" type="stmt"/>
+          <line num="95" count="3" type="cond" truecount="2" falsecount="0"/>
+          <line num="96" count="2" type="stmt"/>
+          <line num="100" count="1" type="stmt"/>
+          <line num="104" count="1" type="stmt"/>
+          <line num="108" count="1" type="stmt"/>
+          <line num="112" count="4" type="cond" truecount="2" falsecount="0"/>
+          <line num="113" count="4" type="stmt"/>
+          <line num="114" count="4" type="cond" truecount="2" falsecount="0"/>
+          <line num="115" count="3" type="stmt"/>
+          <line num="119" count="1" type="stmt"/>
+          <line num="123" count="1" type="stmt"/>
+          <line num="127" count="1" type="stmt"/>
+          <line num="131" count="2" type="stmt"/>
+          <line num="132" count="2" type="cond" truecount="2" falsecount="0"/>
+          <line num="133" count="1" type="stmt"/>
+          <line num="137" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="utils">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <file name="spotifyClient.js" path="/Users/basti/Documents/projects/player/src/utils/spotifyClient.js">
+          <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+          <line num="1" count="3" type="stmt"/>
+          <line num="3" count="3" type="stmt"/>
+          <line num="5" count="3" type="stmt"/>
+        </file>
+      </package>
     </metrics>
   </project>
 </coverage>

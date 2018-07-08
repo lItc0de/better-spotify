@@ -1,4 +1,4 @@
-import { fetchFromSpotify } from '@/utils/fetchFromSpotify';
+import { fetchFromSpotify } from '@/utils/spotifyClient';
 
 export default {
   state: {

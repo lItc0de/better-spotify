@@ -1,4 +1,4 @@
-import { fetchFromSpotify, putToSpotify, postToSpotify } from '@/utils/fetchFromSpotify';
+import { fetchFromSpotify, putToSpotify, postToSpotify } from '@/utils/spotifyClient';
 
 export default {
   state: {

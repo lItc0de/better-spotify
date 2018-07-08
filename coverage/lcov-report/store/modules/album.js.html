@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for player.js</title>
+    <title>Code coverage report for store/modules/album.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="index.html">All files</a> player.js
+      <a href="../../index.html">All files</a> / <a href="index.html">store/modules</a> album.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>20/20</span>
+        <span class='fraction'>15/15</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>16/16</span>
+        <span class='fraction'>12/12</span>
       </div>
     </div>
     <p class="quiet">
@@ -91,18 +91,7 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -111,11 +100,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -140,8 +124,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -152,65 +136,48 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import fetchFromSpotify from '@/utils/spotifyClient';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { fetchFromSpotify } from '@/utils/spotifyClient';
 &nbsp;
 export default {
   state: {
-    devices: [],
-    playback: {},
-    history: [],
-    currentTrack: {},
+    current: {},
+    currentTracks: [],
+    albums: [],
   },
 &nbsp;
   /* eslint-disable no-param-reassign */
   mutations: {
-    setDevices(state, devices) {
-      state.devices = devices;
+    setCurrent(state, current) {
+      state.current = current;
     },
 &nbsp;
-    setPlayback(state, playback) {
-      state.playback = playback;
+    setCurrentTracks(state, currentTracks) {
+      state.currentTracks = currentTracks;
     },
 &nbsp;
-    setHistory(state, history) {
-      state.history = history;
-    },
-&nbsp;
-    setCurrentTrack(state, currentTrack) {
-      state.currentTrack = currentTrack;
+    setAlbums(state, albums) {
+      state.albums = albums;
     },
   },
-  /* eslint-enabel no-param-reassign */
+  /* eslint-enable no-param-reassign */
 &nbsp;
   actions: {
-    async fetchDevices({ commit }) {
-      const res = await fetchFromSpotify('/me/player/devices');
+    async fetchAlbum({ commit }, id) {
+      const res = await fetchFromSpotify(`/albums/${id}`);
       if (!res) return;
-      commit('setDevices', res);
+      commit('setCurrent', res);
     },
 &nbsp;
-    async fetchPlayback({ commit }) {
-      const res = await fetchFromSpotify('/me/player');
+    async fetchAlbumTracks({ commit }, id, limit = 100, offset = 0) {
+      const res = await fetchFromSpotify(`/albums/${id}/tracks?limit=${limit}&amp;offset=${offset}`);
       if (!res) return;
-      commit('setPlayback', res);
+      commit('setCurrentTracks', res);
     },
 &nbsp;
-    async fetchHistory({ commit }) {
-      const res = await fetchFromSpotify('/me/player/recently-played');
+    async fetchAlbums({ commit }, ids) {
+      const res = await fetchFromSpotify(`/albums?ids=${ids}`);
       if (!res) return;
-      commit('setHistory', res);
-    },
-&nbsp;
-    async fetchCurrentTrack({ commit }) {
-      const res = await fetchFromSpotify('/me/player/currently-playing');
-      if (!res) return;
-      commit('setCurrentTrack', res);
+      commit('setAlbums', res);
     },
   },
 };
@@ -220,10 +187,10 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Jun 24 2018 10:03:45 GMT+0200 (CEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Jul 08 2018 12:14:40 GMT+0200 (CEST)
 </div>
 </div>
-<script src="prettify.js"></script>
+<script src="../../prettify.js"></script>
 <script>
 window.onload = function () {
         if (typeof prettyPrint === 'function') {
@@ -231,7 +198,7 @@ window.onload = function () {
         }
 };
 </script>
-<script src="sorter.js"></script>
-<script src="block-navigation.js"></script>
+<script src="../../sorter.js"></script>
+<script src="../../block-navigation.js"></script>
 </body>
 </html>

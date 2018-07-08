@@ -1,5 +1,5 @@
 import album from '@/store/modules/album';
-import * as client from '@/utils/fetchFromSpotify';
+import * as client from '@/utils/spotifyClient';
 
 describe('player module', () => {
   beforeEach(() => {

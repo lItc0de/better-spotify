@@ -1,5 +1,5 @@
 import player from '@/store/modules/player';
-import * as client from '@/utils/fetchFromSpotify';
+import * as client from '@/utils/spotifyClient';
 
 describe('player module', () => {
   beforeEach(() => {
