@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit",
+    "test": "vue-cli-service test:unit",
     "watch": "vue-cli-service test:unit --watch"
   },
   "dependencies": {
@@ -25,7 +25,7 @@
     "@vue/eslint-config-airbnb": "^3.0.0-rc.3",
     "@vue/test-utils": "^1.0.0-beta.16",
     "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "^23.0.1",
+    "babel-jest": "^23.4.0",
     "nock": "^9.4.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
