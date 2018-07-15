@@ -10,6 +10,7 @@
     "watch": "vue-cli-service test:unit --watch"
   },
   "dependencies": {
+    "frisbee": "^2.0.5",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
@@ -25,6 +26,7 @@
     "@vue/test-utils": "^1.0.0-beta.16",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
+    "nock": "^9.4.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-template-compiler": "^2.5.16"
