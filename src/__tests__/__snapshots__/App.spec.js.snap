@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App matches the snapshot 1`] = `
+<div id="app">
+  <div id="nav">
+    <vuecomponent-stub to="{ name: 'home' }"></vuecomponent-stub> |
+  </div>
+  <vuecomponent-stub></vuecomponent-stub>
+</div>
+`;
