@@ -1,13 +1,6 @@
 import player from '@/store/modules/player';
-import * as client from '@/utils/spotifyClient';
 
 describe('player module', () => {
-  beforeEach(() => {
-    client.fetchFromSpotify = jest.fn();
-    client.putToSpotify = jest.fn();
-    client.postToSpotify = jest.fn();
-  });
-
   describe('GET devices', () => {
     it('has a default state', () => {
       expect(player.state.devices).toEqual([]);
@@ -23,15 +16,19 @@ describe('player module', () => {
     it('commits the fetched items', async () => {
       const commit = jest.fn();
       const devices = ['device'];
-      client.fetchFromSpotify.mockReturnValueOnce(devices);
-      await player.actions.fetchDevices({ commit });
-      expect(client.fetchFromSpotify).toHaveBeenCalledWith('/me/player/devices');
+      const dispatch = jest.fn().mockReturnValue(devices);
+      await player.actions.fetchDevices({ commit, dispatch });
+      expect(dispatch).toHaveBeenCalledWith({
+        path: '/me/player/devices',
+        method: 'get',
+      }, { root: true });
       expect(commit).toHaveBeenCalledWith('setDevices', devices);
     });
 
     it('does not call the commit method when there is a fetch error', async () => {
       const commit = jest.fn();
-      await player.actions.fetchDevices({ commit });
+      const dispatch = jest.fn();
+      await player.actions.fetchDevices({ commit, dispatch });
       expect(commit).not.toHaveBeenCalled();
     });
   });
@@ -51,15 +48,19 @@ describe('player module', () => {
     it('commits the fetched items', async () => {
       const commit = jest.fn();
       const playback = { playback: 'playback' };
-      client.fetchFromSpotify.mockReturnValueOnce(playback);
-      await player.actions.fetchPlayback({ commit });
-      expect(client.fetchFromSpotify).toHaveBeenCalledWith('/me/player');
+      const dispatch = jest.fn().mockReturnValue(playback);
+      await player.actions.fetchPlayback({ commit, dispatch });
+      expect(dispatch).toHaveBeenCalledWith({
+        path: '/me/player',
+        method: 'get',
+      }, { root: true });
       expect(commit).toHaveBeenCalledWith('setPlayback', playback);
     });
 
     it('does not call the commit method when there is a fetch error', async () => {
       const commit = jest.fn();
-      await player.actions.fetchPlayback({ commit });
+      const dispatch = jest.fn();
+      await player.actions.fetchPlayback({ commit, dispatch });
       expect(commit).not.toHaveBeenCalled();
     });
   });
@@ -79,15 +80,19 @@ describe('player module', () => {
     it('commits the fetched items', async () => {
       const commit = jest.fn();
       const history = { history: 'history' };
-      client.fetchFromSpotify.mockReturnValueOnce(history);
-      await player.actions.fetchHistory({ commit });
-      expect(client.fetchFromSpotify).toHaveBeenCalledWith('/me/player/recently-played');
+      const dispatch = jest.fn().mockReturnValue(history);
+      await player.actions.fetchHistory({ commit, dispatch });
+      expect(dispatch).toHaveBeenCalledWith({
+        path: '/me/player/recently-played',
+        method: 'get',
+      }, { root: true });
       expect(commit).toHaveBeenCalledWith('setHistory', history);
     });
 
     it('does not call the commit method when there is a fetch error', async () => {
       const commit = jest.fn();
-      await player.actions.fetchHistory({ commit });
+      const dispatch = jest.fn();
+      await player.actions.fetchHistory({ commit, dispatch });
       expect(commit).not.toHaveBeenCalled();
     });
   });
@@ -107,15 +112,19 @@ describe('player module', () => {
     it('commits the fetched items', async () => {
       const commit = jest.fn();
       const currentTrack = { currentTrack: 'currentTrack' };
-      client.fetchFromSpotify.mockReturnValueOnce(currentTrack);
-      await player.actions.fetchCurrentTrack({ commit });
-      expect(client.fetchFromSpotify).toHaveBeenCalledWith('/me/player/currently-playing');
+      const dispatch = jest.fn().mockReturnValue(currentTrack);
+      await player.actions.fetchCurrentTrack({ commit, dispatch });
+      expect(dispatch).toHaveBeenCalledWith({
+        path: '/me/player/currently-playing',
+        method: 'get',
+      }, { root: true });
       expect(commit).toHaveBeenCalledWith('setCurrentTrack', currentTrack);
     });
 
     it('does not call the commit method when there is a fetch error', async () => {
       const commit = jest.fn();
-      await player.actions.fetchCurrentTrack({ commit });
+      const dispatch = jest.fn();
+      await player.actions.fetchCurrentTrack({ commit, dispatch });
       expect(commit).not.toHaveBeenCalled();
     });
   });
@@ -133,15 +142,19 @@ describe('player module', () => {
 
     it('commits when fetch result', async () => {
       const commit = jest.fn();
-      client.putToSpotify.mockReturnValueOnce(true);
-      await player.actions.putPause({ commit });
-      expect(client.putToSpotify).toHaveBeenCalledWith('/me/player/pause');
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.putPause({ commit, dispatch });
+      expect(dispatch).toHaveBeenCalledWith({
+        path: '/me/player/pause',
+        method: 'put',
+      }, { root: true });
       expect(commit).toHaveBeenCalledWith('setPause');
     });
 
     it('does not call the commit method when there is a put error', async () => {
       const commit = jest.fn();
-      await player.actions.putPause({ commit });
+      const dispatch = jest.fn();
+      await player.actions.putPause({ commit, dispatch });
       expect(commit).not.toHaveBeenCalled();
     });
   });
@@ -161,22 +174,26 @@ describe('player module', () => {
     it('commits when fetch result', async () => {
       const commit = jest.fn();
       const seek = 500;
-      client.putToSpotify.mockReturnValueOnce(true);
-      await player.actions.putSeek({ commit }, seek);
-      expect(client.putToSpotify).toHaveBeenCalledWith('/me/player/seek?position_ms=500');
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.putSeek({ commit, dispatch }, seek);
+      expect(dispatch).toHaveBeenCalledWith({
+        path: `/me/player/seek?position_ms=${seek}`,
+        method: 'put',
+      }, { root: true });
       expect(commit).toHaveBeenCalledWith('setSeek', seek);
     });
 
     it('does not call the commit method when there is a put error', async () => {
       const commit = jest.fn();
-      await player.actions.putSeek({ commit });
+      const dispatch = jest.fn();
+      await player.actions.putSeek({ commit, dispatch });
       expect(commit).not.toHaveBeenCalled();
     });
 
     it('sets default seek to 0 when not provided', async () => {
       const commit = jest.fn();
-      client.putToSpotify.mockReturnValueOnce(true);
-      await player.actions.putSeek({ commit });
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.putSeek({ commit, dispatch });
       expect(commit).toHaveBeenCalledWith('setSeek', 0);
     });
   });
@@ -194,22 +211,26 @@ describe('player module', () => {
 
     it('commits when fetch result', async () => {
       const commit = jest.fn();
-      client.putToSpotify.mockReturnValueOnce(true);
-      await player.actions.putRepeat({ commit }, 'track');
-      expect(client.putToSpotify).toHaveBeenCalledWith('/me/player/repeat?state=track');
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.putRepeat({ commit, dispatch }, 'track');
+      expect(dispatch).toHaveBeenCalledWith({
+        path: '/me/player/repeat?state=track',
+        method: 'put',
+      }, { root: true });
       expect(commit).toHaveBeenCalledWith('setRepeat', 'track');
     });
 
     it('does not call the commit method when there is a put error', async () => {
       const commit = jest.fn();
-      await player.actions.putRepeat({ commit });
+      const dispatch = jest.fn();
+      await player.actions.putRepeat({ commit, dispatch });
       expect(commit).not.toHaveBeenCalled();
     });
 
     it('sets default repeat to 0 when not provided', async () => {
       const commit = jest.fn();
-      client.putToSpotify.mockReturnValueOnce(true);
-      await player.actions.putRepeat({ commit });
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.putRepeat({ commit, dispatch });
       expect(commit).toHaveBeenCalledWith('setRepeat', 'off');
     });
 
@@ -247,56 +268,69 @@ describe('player module', () => {
     it('commits when fetch result', async () => {
       const commit = jest.fn();
       const volume = 50;
-      client.putToSpotify.mockReturnValueOnce(true);
-      await player.actions.putVolume({ commit }, volume);
-      expect(client.putToSpotify).toHaveBeenCalledWith(`/me/player/volume?volume_percent=${volume}`);
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.putVolume({ commit, dispatch }, volume);
+      expect(dispatch).toHaveBeenCalledWith({
+        path: `/me/player/volume?volume_percent=${volume}`,
+        method: 'put',
+      }, { root: true });
       expect(commit).toHaveBeenCalledWith('setVolume', volume);
     });
 
     it('does not call the commit method when there is a put error', async () => {
       const commit = jest.fn();
-      await player.actions.putVolume({ commit });
+      const dispatch = jest.fn();
+      await player.actions.putVolume({ commit, dispatch });
       expect(commit).not.toHaveBeenCalled();
     });
 
     it('sets default volume to 100 when not provided', async () => {
       const commit = jest.fn();
-      client.putToSpotify.mockReturnValueOnce(true);
-      await player.actions.putVolume({ commit });
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.putVolume({ commit, dispatch });
       expect(commit).toHaveBeenCalledWith('setVolume', 100);
     });
 
     it('sets the maximum volume to 100', async () => {
       const commit = jest.fn();
-      client.putToSpotify.mockReturnValueOnce(true);
-      await player.actions.putVolume({ commit }, 1000);
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.putVolume({ commit, dispatch }, 1000);
       expect(commit).toHaveBeenCalledWith('setVolume', 100);
     });
   });
 
   describe('POST next', () => {
     it('calls the api to play the next song', async () => {
-      client.postToSpotify.mockReturnValueOnce(true);
-      await player.actions.postNext();
-      expect(client.postToSpotify).toHaveBeenCalledWith('/me/player/next');
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.postNext({ dispatch });
+      expect(dispatch).toHaveBeenCalledWith({
+        path: '/me/player/next',
+        method: 'post',
+      }, { root: true });
     });
   });
 
   describe('POST previous', () => {
     it('calls the api to play the previous song', async () => {
-      client.postToSpotify.mockReturnValueOnce(true);
-      await player.actions.postPrevious();
-      expect(client.postToSpotify).toHaveBeenCalledWith('/me/player/previous');
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.postPrevious({ dispatch });
+      expect(dispatch).toHaveBeenCalledWith({
+        path: '/me/player/previous',
+        method: 'post',
+      }, { root: true });
     });
   });
 
   describe('PUT play', () => {
     it('requests to play from context_uri', async () => {
       const options = { context_uri: 'context_uri' };
-      client.putToSpotify.mockReturnValueOnce(true);
-      await player.actions.putPlay({}, options);
-      expect(client.putToSpotify)
-        .toHaveBeenCalledWith('/me/player/play', JSON.stringify(options));
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.putPlay({ dispatch }, options);
+      expect(dispatch)
+        .toHaveBeenCalledWith({
+          path: '/me/player/play',
+          method: 'put',
+        }, JSON.stringify(options), { root: true });
     });
   });
 
@@ -313,15 +347,19 @@ describe('player module', () => {
 
     it('commits when fetch result', async () => {
       const commit = jest.fn();
-      client.putToSpotify.mockReturnValueOnce(true);
-      await player.actions.putShuffle({ commit }, true);
-      expect(client.putToSpotify).toHaveBeenCalledWith('/me/player/shuffle?state=true');
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.putShuffle({ commit, dispatch }, true);
+      expect(dispatch).toHaveBeenCalledWith({
+        path: `/me/player/shuffle?state=${true}`,
+        method: 'put',
+      }, { root: true });
       expect(commit).toHaveBeenCalledWith('setShuffle', true);
     });
 
     it('does not call the commit method when there is a put error', async () => {
       const commit = jest.fn();
-      await player.actions.putShuffle({ commit });
+      const dispatch = jest.fn();
+      await player.actions.putShuffle({ commit, dispatch });
       expect(commit).not.toHaveBeenCalled();
     });
   });
@@ -330,9 +368,12 @@ describe('player module', () => {
     it('sets the new playback device', async () => {
       const deviceId = 'test';
       const play = false;
-      client.putToSpotify.mockReturnValueOnce(true);
-      await player.actions.putPlayback({}, deviceId, play);
-      expect(client.putToSpotify).toHaveBeenCalledWith('/me/player', JSON.stringify({ device_id: deviceId, play }));
+      const dispatch = jest.fn().mockReturnValue(true);
+      await player.actions.putPlayback({ dispatch }, deviceId, play);
+      expect(dispatch).toHaveBeenCalledWith({
+        path: '/me/player',
+        method: 'put',
+      }, JSON.stringify({ device_id: deviceId, play }), { root: true });
     });
   });
 });

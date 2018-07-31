@@ -3,7 +3,8 @@
 exports[`App matches the snapshot 1`] = `
 <div id="app">
   <div id="nav">
-    <vuecomponent-stub to="{ name: 'home' }"></vuecomponent-stub> |
+    <vuecomponent-stub to="[object Object]"></vuecomponent-stub> |
+    <vuecomponent-stub to="[object Object]"></vuecomponent-stub>
   </div>
   <vuecomponent-stub></vuecomponent-stub>
 </div>

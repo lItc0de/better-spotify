@@ -1,5 +1,3 @@
-import { fetchFromSpotify } from '@/utils/spotifyClient';
-
 export default {
   state: {
     current: {},
@@ -24,22 +22,31 @@ export default {
   /* eslint-enable no-param-reassign */
 
   actions: {
-    async fetchAlbum({ commit }, id) {
-      const res = await fetchFromSpotify(`/albums/${id}`);
+    async fetchAlbum({ commit, dispatch }, id) {
+      const res = await dispatch('client/fetch', {
+        path: `/albums/${id}`,
+        method: 'get',
+      }, { root: true });
       if (!res) return;
       commit('setCurrent', res);
     },
 
-    async fetchAlbumTracks({ commit }, id, limit = 100, offset = 0) {
-      const res = await fetchFromSpotify(`/albums/${id}/tracks?limit=${limit}&offset=${offset}`);
+    async fetchAlbumTracks({ commit, dispatch }, id, limit = 100, offset = 0) {
+      const res = await dispatch('client/fetch', {
+        path: `/albums/${id}/tracks?limit=${limit}&offset=${offset}`,
+        method: 'get',
+      }, { root: true });
       if (!res) return;
       commit('setCurrentTracks', res);
     },
 
-    async fetchAlbums({ commit }, ids) {
-      const res = await fetchFromSpotify(`/albums?ids=${ids}`);
+    async fetchAlbums({ commit, dispatch }, ids) {
+      const res = await dispatch('client/fetch', {
+        path: `/albums?ids=${ids}`,
+        method: 'get',
+      }, { root: true });
       if (!res) return;
-      commit('setAlbums', res);
+      commit('setAlbums', res.albums);
     },
   },
 };

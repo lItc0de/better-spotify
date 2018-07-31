@@ -15,7 +15,8 @@ describe('router', () => {
 
     const matchedComponent = router.getMatchedComponents()[0];
 
-    expect(router.currentRoute.name).toEqual('home');
+    expect(router.currentRoute.name).toEqual('Home');
+    expect(router.currentRoute.meta.auth).toBe(true);
     expect(matchedComponent).toBe(Home);
   });
 
@@ -24,7 +25,8 @@ describe('router', () => {
 
     const matchedComponent = router.getMatchedComponents()[0];
 
-    expect(router.currentRoute.name).toEqual('login');
+    expect(router.currentRoute.name).toEqual('Login');
+    expect(router.currentRoute.metaauth).toBe(undefined);
     expect(matchedComponent).toBe(Login);
   });
 });

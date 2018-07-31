@@ -1,7 +1,9 @@
-const context = require.context('.', false, /\.js$/);
+const context = require.context('.', false, /^((?!index).)*\.js$/);
 
+/* eslint-disable no-param-reassign */
 export default context.keys().reduce((modules, module) => {
-  const name = module.match(/.+(?=\.js$)/);
-  if (name !== 'index') modules.push({ [name]: { namespaced: true, ...context(module) } });
+  const name = module.match(/\.\/(.+)(?=\.js$)/)[1];
+
+  modules[name] = { namespaced: true, ...context(module).default };
   return modules;
-}, []);
+}, {});
