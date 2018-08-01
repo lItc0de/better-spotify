@@ -26,20 +26,23 @@ export default {
     },
 
     getToken() {
-      let accessToken = window.localStorage.getItem('access_token');
-      if (accessToken) {
-        this.setToken(accessToken);
-        return;
+      let accessToken;
+
+      if (this.$route.hash) {
+        const hashParams = this.$route.hash.match(/^#(.*)$/)[1].split('&').reduce((acc, param) => {
+          const keyValue = param.split('=');
+          [, acc[keyValue[0]]] = keyValue;
+          return acc;
+        }, {});
+        accessToken = hashParams.access_token;
+
+        if (accessToken) {
+          this.setToken(accessToken);
+          return;
+        }
       }
 
-      if (!this.$route.hash) return;
-
-      const hashParams = this.$route.hash.match(/^#(.*)$/)[1].split('&').reduce((acc, param) => {
-        const keyValue = param.split('=');
-        [, acc[keyValue[0]]] = keyValue;
-        return acc;
-      }, {});
-      accessToken = hashParams.access_token;
+      accessToken = window.localStorage.getItem('access_token');
 
       if (accessToken) this.setToken(accessToken);
     },

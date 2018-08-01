@@ -65,6 +65,7 @@ describe('LoginForm component', () => {
   it('commits the access token when given in url', () => {
     const accessToken = 'access-token';
     const hash = `#access_token=${accessToken}`;
+    window.localStorage = { getItem: jest.fn().mockReturnValue(accessToken) };
 
     router.push({ name: 'Login', hash });
 

@@ -73,16 +73,16 @@ export default {
       redirectBackOrHome();
     },
 
-    async fetch({ state }, { method, path }) {
+    async fetch({ state, dispatch }, { method, path }) {
       const { api } = state;
 
       if (!api) return null;
 
       const res = await state.api[method](path);
 
-      if (res) return res.body;
+      if (res.status >= 400) return dispatch('handleFetchError', res);
 
-      return null;
+      return res.body;
     },
   },
 

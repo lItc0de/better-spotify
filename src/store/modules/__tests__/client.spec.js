@@ -99,4 +99,43 @@ describe('client module', () => {
       expect(window.location.assign).toHaveBeenCalledWith(loginPath);
     });
   });
+
+  describe('fetch', () => {
+    it('returns the results', async () => {
+      const res = { status: 200, body: 'body' };
+      const state = { api: { method: jest.fn().mockReturnValue(res) } };
+      const path = 'path';
+      const method = 'method';
+      const dispatch = jest.fn();
+
+      const body = await store.actions.fetch({ state, dispatch }, { method, path });
+
+      expect(state.api.method).toHaveBeenCalledWith(path);
+      expect(body).toEqual(res.body);
+    });
+
+    it('returns null if the api is not defined', async () => {
+      const state = { api: undefined };
+      const path = 'path';
+      const method = 'method';
+      const dispatch = jest.fn();
+
+      const res = await store.actions.fetch({ state, dispatch }, { method, path });
+
+      expect(res).toEqual(null);
+    });
+
+    it('calls the handle error action on error', async () => {
+      const res = { status: 400, body: 'body' };
+      const state = { api: { method: jest.fn().mockReturnValue(res) } };
+      const path = 'path';
+      const method = 'method';
+      const dispatch = jest.fn();
+
+      await store.actions.fetch({ state, dispatch }, { method, path });
+
+      expect(state.api.method).toHaveBeenCalledWith(path);
+      expect(dispatch).toHaveBeenCalledWith('handleFetchError', res);
+    });
+  });
 });
