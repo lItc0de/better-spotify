@@ -13,7 +13,7 @@
 import { mapActions, mapState } from 'vuex';
 
 export default {
-  name: 'Albums',
+  name: 'AlbumList',
 
   watch: {
     $route: {
