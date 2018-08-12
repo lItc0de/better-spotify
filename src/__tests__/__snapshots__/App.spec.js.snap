@@ -7,5 +7,6 @@ exports[`App matches the snapshot 1`] = `
     <vuecomponent-stub to="[object Object]"></vuecomponent-stub>
   </div>
   <vuecomponent-stub></vuecomponent-stub>
+  <player-stub></player-stub>
 </div>
 `;

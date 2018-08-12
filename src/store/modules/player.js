@@ -1,14 +1,17 @@
 export default {
   state: {
     devices: [],
-    playback: {},
+    playback: null,
     history: [],
-    currentTrack: {},
+    currentTrack: null,
     playing: false,
     seek: 0,
     repeat: 'off',
     volume: 100,
     shuffle: false,
+    player: null,
+    deviceId: '',
+    WebPlaybackState: null,
   },
 
   /* eslint-disable no-param-reassign */
@@ -48,12 +51,24 @@ export default {
     setShuffle(state, shuffle) {
       state.shuffle = shuffle;
     },
+
+    setPlayer(state, player) {
+      state.player = player;
+    },
+
+    setDeviceId(state, deviceId) {
+      state.deviceId = deviceId;
+    },
+
+    setWebPlaybackState(state, WebPlaybackState) {
+      state.WebPlaybackState = WebPlaybackState;
+    },
   },
   /* eslint-enabel no-param-reassign */
 
   actions: {
     async fetchDevices({ commit, dispatch }) {
-      const res = await dispatch({
+      const res = await dispatch('client/fetch', {
         path: '/me/player/devices',
         method: 'get',
       }, { root: true });
@@ -62,7 +77,7 @@ export default {
     },
 
     async fetchPlayback({ commit, dispatch }) {
-      const res = await dispatch({
+      const res = await dispatch('client/fetch', {
         path: '/me/player',
         method: 'get',
       }, { root: true });
@@ -71,7 +86,7 @@ export default {
     },
 
     async fetchHistory({ commit, dispatch }) {
-      const res = await dispatch({
+      const res = await dispatch('client/fetch', {
         path: '/me/player/recently-played',
         method: 'get',
       }, { root: true });
@@ -80,7 +95,7 @@ export default {
     },
 
     async fetchCurrentTrack({ commit, dispatch }) {
-      const res = await dispatch({
+      const res = await dispatch('client/fetch', {
         path: '/me/player/currently-playing',
         method: 'get',
       }, { root: true });
@@ -89,7 +104,7 @@ export default {
     },
 
     async putPause({ commit, dispatch }) {
-      const res = await dispatch({
+      const res = await dispatch('client/fetch', {
         path: '/me/player/pause',
         method: 'put',
       }, { root: true });
@@ -98,7 +113,7 @@ export default {
     },
 
     async putSeek({ commit, dispatch }, seek = 0) {
-      const res = await dispatch({
+      const res = await dispatch('client/fetch', {
         path: `/me/player/seek?position_ms=${seek}`,
         method: 'put',
       }, { root: true });
@@ -107,7 +122,7 @@ export default {
     },
 
     async putRepeat({ commit, dispatch }, repeat = 'off') {
-      const res = await dispatch({
+      const res = await dispatch('client/fetch', {
         path: `/me/player/repeat?state=${repeat}`,
         method: 'put',
       }, { root: true });
@@ -129,7 +144,7 @@ export default {
 
     async putVolume({ commit, dispatch }, volume = 100) {
       if (volume > 100) volume = 100;
-      const res = await dispatch({
+      const res = await dispatch('client/fetch', {
         path: `/me/player/volume?volume_percent=${volume}`,
         method: 'put',
       }, { root: true });
@@ -138,28 +153,28 @@ export default {
     },
 
     async postNext({ dispatch }) {
-      await dispatch({
+      await dispatch('client/fetch', {
         path: '/me/player/next',
         method: 'post',
       }, { root: true });
     },
 
     async postPrevious({ dispatch }) {
-      await dispatch({
+      await dispatch('client/fetch', {
         path: '/me/player/previous',
         method: 'post',
       }, { root: true });
     },
 
     async putPlay({ dispatch }, options) {
-      await dispatch({
+      await dispatch('client/fetch', {
         path: '/me/player/play',
         method: 'put',
       }, JSON.stringify(options), { root: true });
     },
 
     async putShuffle({ commit, dispatch }, state) {
-      const res = await dispatch({
+      const res = await dispatch('client/fetch', {
         path: `/me/player/shuffle?state=${state}`,
         method: 'put',
       }, { root: true });
@@ -168,10 +183,78 @@ export default {
     },
 
     async putPlayback({ dispatch }, deviceId, play = true) {
-      await dispatch({
+      await dispatch('client/fetch', {
         path: '/me/player',
         method: 'put',
-      }, JSON.stringify({ device_id: deviceId, play }), { root: true });
+        body: JSON.stringify({ device_ids: [deviceId], play }),
+      }, { root: true });
+    },
+
+    togglePlay({ state }) {
+      const { player } = state;
+      if (player) player.togglePlay();
+    },
+
+    createPlayer({ commit, dispatch }, accessToken) {
+      if (!accessToken) return;
+
+      const player = new window.Spotify.Player({
+        name: 'Better Spotify',
+        getOAuthToken: (cb) => { cb(accessToken); },
+      });
+
+      player.addListener('ready', ({ device_id: deviceId }) => {
+        commit('setDeviceId', deviceId);
+      });
+
+      player.addListener('not_ready', ({ device_id: deviceId }) => {
+        console.log('Device ID is not ready for playback', deviceId);
+      });
+
+      player.addListener('player_state_changed', WebPlaybackState =>
+        commit('setWebPlaybackState', WebPlaybackState));
+
+      player.connect().then((success) => {
+        if (success) {
+          player.getCurrentState().then((state) => {
+            if (!state) {
+              console.error('User is not playing music through the Web Playback SDK');
+              dispatch('fetchPlayback');
+              return;
+            }
+
+            const {
+              current_track: currentTrack,
+              next_tracks: [nextTrack],
+            } = state.track_window;
+
+            console.log('Currently Playing', currentTrack);
+            console.log('Playing Next', nextTrack);
+          });
+        }
+      });
+
+      dispatch('handlePlayerErrors', player);
+
+      commit('setPlayer', player);
+    },
+
+    handlePlayerErrors(context, player) {
+      player.on('initialization_error', ({ message }) => {
+        console.error('Failed to initialize', message);
+      });
+
+      player.on('authentication_error', ({ message }) => {
+        console.error('Failed to authenticate', message);
+      });
+
+      player.on('account_error', ({ message }) => {
+        console.error('Failed to validate Spotify account', message);
+      });
+
+      player.on('playback_error', ({ message }) => {
+        console.error('Failed to perform playback', message);
+      });
     },
   },
 };

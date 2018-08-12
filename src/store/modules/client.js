@@ -7,6 +7,8 @@ const scopes = encodeURIComponent([
   'user-read-birthdate',
   'user-read-email',
   'user-read-private',
+  'user-read-playback-state',
+  'user-modify-playback-state',
 ].join(' '));
 
 const loginPath = 'https://accounts.spotify.com/authorize' +
@@ -73,12 +75,12 @@ export default {
       redirectBackOrHome();
     },
 
-    async fetch({ state, dispatch }, { method, path }) {
+    async fetch({ state, dispatch }, { method, path, ...options }) {
       const { api } = state;
 
       if (!api) return null;
 
-      const res = await state.api[method](path);
+      const res = await state.api[method](path, options);
 
       if (res.status >= 400) return dispatch('handleFetchError', res);
 

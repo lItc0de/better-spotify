@@ -5,12 +5,19 @@
       <router-link :to="{ name: 'Albums' }">Albums</router-link>
     </div>
     <router-view/>
+    <player v-if="$route.name !== 'Login'"/>
   </div>
 </template>
 
 <script>
+import Player from '@/containers/Player.vue';
+
 export default {
-  name: 'Player',
+  name: 'SpotifyPlayer',
+
+  components: {
+    Player,
+  },
 };
 </script>
 
