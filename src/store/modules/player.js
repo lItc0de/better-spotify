@@ -130,18 +130,6 @@ export default {
       commit('setRepeat', repeat);
     },
 
-    repeatOff({ dispatch }) {
-      dispatch('putRepeat', 'off');
-    },
-
-    repeatTrack({ dispatch }) {
-      dispatch('putRepeat', 'track');
-    },
-
-    repeatContext({ dispatch }) {
-      dispatch('putRepeat', 'context');
-    },
-
     async putVolume({ commit, dispatch }, volume = 100) {
       if (volume > 100) volume = 100;
       const res = await dispatch('client/fetch', {
@@ -170,7 +158,8 @@ export default {
       await dispatch('client/fetch', {
         path: '/me/player/play',
         method: 'put',
-      }, JSON.stringify(options), { root: true });
+        body: JSON.stringify(options || {}),
+      }, { root: true });
     },
 
     async putShuffle({ commit, dispatch }, state) {
@@ -182,79 +171,12 @@ export default {
       commit('setShuffle', state);
     },
 
-    async putPlayback({ dispatch }, deviceId, play = true) {
+    async putPlayback({ dispatch }, { deviceId, play = true }) {
       await dispatch('client/fetch', {
         path: '/me/player',
         method: 'put',
         body: JSON.stringify({ device_ids: [deviceId], play }),
       }, { root: true });
-    },
-
-    togglePlay({ state }) {
-      const { player } = state;
-      if (player) player.togglePlay();
-    },
-
-    createPlayer({ commit, dispatch }, accessToken) {
-      if (!accessToken) return;
-
-      const player = new window.Spotify.Player({
-        name: 'Better Spotify',
-        getOAuthToken: (cb) => { cb(accessToken); },
-      });
-
-      player.addListener('ready', ({ device_id: deviceId }) => {
-        commit('setDeviceId', deviceId);
-      });
-
-      player.addListener('not_ready', ({ device_id: deviceId }) => {
-        console.log('Device ID is not ready for playback', deviceId);
-      });
-
-      player.addListener('player_state_changed', WebPlaybackState =>
-        commit('setWebPlaybackState', WebPlaybackState));
-
-      player.connect().then((success) => {
-        if (success) {
-          player.getCurrentState().then((state) => {
-            if (!state) {
-              console.error('User is not playing music through the Web Playback SDK');
-              dispatch('fetchPlayback');
-              return;
-            }
-
-            const {
-              current_track: currentTrack,
-              next_tracks: [nextTrack],
-            } = state.track_window;
-
-            console.log('Currently Playing', currentTrack);
-            console.log('Playing Next', nextTrack);
-          });
-        }
-      });
-
-      dispatch('handlePlayerErrors', player);
-
-      commit('setPlayer', player);
-    },
-
-    handlePlayerErrors(context, player) {
-      player.on('initialization_error', ({ message }) => {
-        console.error('Failed to initialize', message);
-      });
-
-      player.on('authentication_error', ({ message }) => {
-        console.error('Failed to authenticate', message);
-      });
-
-      player.on('account_error', ({ message }) => {
-        console.error('Failed to validate Spotify account', message);
-      });
-
-      player.on('playback_error', ({ message }) => {
-        console.error('Failed to perform playback', message);
-      });
     },
   },
 };

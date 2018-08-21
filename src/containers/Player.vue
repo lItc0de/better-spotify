@@ -1,15 +1,16 @@
 <template>
   <x-footer>
-    <button @click="handlePrevious">previous</button>
-    <button @click="handlePlayPause">play/pause</button>
-    <button @click="handleNext">next</button>
-    <button @click="handlePlayHere">play here</button>
-    <span v-if="playback && playback.device">Playing on: {{playback.device.name}}</span>
+    <button @click="toggleShuffle">{{ shuffleIcon }}</button>
+    <button @click="previousTrack">previous</button>
+    <button @click="togglePlay">{{ playPauseIcon }}</button>
+    <button @click="nextTrack">next</button>
+    <button @click="toggleRepeatMode">{{ repeatModeIcon }}</button>
+    <span>{{ positionTime }}</span>
   </x-footer>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 import XFooter from '@/components/XFooter.vue';
 
 export default {
@@ -26,18 +27,11 @@ export default {
   },
 
   methods: {
-    ...mapActions('player', ['putPause', 'postNext', 'postPrevious', 'putPlay',
-      'createPlayer', 'togglePlay', 'putPlayback']),
-
-    handlePrevious() { this.postPrevious(); },
-
-    handlePlayPause() { this.togglePlay(); },
-
-    handleNext() { this.postNext(); },
-
-    handlePlayHere() {
-      if (this.deviceId) this.putPlayback(this.deviceId);
-    },
+    ...mapActions('playback', ['intitializeSDK']),
+    ...mapActions('combine', [
+      'toggleRepeatMode', 'togglePlay', 'toggleShuffle',
+      'seek', 'previousTrack', 'nextTrack',
+    ]),
 
     addPlaybackScript() {
       const playbackScript = document.createElement('script');
@@ -50,7 +44,7 @@ export default {
     window.onSpotifyWebPlaybackSDKReady = () => {
       const { accessToken } = this;
 
-      if (accessToken) this.createPlayer(accessToken);
+      if (accessToken) this.intitializeSDK(accessToken);
     };
 
     this.addPlaybackScript();
@@ -58,7 +52,35 @@ export default {
 
   computed: {
     ...mapState('client', ['accessToken']),
-    ...mapState('player', ['playback', 'deviceId']),
+    ...mapGetters('playback', ['WebPlaybackTrack', 'paused', 'position', 'repeatMode', 'shuffle']),
+
+    playPauseIcon() {
+      return this.paused ? 'play' : 'pause';
+    },
+
+    repeatModeIcon() {
+      let icon;
+      switch (this.repeatMode) {
+        case 1:
+          icon = 'onceRepeat';
+          break;
+        case 2:
+          icon = 'fullRepeat';
+          break;
+        default:
+          icon = 'noRepeat';
+          break;
+      }
+      return icon;
+    },
+
+    shuffleIcon() {
+      return this.shuffle ? 'shuffle' : 'noShuffle';
+    },
+
+    positionTime() {
+      return this.position;
+    },
   },
 };
 </script>
