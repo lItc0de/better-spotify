@@ -5,7 +5,12 @@
     <button @click="togglePlay">{{ playPauseIcon }}</button>
     <button @click="nextTrack">next</button>
     <button @click="toggleRepeatMode">{{ repeatModeIcon }}</button>
+    <button @click="putPlayback">play here</button>
     <span>{{ positionTime }}</span>
+    <p v-if="WebPlaybackTrack.artists">
+      {{ WebPlaybackTrack.name }} -
+      {{ WebPlaybackTrack.artists.map((artist) => artist.name).join(', ') }}
+    </p>
   </x-footer>
 </template>
 
@@ -30,7 +35,7 @@ export default {
     ...mapActions('playback', ['intitializeSDK']),
     ...mapActions('combine', [
       'toggleRepeatMode', 'togglePlay', 'toggleShuffle',
-      'seek', 'previousTrack', 'nextTrack',
+      'seek', 'previousTrack', 'nextTrack', 'putPlayback',
     ]),
 
     addPlaybackScript() {
@@ -52,26 +57,15 @@ export default {
 
   computed: {
     ...mapState('client', ['accessToken']),
-    ...mapGetters('playback', ['WebPlaybackTrack', 'paused', 'position', 'repeatMode', 'shuffle']),
+    ...mapGetters('playback', ['paused', 'position', 'repeatMode', 'shuffle']),
+    ...mapGetters('combine', ['WebPlaybackTrack']),
 
     playPauseIcon() {
       return this.paused ? 'play' : 'pause';
     },
 
     repeatModeIcon() {
-      let icon;
-      switch (this.repeatMode) {
-        case 1:
-          icon = 'onceRepeat';
-          break;
-        case 2:
-          icon = 'fullRepeat';
-          break;
-        default:
-          icon = 'noRepeat';
-          break;
-      }
-      return icon;
+      return ['noRepeat', 'fullRepeat', 'onceRepeat'][this.repeatMode];
     },
 
     shuffleIcon() {

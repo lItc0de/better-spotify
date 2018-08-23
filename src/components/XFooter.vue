@@ -17,6 +17,6 @@ export default {
   position fixed
   bottom 0
   left 0
-  height 50px
+  min-height 50px
   width 100%
 </style>

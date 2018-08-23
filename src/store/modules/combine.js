@@ -9,17 +9,9 @@ export default {
 
   actions: {
     toggleRepeatMode({ dispatch, rootGetters }) {
-      switch (rootGetters['playback/repeatMode']) {
-        case 'off':
-          dispatch('player/putRepeat', 'context', { root: true });
-          break;
-        case 'context':
-          dispatch('player/putRepeat', 'track', { root: true });
-          break;
-        default:
-          dispatch('player/putRepeat', 'off', { root: true });
-          break;
-      }
+      const repeatMode = rootGetters['playback/repeatMode'];
+      const newRepeatMode = ['context', 'track', 'off'][repeatMode];
+      dispatch('player/putRepeat', newRepeatMode, { root: true });
     },
 
     toggleShuffle({ dispatch, rootGetters }) {
@@ -57,15 +49,20 @@ export default {
 
   getters: {
     hasPlayback(state, getters, rootState) {
-      return rootState['playback/ready'];
+      return rootState.playback.ready;
     },
 
     paused(state, getters, rootState, rootGetters) {
       return rootGetters['playback/paused'];
     },
 
-    deviceId() {
-      return undefined;
+    deviceId(state, getters, rootState) {
+      return rootState.playback.deviceId;
+    },
+
+    WebPlaybackTrack(state, getters, rootState, rootGetters) {
+      const WebPlaybackTrack = rootGetters['playback/WebPlaybackTrack'];
+      return WebPlaybackTrack || {};
     },
   },
 };
