@@ -1,40 +1,36 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link :to="{ name: 'Home' }">Home</router-link> |
-      <router-link :to="{ name: 'Albums' }">Albums</router-link>
-    </div>
-    <router-view/>
-    <player v-if="$route.name !== 'Login'"/>
-  </div>
+  <v-app id="inspire">
+    <x-sidebar :drawer="drawer" @drawerChange="drawer = !drawer"/>
+    <x-header @drawerClick="drawer = !drawer"/>
+    <v-content>
+      <v-container fluid fill-height>
+        <router-view/>
+      </v-container>
+    </v-content>
+    <v-footer color="indigo" app>
+      <player v-if="$route.name !== 'Login'"/>
+    </v-footer>
+  </v-app>
 </template>
 
 <script>
+import XSidebar from '@/components/XSidebar.vue';
+import XHeader from '@/components/XHeader.vue';
 import Player from '@/containers/Player.vue';
 
 export default {
-  name: 'SpotifyPlayer',
-
   components: {
+    XSidebar,
+    XHeader,
     Player,
   },
+
+  props: {
+    source: String,
+  },
+
+  data: () => ({
+    drawer: false,
+  }),
 };
 </script>
-
-
-<style lang="stylus">
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-
-#nav
-  padding 30px
-  a
-    font-weight bold
-    color #2c3e50
-    &.router-link-exact-active
-      color #42b983
-</style>

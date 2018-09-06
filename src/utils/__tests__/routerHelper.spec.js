@@ -15,7 +15,7 @@ jest.mock('@/store/modules/index.js', () => ({
 
 describe('redirectBackOrHome', () => {
   it('', () => {
-    
+
   });
 });
 

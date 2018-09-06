@@ -1,5 +1,5 @@
 <template>
-  <x-footer>
+  <v-flex>
     <button @click="toggleShuffle">{{ shuffleIcon }}</button>
     <button @click="previousTrack">previous</button>
     <button @click="togglePlay">{{ playPauseIcon }}</button>
@@ -11,19 +11,14 @@
       {{ WebPlaybackTrack.name }} -
       {{ WebPlaybackTrack.artists.map((artist) => artist.name).join(', ') }}
     </p>
-  </x-footer>
+  </v-flex>
 </template>
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex';
-import XFooter from '@/components/XFooter.vue';
 
 export default {
   name: 'Player',
-
-  components: {
-    XFooter,
-  },
 
   data() {
     return {
@@ -36,6 +31,7 @@ export default {
     ...mapActions('combine', [
       'toggleRepeatMode', 'togglePlay', 'toggleShuffle',
       'seek', 'previousTrack', 'nextTrack', 'putPlayback',
+      'getCurrentState',
     ]),
 
     addPlaybackScript() {
@@ -51,7 +47,7 @@ export default {
 
       if (accessToken) this.intitializeSDK(accessToken);
     };
-
+    this.getCurrentState();
     this.addPlaybackScript();
   },
 

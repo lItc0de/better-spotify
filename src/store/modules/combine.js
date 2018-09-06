@@ -45,6 +45,12 @@ export default {
       const options = { deviceId: deviceId || ownDeviceId, play };
       dispatch('player/putPlayback', options, { root: true });
     },
+
+    async getCurrentState({ dispatch, getters }) {
+      if (getters.hasPlayback) await dispatch('playback/getCurrentState', null, { root: true });
+      else await dispatch('player/fetchPlayback', null, { root: true });
+      // setTimeout(() => dispatch('getCurrentState'), 1000);
+    },
   },
 
   getters: {
