@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { sync } from 'vuex-router-sync';
 import './plugins/vuetify';
+import './plugins/xstyles';
 import App from './App.vue';
 import router from './routes';
 import store from './store';

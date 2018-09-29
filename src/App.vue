@@ -5,6 +5,7 @@
     <v-content>
       <v-container fluid fill-height>
         <router-view/>
+        <x-player></x-player>
       </v-container>
     </v-content>
     <v-footer color="indigo" app>

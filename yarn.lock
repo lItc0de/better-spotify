@@ -729,6 +729,14 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
+"@litc0de/xstyles@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@litc0de/xstyles/-/xstyles-0.1.0.tgz#de61392e204d1949829879815fcd7196cd38b89c"
+  dependencies:
+    register-service-worker "^1.0.0"
+    vue "^2.5.17"
+    vue-router "^3.0.1"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -8104,6 +8112,10 @@ vue-template-es2015-compiler@^1.6.0:
 vue@^2.5.16:
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
+
+vue@^2.5.17:
+  version "2.5.17"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
 
 vuetify@^1.0.19:
   version "1.1.14"
