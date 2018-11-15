@@ -1,5 +1,5 @@
 import store from '@/store';
-import { redirectBackOrHome, loggedInOrRedirect } from '@/utils/routerHelper';
+import { loggedInOrRedirect } from '@/utils/routerHelper';
 
 jest.mock('@/store/modules/index.js', () => ({
   client: {
