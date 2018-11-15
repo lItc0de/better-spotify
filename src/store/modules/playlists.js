@@ -3,6 +3,8 @@ export default {
     myPlaylists: [],
     playlists: [],
     images: [],
+    current: null,
+    currentTracks: [],
   },
 
   /* eslint-disable no-param-reassign */
@@ -17,6 +19,14 @@ export default {
 
     setImages(state, images) {
       state.images = images;
+    },
+
+    setCurrent(state, playlist) {
+      state.current = playlist;
+    },
+
+    setCurrentTracks(state, tracks) {
+      state.currentTracks = tracks;
     },
   },
   /* eslint-enable no-param-reassign */
@@ -52,7 +62,7 @@ export default {
         method: 'get',
       }, { root: true });
       if (!res) return;
-      commit('setMyPlaylists', res);
+      commit('setMyPlaylists', res.items);
     },
 
     async fetchPlaylists({ dispatch, commit }, { userId, limit, offset }) {
@@ -71,6 +81,24 @@ export default {
       }, { root: true });
       if (!res) return;
       commit('setImages', res);
+    },
+
+    async fetchPlaylist({ commit, dispatch }, playlistId) {
+      const res = await dispatch('client/fetch', {
+        path: `/playlists/${playlistId}`,
+        method: 'get',
+      }, { root: true });
+      if (!res) return;
+      commit('setCurrent', res);
+    },
+
+    async fetchPlaylistTracks({ commit, dispatch }, { playlistId, limit, offset }) {
+      const res = await dispatch('client/fetch', {
+        path: `/playlists/${playlistId}/tracks?limit=${limit}&offset=${offset}`,
+        method: 'get',
+      }, { root: true });
+      if (!res) return;
+      commit('setCurrentTracks', res.items);
     },
   },
 

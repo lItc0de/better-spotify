@@ -9,14 +9,15 @@ const scopes = encodeURIComponent([
   'user-read-private',
   'user-read-playback-state',
   'user-modify-playback-state',
+  'user-library-read',
 ].join(' '));
 
-const loginPath = 'https://accounts.spotify.com/authorize' +
-  '?client_id=5c4aeb1c4e8f495fa3ba5e13916eb3f4' +
-  '&response_type=token' +
-  `&redirect_uri=${encodeURIComponent('http://localhost:8080/login')}` +
-  '&state=123' +
-  `&scope=${scopes}`;
+const loginPath = 'https://accounts.spotify.com/authorize'
+  + '?client_id=5c4aeb1c4e8f495fa3ba5e13916eb3f4'
+  + '&response_type=token'
+  + `&redirect_uri=${encodeURIComponent('http://localhost:8080/login')}`
+  + '&state=123'
+  + `&scope=${scopes}`;
 
 export default {
   state: {

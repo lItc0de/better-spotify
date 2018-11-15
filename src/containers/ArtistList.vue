@@ -1,9 +1,9 @@
 <template>
   <x-container>
-    <h1>Albums</h1>
+    <h1>Artists</h1>
     <x-img-grid>
       <x-img
-        v-for="item in myAlbums"
+        v-for="item in myArtists"
         :key="item.album.id"
         :src="item.album.images[0].url"
         :to="{ name: 'Album', params: { id: item.album.id } }"
@@ -29,15 +29,15 @@ export default {
   },
 
   methods: {
-    ...mapActions('albums', ['fetchMyAlbums']),
+    ...mapActions('albums', ['fetchMyArtists']),
 
     fetchData() {
-      this.fetchMyAlbums({ limit: 50, offset: 0 });
+      this.fetchMyArtists({ limit: 50, offset: 0 });
     },
   },
 
   computed: {
-    ...mapState('albums', ['myAlbums']),
+    ...mapState('albums', ['myArtists']),
   },
 };
 </script>

@@ -1,17 +1,20 @@
 <template>
-  <v-flex>
-    <button @click="toggleShuffle">{{ shuffleIcon }}</button>
-    <button @click="previousTrack">previous</button>
-    <button @click="togglePlay">{{ playPauseIcon }}</button>
-    <button @click="nextTrack">next</button>
-    <button @click="toggleRepeatMode">{{ repeatModeIcon }}</button>
+  <div>
+    <x-player
+      :state="state"
+      @shuffle-click="toggleShuffle"
+      @previous-click="previousTrack"
+      @play-click="togglePlay"
+      @next-click="nextTrack"
+      @repeat-click="toggleRepeatMode"
+    />
     <button @click="putPlayback">play here</button>
     <span>{{ positionTime }}</span>
     <p v-if="WebPlaybackTrack.artists">
       {{ WebPlaybackTrack.name }} -
       {{ WebPlaybackTrack.artists.map((artist) => artist.name).join(', ') }}
     </p>
-  </v-flex>
+  </div>
 </template>
 
 <script>
@@ -55,6 +58,15 @@ export default {
     ...mapState('client', ['accessToken']),
     ...mapGetters('playback', ['paused', 'position', 'repeatMode', 'shuffle']),
     ...mapGetters('combine', ['WebPlaybackTrack']),
+
+    state() {
+      const {
+        paused, repeatMode, shuffle, position,
+      } = this;
+      return {
+        paused, repeatMode, shuffle, position,
+      };
+    },
 
     playPauseIcon() {
       return this.paused ? 'play' : 'pause';

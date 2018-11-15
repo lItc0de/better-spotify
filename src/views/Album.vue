@@ -1,15 +1,15 @@
 <template>
-  <album-list/>
+  <album-show/>
 </template>
 
 <script>
-import AlbumList from '@/containers/AlbumList.vue';
+import AlbumShow from '@/containers/AlbumShow.vue';
 
 export default {
   name: 'Albums',
 
   components: {
-    AlbumList,
+    AlbumShow,
   },
 };
 </script>
