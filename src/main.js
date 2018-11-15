@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { sync } from 'vuex-router-sync';
-import './plugins/vuetify';
+import '@mdi/font/css/materialdesignicons.min.css';
+
 import './plugins/xstyles';
 import App from './App.vue';
 import router from './routes';
