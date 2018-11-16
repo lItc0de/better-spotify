@@ -1,17 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App matches the snapshot 1`] = `
-<v-app id="inspire">
-  <xsidebar-stub></xsidebar-stub>
-  <xheader-stub></xheader-stub>
-  <v-content>
-    <v-container fluid="" fill-height="">
-      <vuecomponent-stub></vuecomponent-stub>
-      <x-player></x-player>
-    </v-container>
-  </v-content>
-  <v-footer color="indigo" app="">
-    <player-stub></player-stub>
-  </v-footer>
-</v-app>
+<layout-stub id="app">
+  <router-view-stub name="default"></router-view-stub>
+</layout-stub>
 `;

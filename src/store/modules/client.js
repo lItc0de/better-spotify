@@ -1,3 +1,4 @@
+import { join } from 'path';
 import Frisbee from 'frisbee';
 import { redirectBackOrHome } from '@/utils/routerHelper';
 
@@ -12,10 +13,12 @@ const scopes = encodeURIComponent([
   'user-library-read',
 ].join(' '));
 
+const redirectPath = join(process.env.VUE_APP_HOST, process.env.BASE_URL, 'login').replace(/(https?:\/)/, '$1/');
+
 const loginPath = 'https://accounts.spotify.com/authorize'
   + '?client_id=5c4aeb1c4e8f495fa3ba5e13916eb3f4'
   + '&response_type=token'
-  + `&redirect_uri=${encodeURIComponent('http://localhost:8080/login')}`
+  + `&redirect_uri=${encodeURIComponent(redirectPath)}`
   + '&state=123'
   + `&scope=${scopes}`;
 
