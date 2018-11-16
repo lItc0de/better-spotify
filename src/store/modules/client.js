@@ -13,7 +13,7 @@ const scopes = encodeURIComponent([
   'user-library-read',
 ].join(' '));
 
-const redirectPath = join(process.env.VUE_APP_HOST, process.env.BASE_URL, 'login').replace(/(https?:\/)/, '$1/');
+const redirectPath = join(process.env.VUE_APP_HOST, process.env.BASE_URL).replace(/(https?:\/)/, '$1/');
 
 const loginPath = 'https://accounts.spotify.com/authorize'
   + '?client_id=5c4aeb1c4e8f495fa3ba5e13916eb3f4'
