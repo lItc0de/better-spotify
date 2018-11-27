@@ -1,10 +1,12 @@
 <template>
-  <layout id="app">
-    <router-view/>
-    <!-- <div>
-      <player v-if="$route.name !== 'Login'"/>
-    </div> -->
-  </layout>
+  <x-app>
+    <layout id="app">
+      <router-view/>
+      <!-- <div>
+        <player v-if="$route.name !== 'Login'"/>
+      </div> -->
+    </layout>
+  </x-app>
 </template>
 
 <script>

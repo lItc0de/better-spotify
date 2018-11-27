@@ -1,17 +1,19 @@
 <template>
   <div>
     <h1>Playlists</h1>
-    <x-img-grid>
-      <x-img
+    <x-grid-list>
+      <x-link
         v-for="playlist in myPlaylists"
         :key="playlist.id"
-        :src="playlist.images[0].url"
         :to="{ name: 'Playlist', params: { id: playlist.id } }"
+        color="color"
+        no-underline
       >
-        <x-text>{{ playlist.name }}</x-text>
-      <x-text subtitle>{{ playlist.owner.display_name }}</x-text>
-      </x-img>
-    </x-img-grid>
+        <x-img :src="playlist.images[0].url"/>
+        <x-text slim>{{ playlist.name }}</x-text>
+        <x-text color="colorSecondary" slim>{{ playlist.owner.display_name }}</x-text>
+      </x-link>
+    </x-grid-list>
   </div>
 </template>
 
