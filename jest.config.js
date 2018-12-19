@@ -12,6 +12,7 @@ module.exports = {
   },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    '^utils/(.*)$': '<rootDir>/src/utils/$1',
   },
   snapshotSerializers: [
     'jest-serializer-vue',
@@ -19,4 +20,9 @@ module.exports = {
   testMatch: [
     '<rootDir>/(tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx))',
   ],
+  transformIgnorePatterns: [
+    '/node_modules/.*',
+  ],
+  setupTestFrameworkScriptFile: '<rootDir>/setupJest.js',
+  testURL: 'http://localhost',
 };

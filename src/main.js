@@ -2,11 +2,11 @@ import Vue from 'vue';
 import { sync } from 'vuex-router-sync';
 import '@mdi/font/css/materialdesignicons.min.css';
 
-import './plugins/xstyles';
-import App from './App.vue';
-import router from './routes';
-import store from './store';
-import './registerServiceWorker';
+import '@/plugins/xstyles';
+import App from '@/App.vue';
+import router from '@/router';
+import store from '@/store';
+import '@/registerServiceWorker';
 
 Vue.config.productionTip = false;
 

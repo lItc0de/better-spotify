@@ -13,6 +13,9 @@ describe('App', () => {
     wrapper = shallowMount(App, {
       localVue,
       router,
+      stubs: {
+        'x-app': true,
+      },
     });
   });
 

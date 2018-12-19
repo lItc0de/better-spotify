@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   root: true,
   env: {
@@ -14,5 +16,19 @@ module.exports = {
   },
   parserOptions: {
     parser: 'babel-eslint',
+  },
+  settings: {
+    'import/resolver': {
+      webpack: {
+        config: {
+          resolve: {
+            alias: {
+              '@': path.resolve(__dirname, 'src/'),
+              utils: path.resolve(__dirname, 'src/utils/'),
+            },
+          },
+        },
+      },
+    },
   },
 };

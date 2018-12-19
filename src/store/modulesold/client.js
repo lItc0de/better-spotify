@@ -35,6 +35,8 @@ export default {
       if (!newAccessToken) return;
       if (newAccessToken === accessToken) return;
 
+      debugger;
+
       state.api = new Frisbee({
         baseURI: 'https://api.spotify.com/v1',
         headers: {
@@ -81,6 +83,8 @@ export default {
 
     async fetch({ state, dispatch }, { method, path, ...options }) {
       const { api } = state;
+
+      debugger;
 
       if (!api) return null;
 

@@ -1,6 +1,6 @@
 import { createLocalVue } from '@vue/test-utils';
 import Router from 'vue-router';
-import routerConfig from '@/routes/config';
+import routerConfig from '@/router/routes';
 
 import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';

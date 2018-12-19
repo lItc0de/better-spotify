@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test": "vue-cli-service test:unit",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "watch": "vue-cli-service test:unit --watch"
   },
@@ -24,10 +24,12 @@
   },
   "dependencies": {
     "@litc0de/xstyles": "^0.1.7",
-    "@mdi/font": "^3.0.39",
+    "@mdi/font": "^3.2.89",
+    "axios": "^0.18.0",
+    "dotenv": "^6.2.0",
     "frisbee": "^2.0.5",
     "register-service-worker": "^1.0.0",
-    "vue": "^2.5.16",
+    "vue": "^2.5.18",
     "vue-head": "^2.1.0",
     "vue-prism-component": "^1.1.1",
     "vue-router": "^3.0.2",
@@ -35,21 +37,23 @@
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.0-beta.15",
-    "@vue/cli-plugin-eslint": "^3.1.5",
-    "@vue/cli-plugin-pwa": "^3.1.2",
-    "@vue/cli-plugin-unit-jest": "^3.0.0-beta.15",
-    "@vue/cli-service": "^3.1.4",
+    "@types/jest": "^23.3.10",
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-eslint": "^3.2.1",
+    "@vue/cli-plugin-pwa": "^3.2.0",
+    "@vue/cli-plugin-unit-jest": "^3.2.0",
+    "@vue/cli-service": "^3.2.0",
     "@vue/eslint-config-airbnb": "^4.0.0",
     "@vue/test-utils": "^1.0.0-beta.26",
+    "axios-mock-adapter": "^1.15.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.4.0",
     "babel-plugin-transform-imports": "^1.4.1",
     "lint-staged": "^8.1.0",
-    "nock": "^10.0.2",
+    "lodash.clonedeep": "^4.5.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "vue-template-compiler": "^2.5.16"
+    "vue-template-compiler": "^2.5.18"
   },
   "browserslist": [
     "> 1%",
