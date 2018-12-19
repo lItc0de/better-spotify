@@ -14,7 +14,7 @@ stages:
 jest_tests:
   stage: test
   script:
-    - yarn test
+    - yarn test:unit
 
 pages:
   image: node:latest
