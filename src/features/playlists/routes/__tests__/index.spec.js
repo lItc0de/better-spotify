@@ -1,6 +1,8 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import Vuex from 'vuex';
+import { createLocalVue, mount } from '@vue/test-utils';
 import Router from 'vue-router';
 import routerConfig from '@/router/config';
+import { restoreMockedWindow, mockWindowLocation } from '@/__utils__/mockWindow';
 
 import App from '@/App.vue';
 import Playlists from '../../views/Playlists.vue';
@@ -8,23 +10,45 @@ import Playlist from '../../views/Playlist.vue';
 
 const localVue = createLocalVue();
 localVue.use(Router);
+localVue.use(Vuex);
 
 describe('playlist routes', () => {
+  let store;
   let wrapper;
   let router;
 
   beforeEach(() => {
+    const config = {
+      modules: {
+        playlists: {
+          namespaced: true,
+          actions: {
+            fetchList: jest.fn(),
+          },
+        },
+      },
+    };
+
+    store = new Vuex.Store(config);
     router = new Router(routerConfig);
-    wrapper = shallowMount(App, {
+    wrapper = mount(App, {
+      store,
       localVue,
       router,
+      stubs: ['x-app', 'x-container', 'x-layout'],
     });
   });
 
   describe('/playlists', () => {
-    xit('loads the playlists view', () => {
-      router.push('/playlists');
+    beforeAll(() => {
+      mockWindowLocation('/playlists');
+    });
 
+    afterAll(() => {
+      restoreMockedWindow();
+    });
+
+    it('loads the playlists view', () => {
       const matchedComponent = router.getMatchedComponents()[0];
 
       expect(wrapper.find(Playlists).exists()).toBe(true);
@@ -35,9 +59,15 @@ describe('playlist routes', () => {
   });
 
   describe('/playlist/:id', () => {
-    xit('loads the playlist detail view', () => {
-      router.push('/playlist/123');
+    beforeAll(() => {
+      mockWindowLocation('/playlists/123');
+    });
 
+    afterAll(() => {
+      restoreMockedWindow();
+    });
+
+    it('loads the playlist detail view', () => {
       const matchedComponent = router.getMatchedComponents()[0];
 
       expect(wrapper.find(Playlist).exists()).toBe(true);

@@ -20,6 +20,7 @@ describe('Playlists View', () => {
       store,
       stubs: {
         'x-container': true,
+        'x-layout': true,
       },
     });
   });

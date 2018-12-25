@@ -2,8 +2,6 @@
 
 exports[`App matches the snapshot 1`] = `
 <x-app-stub>
-  <layout-stub id="app">
-    <router-view-stub name="default"></router-view-stub>
-  </layout-stub>
+  <router-view-stub name="default"></router-view-stub>
 </x-app-stub>
 `;

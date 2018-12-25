@@ -1,5 +1,7 @@
 <template>
-  <x-container>Playlists</x-container>
+  <x-layout id="app">
+    <x-container>Playlists</x-container>
+  </x-layout>
 </template>
 
 <script>
