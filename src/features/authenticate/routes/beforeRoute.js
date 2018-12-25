@@ -5,7 +5,7 @@ export default (to, from, next) => {
   if (splitedHash.access_token) window.localStorage.setItem('access_token', splitedHash.access_token);
 
   const accessToken = window.localStorage.getItem('access_token');
-  if (!accessToken) return next({ name: 'Login' });
+  if (to.name !== 'Login' && !accessToken) return next({ name: 'Login' });
   if (to.name === 'Login' && accessToken) return next({ name: 'Home' });
 
   return next();

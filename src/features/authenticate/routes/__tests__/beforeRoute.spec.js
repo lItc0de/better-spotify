@@ -2,9 +2,14 @@ import beforeRoute from '../beforeRoute';
 
 const accessToken = 'access_token';
 const from = {};
-const next = jest.fn();
 
 describe('authentication before route', () => {
+  let next;
+
+  beforeEach(() => {
+    next = jest.fn();
+  });
+
   afterEach(() => {
     window.localStorage.removeItem('access_token');
   });
@@ -22,7 +27,7 @@ describe('authentication before route', () => {
     beforeRoute(to, from, next);
 
     expect(window.localStorage.getItem('access_token')).toEqual(null);
-    expect(next).toHaveBeenCalledWith();
+    expect(next).toHaveBeenCalledWith({ name: 'Login' });
   });
 
   it('redirects to "/login" if no access token is set', () => {
@@ -30,6 +35,13 @@ describe('authentication before route', () => {
     beforeRoute(to, from, next);
 
     expect(next).toHaveBeenCalledWith({ name: 'Login' });
+  });
+
+  it('stays on "/login" if no access token is set', () => {
+    const to = { hash: '', name: 'Login' };
+    beforeRoute(to, from, next);
+
+    expect(next).toHaveBeenCalledWith();
   });
 
   it('redirects from "/login" to "/" if access token is set', () => {
