@@ -1,7 +1,7 @@
 import Vuex from 'vuex';
 import { createLocalVue, mount } from '@vue/test-utils';
 import Router from 'vue-router';
-import routerConfig from '@/router/config';
+import { config as routerConfig } from '@/router';
 import { restoreMockedWindow, mockWindowLocation } from '@/__utils__/mockWindow';
 
 import App from '@/App.vue';
