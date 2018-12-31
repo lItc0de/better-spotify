@@ -18,8 +18,6 @@ export default {
 
   methods: {
     handleLogin() {
-      console.log(loginPath);
-
       window.location.assign(loginPath);
     },
   },

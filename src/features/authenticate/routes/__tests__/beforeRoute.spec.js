@@ -15,11 +15,11 @@ describe('authentication before route', () => {
   });
 
   it('saves the access token to the local store', () => {
-    const to = { hash: `#access_token=${accessToken}` };
+    const to = { hash: `#access_token=${accessToken}`, path: '/' };
     beforeRoute(to, from, next);
 
     expect(window.localStorage.getItem('access_token')).toEqual(accessToken);
-    expect(next).toHaveBeenCalledWith();
+    expect(next).toHaveBeenCalledWith(to.path);
   });
 
   it('doesn‘t set the access token if the hash is empty', () => {
