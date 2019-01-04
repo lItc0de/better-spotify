@@ -24,12 +24,12 @@
   },
   "dependencies": {
     "@litc0de/xstyles": "^0.1.7",
-    "@mdi/font": "^3.2.89",
+    "@mdi/font": "^3.3.92",
     "axios": "^0.18.0",
     "dotenv": "^6.2.0",
     "frisbee": "^2.0.5",
     "register-service-worker": "^1.0.0",
-    "vue": "^2.5.18",
+    "vue": "^2.5.21",
     "vue-head": "^2.1.0",
     "vue-prism-component": "^1.1.1",
     "vue-router": "^3.0.2",
@@ -37,15 +37,15 @@
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.10",
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.1",
-    "@vue/cli-plugin-pwa": "^3.2.0",
-    "@vue/cli-plugin-unit-jest": "^3.2.0",
-    "@vue/cli-service": "^3.2.0",
+    "@types/jest": "^23.3.11",
+    "@vue/cli-plugin-babel": "^3.2.2",
+    "@vue/cli-plugin-eslint": "^3.2.2",
+    "@vue/cli-plugin-pwa": "^3.2.2",
+    "@vue/cli-plugin-unit-jest": "^3.2.3",
+    "@vue/cli-service": "^3.2.3",
     "@vue/eslint-config-airbnb": "^4.0.0",
-    "@vue/test-utils": "^1.0.0-beta.26",
-    "axios-mock-adapter": "^1.15.0",
+    "@vue/test-utils": "^1.0.0-beta.28",
+    "axios-mock-adapter": "^1.16.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.4.0",
     "babel-plugin-transform-imports": "^1.4.1",
@@ -53,7 +53,7 @@
     "lodash.clonedeep": "^4.5.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "vue-template-compiler": "^2.5.18"
+    "vue-template-compiler": "^2.5.21"
   },
   "browserslist": [
     "> 1%",
