@@ -11,6 +11,14 @@ describe('Playlists View', () => {
   let store;
   let wrapper;
 
+  beforeAll(() => {
+    window.localStorage.setItem('access_token', 'access_token');
+  });
+
+  afterAll(() => {
+    window.localStorage.removeItem('access_token');
+  });
+
   beforeEach(() => {
     const config = cloneDeep(storeConfig);
     store = new Vuex.Store(config);

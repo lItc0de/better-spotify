@@ -112,6 +112,14 @@ describe('playlists module', () => {
 
   describe('actions', () => {
     describe('fetchPlaylists', () => {
+      beforeAll(() => {
+        window.localStorage.setItem('access_token', 'access_token');
+      });
+
+      afterAll(() => {
+        window.localStorage.removeItem('access_token');
+      });
+
       it('returns a list of playlists', async () => {
         mock.onGet('/v1/me/playlists').reply(200, playlists);
 
