@@ -12,14 +12,19 @@ describe('authentication before route', () => {
 
   afterEach(() => {
     window.localStorage.removeItem('access_token');
+    window.localStorage.removeItem('redirect_url');
   });
 
   it('saves the access token to the local store', () => {
     const to = { hash: `#access_token=${accessToken}`, path: '/' };
+    const redirectUrl = '/test';
+
+    window.localStorage.setItem('redirect_url', redirectUrl);
     beforeRoute(to, from, next);
 
     expect(window.localStorage.getItem('access_token')).toEqual(accessToken);
-    expect(next).toHaveBeenCalledWith(to.path);
+    expect(window.localStorage.getItem('redirect_url')).toEqual(null);
+    expect(next).toHaveBeenCalledWith(redirectUrl);
   });
 
   it('doesn‘t set the access token if the hash is empty', () => {
