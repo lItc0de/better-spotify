@@ -27,13 +27,13 @@ describe('Playlists View', () => {
       localVue,
       store,
       stubs: {
-        'x-container': true,
+        'x-container': '<div class="container" />',
         'x-layout': true,
       },
     });
   });
 
   it('renders a container', () => {
-    expect(wrapper.exists('x-container')).toBe(true);
+    expect(wrapper.find('.container').exists()).toBe(true);
   });
 });
