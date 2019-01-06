@@ -108,6 +108,13 @@ describe('playlists module', () => {
         expect(store.getters['playlists/currentTracks']).toEqual({});
       });
     });
+
+    describe('items', () => {
+      it('returns all the playlists items', () => {
+        store.state.playlists.list = playlists;
+        expect(store.getters['playlists/items']).toEqual(playlists.items);
+      });
+    });
   });
 
   describe('actions', () => {

@@ -61,5 +61,7 @@ export default {
       const { current } = getters;
       return current ? current.tracks : {};
     },
+
+    items: state => (state.list ? state.list.items : []),
   },
 };

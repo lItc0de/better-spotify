@@ -1,8 +1,10 @@
 import Vuex from 'vuex';
 import { createLocalVue, mount } from '@vue/test-utils';
+import cloneDeep from 'lodash.clonedeep';
 import Router from 'vue-router';
 import { config as routerConfig } from '@/router';
 import { restoreMockedWindow, mockWindowLocation } from '@/__utils__/mockWindow';
+import storeConfig from '@/store/config';
 
 import App from '@/App.vue';
 import Playlists from '../../views/Playlists.vue';
@@ -18,24 +20,15 @@ describe('playlist routes', () => {
   let router;
 
   beforeEach(() => {
-    const config = {
-      modules: {
-        playlists: {
-          namespaced: true,
-          actions: {
-            fetchList: jest.fn(),
-          },
-        },
-      },
-    };
-
+    const config = cloneDeep(storeConfig);
+    config.modules.playlists.actions.fetchList = jest.fn();
     store = new Vuex.Store(config);
+
     router = new Router(routerConfig);
     wrapper = mount(App, {
       store,
       localVue,
       router,
-      stubs: ['x-app', 'x-container', 'x-layout'],
     });
   });
 
