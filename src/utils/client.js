@@ -29,6 +29,8 @@ instance.interceptors.response.use(
   response => response,
   (error) => {
     if (error.response.status === 401) {
+      const redirectUrl = window.location.pathname;
+      window.localStorage.setItem('redirect_url', redirectUrl);
       window.location.assign(loginPath);
     }
 
