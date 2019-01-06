@@ -15,7 +15,8 @@ instance.interceptors.request.use(
     const newConfig = config;
     const accessToken = window.localStorage.getItem('access_token');
     if (!accessToken) {
-      const error = { response: { status: 401 } };
+      const error = new Error('No access token was set');
+      error.response = { status: 401 };
       return Promise.reject(error);
     }
 
@@ -32,6 +33,7 @@ instance.interceptors.response.use(
       const redirectUrl = window.location.pathname;
       window.localStorage.setItem('redirect_url', redirectUrl);
       window.location.assign(loginPath);
+      return null;
     }
 
     return Promise.reject(error);

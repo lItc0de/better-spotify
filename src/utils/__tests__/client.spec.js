@@ -26,7 +26,7 @@ describe('client', () => {
     });
   });
 
-  describe('incorrecct access token', () => {
+  describe('incorrect access token', () => {
     const { assign } = window.location;
 
     beforeEach(() => {
@@ -39,8 +39,7 @@ describe('client', () => {
 
     describe('access token not set', () => {
       it('should redirect to spotify login', async () => {
-        const res = { response: { status: 401 } };
-        await expect(client.get('/v1')).rejects.toEqual(res);
+        await expect(client.get('/v1')).resolves.toEqual(null);
         expect(window.location.assign).toHaveBeenCalledWith(loginPath);
       });
     });
@@ -60,7 +59,7 @@ describe('client', () => {
       });
 
       it('should redirect to spotify login', async () => {
-        await expect(client.get('/v1')).rejects.toThrowError();
+        await expect(client.get('/v1')).resolves.toEqual(null);
         expect(window.location.assign).toHaveBeenCalledWith(loginPath);
       });
 
