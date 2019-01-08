@@ -5,12 +5,16 @@ import { createLocalVue } from '@vue/test-utils';
 import client from 'utils/client';
 import storeConfig from '@/store/config';
 import playlistsMock from '@/__mocks__/playlists.json';
+import playlistsWithOffset from '@/__mocks__/playlistsWithOffset.json';
 import tracksMock from '@/__mocks__/tracks.json';
 
 const mock = new MockAdapter(client);
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+
+const getPlaylists = () => cloneDeep(playlistsMock);
+const getPlaylistsWithOffset = () => cloneDeep(playlistsWithOffset);
 
 describe('playlists module', () => {
   let store;
@@ -44,14 +48,21 @@ describe('playlists module', () => {
       });
     });
 
-    describe('setPlaylists', () => {
+    describe('setList', () => {
       it('adds new playlists to the list array', () => {
         store.commit('playlists/setList', playlists);
         expect(store.state.playlists.list).toEqual(playlists);
       });
+    });
+
+    describe('pushList', () => {
+      it('adds new playlists to the list array', () => {
+        store.commit('playlists/pushList', playlists);
+        expect(store.state.playlists.list).toEqual(playlists);
+      });
 
       it('only allows arrays a valid playlist object', () => {
-        store.commit('playlists/setList', {});
+        store.commit('playlists/pushList', {});
         expect(store.state.playlists.list).toEqual(null);
       });
     });
@@ -115,24 +126,61 @@ describe('playlists module', () => {
         expect(store.getters['playlists/items']).toEqual(playlists.items);
       });
     });
+
+    describe('listCount', () => {
+      it('returns the count of the loaded playlists', () => {
+        store.state.playlists.list = playlists;
+        expect(store.getters['playlists/listCount']).toEqual(playlists.items.length);
+      });
+
+      it('returns 0 if no playlists are loaded', () => {
+        expect(store.getters['playlists/listCount']).toEqual(0);
+      });
+    });
   });
 
   describe('actions', () => {
+    beforeAll(() => {
+      window.localStorage.setItem('access_token', 'access_token');
+    });
+
+    afterAll(() => {
+      window.localStorage.removeItem('access_token');
+    });
+
     describe('fetchPlaylists', () => {
-      beforeAll(() => {
-        window.localStorage.setItem('access_token', 'access_token');
-      });
-
-      afterAll(() => {
-        window.localStorage.removeItem('access_token');
-      });
-
       it('returns a list of playlists', async () => {
-        mock.onGet('/v1/me/playlists').reply(200, playlists);
+        mock.onGet('/v1/me/playlists?limit=50&offset=0').reply(200, getPlaylists());
 
         await store.dispatch('playlists/fetchList');
 
+        expect(store.state.playlists.list).toEqual(getPlaylists());
+      });
+    });
+
+    describe('fetchNextPlaylists', () => {
+      it('returns a list of playlist and adds it to the existing', async () => {
+        store.state.playlists.list = playlists;
+        mock.onGet('/v1/me/playlists?limit=50&offset=2').reply(200, getPlaylistsWithOffset());
+
+        const newPlaylists = getPlaylistsWithOffset();
+        newPlaylists.items.unshift(...getPlaylists().items);
+
+        await store.dispatch('playlists/fetchNext');
+
+        expect(store.state.playlists.list).toEqual(newPlaylists);
+        expect(store.state.playlists.list.items.length).toEqual(4);
+      });
+
+      it('doesn‘t fetch new playlists if all are fetched', async () => {
+        playlists.total = 2;
+        store.state.playlists.list = playlists;
+        mock.onGet('/v1/me/playlists?limit=50&offset=2').reply(200, getPlaylistsWithOffset());
+
+        await store.dispatch('playlists/fetchNext');
+
         expect(store.state.playlists.list).toEqual(playlists);
+        expect(store.state.playlists.list.items.length).toEqual(2);
       });
     });
   });

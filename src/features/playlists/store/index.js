@@ -15,6 +15,10 @@ export default {
     setLoading: (state, loading) => { if (typeof loading === 'boolean') state.loading = loading; },
 
     setList: (state, playlists) => {
+      state.list = playlists;
+    },
+
+    pushList: (state, playlists) => {
       const newItems = playlists.items;
       if (!(newItems instanceof Array)) return;
 
@@ -46,10 +50,18 @@ export default {
 
   actions: {
     async fetchList({ commit }) {
-      const res = await client.get('v1/me/playlists');
+      const res = await client.get('v1/me/playlists?limit=50&offset=0');
 
       if (!res) return;
       commit('setList', res.data);
+    },
+
+    async fetchNext({ commit, getters, state }) {
+      if (state.list.total === getters.listCount) return;
+      const res = await client.get(`v1/me/playlists?limit=50&offset=${getters.listCount}`);
+
+      if (!res) return;
+      commit('pushList', res.data);
     },
   },
 
@@ -63,5 +75,7 @@ export default {
     },
 
     items: state => (state.list ? state.list.items : []),
+
+    listCount: state => (state.list ? state.list.items.length : 0),
   },
 };

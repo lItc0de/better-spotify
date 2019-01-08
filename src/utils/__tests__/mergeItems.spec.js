@@ -11,8 +11,8 @@ describe('mergeItems', () => {
   it('should append new items to an existing list', () => {
     const existingItems = getItems();
     const newItems = [
-      { id: '5', name: 'test4' },
-      { id: '6', name: 'test4' },
+      { id: '5', name: 'test5' },
+      { id: '6', name: 'test6' },
     ];
     const mergedItems = mergeItems(existingItems, newItems);
 

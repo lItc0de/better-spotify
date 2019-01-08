@@ -1,31 +1,31 @@
 {
-  "href": "https://api.spotify.com/v1/users/basti_3/playlists?offset=2&limit=3",
+  "href": "https://api.spotify.com/v1/users/basti_3/playlists?offset=0&limit=2",
   "items": [
     {
       "collaborative": false,
       "external_urls": {
-        "spotify": "https://open.spotify.com/playlist/5rVQlDLplfQhOWk6Nf3XLG"
+        "spotify": "https://open.spotify.com/playlist/4NPzziSpoSEA4dPNnSAsl9"
       },
-      "href": "https://api.spotify.com/v1/playlists/5rVQlDLplfQhOWk6Nf3XLG",
-      "id": "5rVQlDLplfQhOWk6Nf3XLG",
+      "href": "https://api.spotify.com/v1/playlists/4NPzziSpoSEA4dPNnSAsl9",
+      "id": "4NPzziSpoSEA4dPNnSAsl9",
       "images": [
         {
           "height": 640,
-          "url": "https://mosaic.scdn.co/640/16f5134b451303d2ca39d6757ceabe295d387b3b295e2f20d65b0845a10ca86115971fb9e705c3ccb04f24f9b2c3387070e88eb0e01f186fd660b92bc5c834b63eee4279cd475cfcc387e8275a377e20",
+          "url": "https://mosaic.scdn.co/640/0e81b5ec81e1d81fcac3feca1d3b533129f9600f7565c10bd67f7f7fcf9ec4f42db9704eab85eacab8b96e31074847815dd61a772864c9e0978d90ccd6b6261317750bfa507824fec9c7681b8f40879b",
           "width": 640
         },
         {
           "height": 300,
-          "url": "https://mosaic.scdn.co/300/16f5134b451303d2ca39d6757ceabe295d387b3b295e2f20d65b0845a10ca86115971fb9e705c3ccb04f24f9b2c3387070e88eb0e01f186fd660b92bc5c834b63eee4279cd475cfcc387e8275a377e20",
+          "url": "https://mosaic.scdn.co/300/0e81b5ec81e1d81fcac3feca1d3b533129f9600f7565c10bd67f7f7fcf9ec4f42db9704eab85eacab8b96e31074847815dd61a772864c9e0978d90ccd6b6261317750bfa507824fec9c7681b8f40879b",
           "width": 300
         },
         {
           "height": 60,
-          "url": "https://mosaic.scdn.co/60/16f5134b451303d2ca39d6757ceabe295d387b3b295e2f20d65b0845a10ca86115971fb9e705c3ccb04f24f9b2c3387070e88eb0e01f186fd660b92bc5c834b63eee4279cd475cfcc387e8275a377e20",
+          "url": "https://mosaic.scdn.co/60/0e81b5ec81e1d81fcac3feca1d3b533129f9600f7565c10bd67f7f7fcf9ec4f42db9704eab85eacab8b96e31074847815dd61a772864c9e0978d90ccd6b6261317750bfa507824fec9c7681b8f40879b",
           "width": 60
         }
       ],
-      "name": "House",
+      "name": "new stuff",
       "owner": {
         "display_name": "basti_3",
         "external_urls": {
@@ -38,39 +38,39 @@
       },
       "primary_color": null,
       "public": false,
-      "snapshot_id": "MjAsZGY2ZjhiYzE1YzhmYTZmNmI2YTIyMThjNGI2YzAyMWVlY2M2MGQzMw==",
+      "snapshot_id": "NTU4LDVlOGY4NDM1ODgwYjdlZDY2NzJjMzcwY2NmZDIzZWY0ZDNkZTkzYjc=",
       "tracks": {
-        "href": "https://api.spotify.com/v1/playlists/5rVQlDLplfQhOWk6Nf3XLG/tracks",
-        "total": 17
+        "href": "https://api.spotify.com/v1/playlists/4NPzziSpoSEA4dPNnSAsl9/tracks",
+        "total": 184
       },
       "type": "playlist",
-      "uri": "spotify:user:basti_3:playlist:5rVQlDLplfQhOWk6Nf3XLG"
+      "uri": "spotify:user:basti_3:playlist:4NPzziSpoSEA4dPNnSAsl9"
     },
     {
       "collaborative": false,
       "external_urls": {
-        "spotify": "https://open.spotify.com/playlist/2lozBTZJKkKktIjS5KDCeB"
+        "spotify": "https://open.spotify.com/playlist/48NIAlNtylJumKg5iPPQ4d"
       },
-      "href": "https://api.spotify.com/v1/playlists/2lozBTZJKkKktIjS5KDCeB",
-      "id": "2lozBTZJKkKktIjS5KDCeB",
+      "href": "https://api.spotify.com/v1/playlists/48NIAlNtylJumKg5iPPQ4d",
+      "id": "48NIAlNtylJumKg5iPPQ4d",
       "images": [
         {
           "height": 640,
-          "url": "https://mosaic.scdn.co/640/2284832310616607535a705359a671b0ace0a0f232b4b01c754daf52a67cd86368e6e2b3d9468bca569055900d3d4a8d13dd5cf1672b0643e7d27ebca3d071853a12fad7f4114e92c404a218d90081a7",
+          "url": "https://mosaic.scdn.co/640/06fc3ffde31bb75e7e9abcbb82e8071a84c40ae617d7d648425259666e7b62a3597bdb3303e2f7018d20df0fbec1cd84eaa3de542167a50fd6140a7ed69a5ba9ae21b201605b9a328981b194553989a3",
           "width": 640
         },
         {
           "height": 300,
-          "url": "https://mosaic.scdn.co/300/2284832310616607535a705359a671b0ace0a0f232b4b01c754daf52a67cd86368e6e2b3d9468bca569055900d3d4a8d13dd5cf1672b0643e7d27ebca3d071853a12fad7f4114e92c404a218d90081a7",
+          "url": "https://mosaic.scdn.co/300/06fc3ffde31bb75e7e9abcbb82e8071a84c40ae617d7d648425259666e7b62a3597bdb3303e2f7018d20df0fbec1cd84eaa3de542167a50fd6140a7ed69a5ba9ae21b201605b9a328981b194553989a3",
           "width": 300
         },
         {
           "height": 60,
-          "url": "https://mosaic.scdn.co/60/2284832310616607535a705359a671b0ace0a0f232b4b01c754daf52a67cd86368e6e2b3d9468bca569055900d3d4a8d13dd5cf1672b0643e7d27ebca3d071853a12fad7f4114e92c404a218d90081a7",
+          "url": "https://mosaic.scdn.co/60/06fc3ffde31bb75e7e9abcbb82e8071a84c40ae617d7d648425259666e7b62a3597bdb3303e2f7018d20df0fbec1cd84eaa3de542167a50fd6140a7ed69a5ba9ae21b201605b9a328981b194553989a3",
           "width": 60
         }
       ],
-      "name": "Acid",
+      "name": "Acid/Funk | Jazz Fusion",
       "owner": {
         "display_name": "basti_3",
         "external_urls": {
@@ -83,63 +83,18 @@
       },
       "primary_color": null,
       "public": false,
-      "snapshot_id": "MzIsMjI2ODQ1NzU0YTY2OTQxYjMxMzk1MDVmNDA0MmZmZDU1YTEzYTJlZQ==",
+      "snapshot_id": "OSw4NjQ1YzQxMjBkN2RlOTVjZTJlZGZkNzZiMDgyNGFiNzc5NGZmYThl",
       "tracks": {
-        "href": "https://api.spotify.com/v1/playlists/2lozBTZJKkKktIjS5KDCeB/tracks",
-        "total": 29
+        "href": "https://api.spotify.com/v1/playlists/48NIAlNtylJumKg5iPPQ4d/tracks",
+        "total": 7
       },
       "type": "playlist",
-      "uri": "spotify:user:basti_3:playlist:2lozBTZJKkKktIjS5KDCeB"
-    },
-    {
-      "collaborative": false,
-      "external_urls": {
-        "spotify": "https://open.spotify.com/playlist/7l52EF3Z1tqinWOTYGAGKl"
-      },
-      "href": "https://api.spotify.com/v1/playlists/7l52EF3Z1tqinWOTYGAGKl",
-      "id": "7l52EF3Z1tqinWOTYGAGKl",
-      "images": [
-        {
-          "height": 640,
-          "url": "https://mosaic.scdn.co/640/33211118630c57bd25cda8ee121047bed91d68be3530892482b7436fd3f84338e5ec1c40915346feaeab90a33983c7c0e76b9572d009cb6c4e9c8199f2d8d245b0614b503ad24c812639895c4f0308b8",
-          "width": 640
-        },
-        {
-          "height": 300,
-          "url": "https://mosaic.scdn.co/300/33211118630c57bd25cda8ee121047bed91d68be3530892482b7436fd3f84338e5ec1c40915346feaeab90a33983c7c0e76b9572d009cb6c4e9c8199f2d8d245b0614b503ad24c812639895c4f0308b8",
-          "width": 300
-        },
-        {
-          "height": 60,
-          "url": "https://mosaic.scdn.co/60/33211118630c57bd25cda8ee121047bed91d68be3530892482b7436fd3f84338e5ec1c40915346feaeab90a33983c7c0e76b9572d009cb6c4e9c8199f2d8d245b0614b503ad24c812639895c4f0308b8",
-          "width": 60
-        }
-      ],
-      "name": "Cool",
-      "owner": {
-        "display_name": "basti_3",
-        "external_urls": {
-          "spotify": "https://open.spotify.com/user/basti_3"
-        },
-        "href": "https://api.spotify.com/v1/users/basti_3",
-        "id": "basti_3",
-        "type": "user",
-        "uri": "spotify:user:basti_3"
-      },
-      "primary_color": null,
-      "public": false,
-      "snapshot_id": "NDksODk4MTE4MDE3MGEwM2MwMGVmZjA4NGM1NTI0YWFhYThhNjA5NjYwYQ==",
-      "tracks": {
-        "href": "https://api.spotify.com/v1/playlists/7l52EF3Z1tqinWOTYGAGKl/tracks",
-        "total": 47
-      },
-      "type": "playlist",
-      "uri": "spotify:user:basti_3:playlist:7l52EF3Z1tqinWOTYGAGKl"
+      "uri": "spotify:user:basti_3:playlist:48NIAlNtylJumKg5iPPQ4d"
     }
   ],
-  "limit": 3,
-  "next": "https://api.spotify.com/v1/users/basti_3/playlists?offset=5&limit=3",
-  "offset": 2,
-  "previous": "https://api.spotify.com/v1/users/basti_3/playlists?offset=0&limit=3",
-  "total": 75
+  "limit": 2,
+  "next": "https://api.spotify.com/v1/users/basti_3/playlists?offset=2&limit=2",
+  "offset": 0,
+  "previous": null,
+  "total": 74
 }
