@@ -57,11 +57,12 @@ export default {
     },
 
     async fetchNext({ commit, getters, state }) {
-      if (state.list.total === getters.listCount) return;
+      if (!state.list || state.list.total === getters.listCount) return false;
       const res = await client.get(`v1/me/playlists?limit=50&offset=${getters.listCount}`);
 
-      if (!res) return;
+      if (!res) return false;
       commit('pushList', res.data);
+      return true;
     },
   },
 

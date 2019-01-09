@@ -7,7 +7,7 @@
         <x-navigation-list-item :to="{ name: 'Playlists' }">Playlists</x-navigation-list-item>
       </x-navigation-list>
     </x-navigation-drawer>
-    <div class="content"><slot/></div>
+    <div class="content" id="content"><slot/></div>
   </div>
 </template>
 
