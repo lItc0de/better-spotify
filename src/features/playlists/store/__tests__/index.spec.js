@@ -150,7 +150,7 @@ describe('playlists module', () => {
 
     describe('fetchPlaylists', () => {
       it('returns a list of playlists', async () => {
-        mock.onGet('/v1/me/playlists?limit=50&offset=0').reply(200, getPlaylists());
+        mock.onGet('/v1/me/playlists').reply(200, getPlaylists());
 
         await store.dispatch('playlists/fetchList');
 
@@ -161,7 +161,7 @@ describe('playlists module', () => {
     describe('fetchNextPlaylists', () => {
       it('returns a list of playlist and adds it to the existing', async () => {
         store.state.playlists.list = playlists;
-        mock.onGet('/v1/me/playlists?limit=50&offset=2').reply(200, getPlaylistsWithOffset());
+        mock.onGet('/v1/me/playlists?offset=2').reply(200, getPlaylistsWithOffset());
 
         const newPlaylists = getPlaylistsWithOffset();
         newPlaylists.items.unshift(...getPlaylists().items);
@@ -175,7 +175,7 @@ describe('playlists module', () => {
       it('doesn‘t fetch new playlists if all are fetched', async () => {
         playlists.total = 2;
         store.state.playlists.list = playlists;
-        mock.onGet('/v1/me/playlists?limit=50&offset=2').reply(200, getPlaylistsWithOffset());
+        mock.onGet('/v1/me/playlists?offset=2').reply(200, getPlaylistsWithOffset());
 
         await store.dispatch('playlists/fetchNext');
 

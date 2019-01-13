@@ -3,16 +3,14 @@
     <x-layout id="app">
       <x-container>
         <x-grid-list>
-          <x-link
+          <x-grid-img
             v-for="playlist in items"
             :key="playlist.id"
             :to="{ name: 'Playlist', params: { id: playlist.id } }"
-          >
-            <x-img v-if="playlist.images[0]" :src="playlist.images[0].url">
-            </x-img>
-            <x-text slim>{{ playlist.name }}</x-text>
-            <x-text color="colorSecondary" slim>{{ playlist.owner.display_name }}</x-text>
-          </x-link>
+            :img="playlist.images[0] ? playlist.images[0].url : ''"
+            :title="playlist.name"
+            :subtitle="playlist.owner.display_name"
+          />
         </x-grid-list>
       </x-container>
     </x-layout>
@@ -47,7 +45,7 @@ export default {
 
     getBottomVisible() {
       const { content } = this;
-      if (content) this.bottomVisible = content.scrollTop === content.scrollTopMax;
+      if (content) this.bottomVisible = content.scrollTop >= (content.scrollTopMax - 200);
     },
 
     async handlePageBottom() {

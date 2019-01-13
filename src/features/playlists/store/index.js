@@ -50,7 +50,7 @@ export default {
 
   actions: {
     async fetchList({ commit }) {
-      const res = await client.get('v1/me/playlists?limit=50&offset=0');
+      const res = await client.get('v1/me/playlists');
 
       if (!res) return;
       commit('setList', res.data);
@@ -58,7 +58,7 @@ export default {
 
     async fetchNext({ commit, getters, state }) {
       if (!state.list || state.list.total === getters.listCount) return false;
-      const res = await client.get(`v1/me/playlists?limit=50&offset=${getters.listCount}`);
+      const res = await client.get(`v1/me/playlists?offset=${getters.listCount}`);
 
       if (!res) return false;
       commit('pushList', res.data);
