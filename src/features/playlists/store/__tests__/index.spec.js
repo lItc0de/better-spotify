@@ -5,8 +5,9 @@ import { createLocalVue } from '@vue/test-utils';
 import client from 'utils/client';
 import storeConfig from '@/store/config';
 import playlistsMock from '@/__mocks__/playlists.json';
-import playlistsWithOffset from '@/__mocks__/playlistsWithOffset.json';
+import playlistsWithOffsetMock from '@/__mocks__/playlistsWithOffset.json';
 import tracksMock from '@/__mocks__/tracks.json';
+import tracksWithOffsetMock from '@/__mocks__/tracksWithOffset.json';
 
 const mock = new MockAdapter(client);
 
@@ -14,7 +15,9 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 const getPlaylists = () => cloneDeep(playlistsMock);
-const getPlaylistsWithOffset = () => cloneDeep(playlistsWithOffset);
+const getPlaylistsWithOffset = () => cloneDeep(playlistsWithOffsetMock);
+const getTracks = () => cloneDeep(tracksMock);
+const getTracksWithOffset = () => cloneDeep(tracksWithOffsetMock);
 
 describe('playlists module', () => {
   let store;
@@ -74,6 +77,18 @@ describe('playlists module', () => {
         store.commit('playlists/setTracks', tracks);
 
         expect(store.state.playlists.list.items[1].tracks).toEqual(tracks);
+      });
+    });
+
+    describe('pushTracks', () => {
+      it('adds new tracks to the current playlist', () => {
+        tracks = getTracks();
+        store.state.playlists.list = getPlaylists();
+        const current = store.state.playlists.list.items[0];
+        store.state.playlists.id = current.id;
+
+        store.commit('playlists/pushTracks', tracks);
+        expect(store.state.playlists.list.items[0].tracks).toEqual(tracks);
       });
     });
   });
@@ -181,6 +196,54 @@ describe('playlists module', () => {
 
         expect(store.state.playlists.list).toEqual(playlists);
         expect(store.state.playlists.list.items.length).toEqual(2);
+      });
+    });
+
+    describe('fetchTracks', () => {
+      it('returns a list of the current playlists tracks', async () => {
+        playlists = getPlaylists();
+        tracks = getTracks();
+        const playlistId = playlists.items[0].id;
+        store.state.playlists.id = playlistId;
+        store.state.playlists.list = playlists;
+        mock.onGet(`/v1/playlists/${playlistId}`).reply(200, tracks);
+
+        await store.dispatch('playlists/fetchTracks');
+
+        expect(store.state.playlists.list.items[0].tracks).toEqual(tracks);
+      });
+
+      it('doesn‘t set new tracks if the id is not set', async () => {
+        playlists = getPlaylists();
+        tracks = getTracks();
+        const playlistId = playlists.items[0].id;
+        store.state.playlists.list = playlists;
+        mock.onGet(`/v1/playlists/${playlistId}`).reply(200, tracks);
+
+        await store.dispatch('playlists/fetchTracks');
+
+        expect(store.state.playlists.list).toEqual(getPlaylists());
+      });
+    });
+
+    describe('fetchNextTracks', () => {
+      it('adds the next tracks to the playlist', async () => {
+        const tracksWithOffset = getTracksWithOffset();
+        playlists = getPlaylists();
+        tracks = getTracks();
+        playlists.items[0].tracks = tracks;
+        const playlistId = playlists.items[0].id;
+        store.state.playlists.id = playlistId;
+        store.state.playlists.list = playlists;
+
+        const newTracks = getTracksWithOffset();
+        newTracks.items.unshift(...playlists.items[0].tracks.items);
+
+        mock.onGet(`/v1/playlists/${playlistId}?offset=2`).reply(200, tracksWithOffset);
+
+        await store.dispatch('playlists/fetchNextTracks');
+
+        expect(store.state.playlists.list.items[0].tracks).toEqual(newTracks);
       });
     });
   });

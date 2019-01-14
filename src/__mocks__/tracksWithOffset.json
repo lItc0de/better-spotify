@@ -354,7 +354,7 @@
   ],
   "limit": 2,
   "next": "https://api.spotify.com/v1/playlists/4NPzziSpoSEA4dPNnSAsl9/tracks?offset=5&limit=2",
-  "offset": 0,
+  "offset": 2,
   "previous": "https://api.spotify.com/v1/playlists/4NPzziSpoSEA4dPNnSAsl9/tracks?offset=1&limit=2",
   "total": 176
 }

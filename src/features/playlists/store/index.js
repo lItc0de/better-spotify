@@ -32,6 +32,11 @@ export default {
     },
 
     setTracks: (state, tracks) => {
+      const playlist = state.list.items.find(p => p.id === state.id);
+      playlist.tracks = tracks;
+    },
+
+    pushTracks: (state, tracks) => {
       const newItems = tracks.items;
       if (!(newItems instanceof Array)) return;
 
@@ -64,6 +69,22 @@ export default {
       commit('pushList', res.data);
       return true;
     },
+
+    async fetchTracks({ commit, state }) {
+      if (!state.id) return;
+      const res = await client.get(`v1/playlists/${state.id}`);
+
+      if (!res) return;
+      commit('setTracks', res.data);
+    },
+
+    async fetchNextTracks({ commit, state, getters }) {
+      if (!state.id) return;
+      const res = await client.get(`v1/playlists/${state.id}?offset=${getters.tracksCount}`);
+
+      if (!res) return;
+      commit('pushTracks', res.data);
+    },
   },
 
   getters: {
@@ -78,5 +99,7 @@ export default {
     items: state => (state.list ? state.list.items : []),
 
     listCount: state => (state.list ? state.list.items.length : 0),
+
+    tracksCount: (state, getters) => (getters.current ? getters.current.tracks.items.length : 0),
   },
 };
