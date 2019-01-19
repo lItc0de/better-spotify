@@ -11,17 +11,17 @@
       "images": [
         {
           "height": 640,
-          "url": "https://mosaic.scdn.co/640/16f5134b451303d2ca39d6757ceabe295d387b3b295e2f20d65b0845a10ca86115971fb9e705c3ccb04f24f9b2c3387070e88eb0e01f186fd660b92bc5c834b63eee4279cd475cfcc387e8275a377e20",
+          "url": "https://mosaic.scdn.co/640/16f5134b451303d2ca39d6757ceabe295d387b3b295e2f20d65b0845a10ca86115971fb9e705c3cc4cbf82c2ceb43ecea29fc039cbf6efefe3ccc0ffb863cf3ffd817f34744c2473570ce1a2fe8098c9",
           "width": 640
         },
         {
           "height": 300,
-          "url": "https://mosaic.scdn.co/300/16f5134b451303d2ca39d6757ceabe295d387b3b295e2f20d65b0845a10ca86115971fb9e705c3ccb04f24f9b2c3387070e88eb0e01f186fd660b92bc5c834b63eee4279cd475cfcc387e8275a377e20",
+          "url": "https://mosaic.scdn.co/300/16f5134b451303d2ca39d6757ceabe295d387b3b295e2f20d65b0845a10ca86115971fb9e705c3cc4cbf82c2ceb43ecea29fc039cbf6efefe3ccc0ffb863cf3ffd817f34744c2473570ce1a2fe8098c9",
           "width": 300
         },
         {
           "height": 60,
-          "url": "https://mosaic.scdn.co/60/16f5134b451303d2ca39d6757ceabe295d387b3b295e2f20d65b0845a10ca86115971fb9e705c3ccb04f24f9b2c3387070e88eb0e01f186fd660b92bc5c834b63eee4279cd475cfcc387e8275a377e20",
+          "url": "https://mosaic.scdn.co/60/16f5134b451303d2ca39d6757ceabe295d387b3b295e2f20d65b0845a10ca86115971fb9e705c3cc4cbf82c2ceb43ecea29fc039cbf6efefe3ccc0ffb863cf3ffd817f34744c2473570ce1a2fe8098c9",
           "width": 60
         }
       ],
@@ -96,5 +96,5 @@
   "next": "https://api.spotify.com/v1/users/basti_3/playlists?offset=4&limit=2",
   "offset": 2,
   "previous": "https://api.spotify.com/v1/users/basti_3/playlists?offset=0&limit=2",
-  "total": 74
+  "total": 4
 }

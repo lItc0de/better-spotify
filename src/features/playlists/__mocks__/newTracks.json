@@ -1,0 +1,200 @@
+{
+  "href": "https://api.spotify.com/v1/playlists/50L3W8NaVU3d4bKlCPi6I9/tracks?offset=2&limit=2&market=DE",
+  "items": [
+    {
+      "added_at": "2019-01-18T09:36:10Z",
+      "added_by": {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/adamscottheaton"
+        },
+        "href": "https://api.spotify.com/v1/users/adamscottheaton",
+        "id": "adamscottheaton",
+        "type": "user",
+        "uri": "spotify:user:adamscottheaton"
+      },
+      "is_local": false,
+      "primary_color": null,
+      "track": {
+        "album": {
+          "album_type": "single",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2C5ZMi6drXQAbj9LNhzZo0"
+              },
+              "href": "https://api.spotify.com/v1/artists/2C5ZMi6drXQAbj9LNhzZo0",
+              "id": "2C5ZMi6drXQAbj9LNhzZo0",
+              "name": "Boston 168",
+              "type": "artist",
+              "uri": "spotify:artist:2C5ZMi6drXQAbj9LNhzZo0"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/71WFEGod1blhALyjIh8Frn"
+          },
+          "href": "https://api.spotify.com/v1/albums/71WFEGod1blhALyjIh8Frn",
+          "id": "71WFEGod1blhALyjIh8Frn",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/9768fa249ac043c8f1d45e97e4fd21ed693bb649",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/f306308772fb52bcec13298fb5642f0b5b05bf10",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/29eb2ce32618e368e73a2976f70435651968b848",
+              "width": 64
+            }
+          ],
+          "name": "909 Therapy",
+          "release_date": "2019-01-18",
+          "release_date_precision": "day",
+          "total_tracks": 3,
+          "type": "album",
+          "uri": "spotify:album:71WFEGod1blhALyjIh8Frn"
+        },
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2C5ZMi6drXQAbj9LNhzZo0"
+            },
+            "href": "https://api.spotify.com/v1/artists/2C5ZMi6drXQAbj9LNhzZo0",
+            "id": "2C5ZMi6drXQAbj9LNhzZo0",
+            "name": "Boston 168",
+            "type": "artist",
+            "uri": "spotify:artist:2C5ZMi6drXQAbj9LNhzZo0"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 372299,
+        "episode": false,
+        "explicit": false,
+        "external_ids": {
+          "isrc": "DEAE61800044"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/0QKY96rxUM3Xzt3gWm2P8G"
+        },
+        "href": "https://api.spotify.com/v1/tracks/0QKY96rxUM3Xzt3gWm2P8G",
+        "id": "0QKY96rxUM3Xzt3gWm2P8G",
+        "is_local": false,
+        "is_playable": true,
+        "name": "Daydreams",
+        "popularity": 0,
+        "preview_url": "https://p.scdn.co/mp3-preview/f736a9c1ebede4702398d3d04739e3a4ab4bb869?cid=774b29d4f13844c495f206cafdad9c86",
+        "track": true,
+        "track_number": 3,
+        "type": "track",
+        "uri": "spotify:track:0QKY96rxUM3Xzt3gWm2P8G"
+      },
+      "video_thumbnail": {
+        "url": null
+      }
+    },
+    {
+      "added_at": "2019-01-15T18:53:37Z",
+      "added_by": {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/adamscottheaton"
+        },
+        "href": "https://api.spotify.com/v1/users/adamscottheaton",
+        "id": "adamscottheaton",
+        "type": "user",
+        "uri": "spotify:user:adamscottheaton"
+      },
+      "is_local": false,
+      "primary_color": null,
+      "track": {
+        "album": {
+          "album_type": "single",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3hZVbrXbwEXNsm04xm9Fea"
+              },
+              "href": "https://api.spotify.com/v1/artists/3hZVbrXbwEXNsm04xm9Fea",
+              "id": "3hZVbrXbwEXNsm04xm9Fea",
+              "name": "Edge Of Motion",
+              "type": "artist",
+              "uri": "spotify:artist:3hZVbrXbwEXNsm04xm9Fea"
+            }
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/1JlWLU4LOJ9UO2Eb7t6nGw"
+          },
+          "href": "https://api.spotify.com/v1/albums/1JlWLU4LOJ9UO2Eb7t6nGw",
+          "id": "1JlWLU4LOJ9UO2Eb7t6nGw",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/6543bc058f67cce873485477d0fd8d1dbd3a4f2f",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/86dce2e5d7696cf2410540aba779137e6c37bd00",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/26158f455169a66076077c26a62b73cd3ee3ae20",
+              "width": 64
+            }
+          ],
+          "name": "Ecto Phase",
+          "release_date": "2018-11-23",
+          "release_date_precision": "day",
+          "total_tracks": 4,
+          "type": "album",
+          "uri": "spotify:album:1JlWLU4LOJ9UO2Eb7t6nGw"
+        },
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3hZVbrXbwEXNsm04xm9Fea"
+            },
+            "href": "https://api.spotify.com/v1/artists/3hZVbrXbwEXNsm04xm9Fea",
+            "id": "3hZVbrXbwEXNsm04xm9Fea",
+            "name": "Edge Of Motion",
+            "type": "artist",
+            "uri": "spotify:artist:3hZVbrXbwEXNsm04xm9Fea"
+          }
+        ],
+        "disc_number": 1,
+        "duration_ms": 375338,
+        "episode": false,
+        "explicit": false,
+        "external_ids": {
+          "isrc": "NLR341010325"
+        },
+        "external_urls": {
+          "spotify": "https://open.spotify.com/track/1ECAvra1KorqKiEvoNoArH"
+        },
+        "href": "https://api.spotify.com/v1/tracks/1ECAvra1KorqKiEvoNoArH",
+        "id": "1ECAvra1KorqKiEvoNoArH",
+        "is_local": false,
+        "is_playable": true,
+        "name": "5 Minutes of Justice - Original Mix",
+        "popularity": 2,
+        "preview_url": "https://p.scdn.co/mp3-preview/69886137c5e9472459f8fdc95fcd90304c6bb17f?cid=774b29d4f13844c495f206cafdad9c86",
+        "track": true,
+        "track_number": 3,
+        "type": "track",
+        "uri": "spotify:track:1ECAvra1KorqKiEvoNoArH"
+      },
+      "video_thumbnail": {
+        "url": null
+      }
+    }
+  ],
+  "limit": 2,
+  "next": "https://api.spotify.com/v1/playlists/50L3W8NaVU3d4bKlCPi6I9/tracks?offset=4&limit=2&market=DE",
+  "offset": 2,
+  "previous": "https://api.spotify.com/v1/playlists/50L3W8NaVU3d4bKlCPi6I9/tracks?offset=0&limit=2&market=DE",
+  "total": 155
+}

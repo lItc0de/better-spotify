@@ -2,13 +2,15 @@ import { config } from '@vue/test-utils'; // eslint-disable-line import/no-extra
 
 require('dotenv').config({ path: '.env.test' });
 
-config.stubs['x-btn'] = '<button @click="$emit(\'click\')"/>';
-config.stubs['x-text'] = '<p />';
-config.stubs['x-spacer'] = '<span />';
-config.stubs['x-navigation-drawer'] = '<div />';
-config.stubs['x-navigation-list'] = '<ul />';
-config.stubs['x-navigation-list-item'] = '<li />';
-config.stubs['x-grid-list'] = '<div />';
-config.stubs['x-app'] = '<div><slot /></div>';
-config.stubs['x-layout'] = '<div/>';
-config.stubs['x-container'] = '<div/>';
+config.stubs = {
+  'x-app': '<div><slot /></div>',
+  'x-btn': '<button @click="$emit(\'click\')"/>',
+  'x-container': '<div class="container"><slot/></div>',
+  'x-grid-list': '<div><slot/></div>',
+  'x-layout': '<div><slot/></div>',
+  'x-navigation-drawer': '<div><slot/></div>',
+  'x-navigation-list-item': '<li><slot/></li>',
+  'x-navigation-list': '<ul><slot/></ul>',
+  'x-spacer': '<span/>',
+  'x-text': '<p/>',
+};

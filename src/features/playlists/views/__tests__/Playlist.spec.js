@@ -3,7 +3,7 @@ import cloneDeep from 'lodash.clonedeep';
 import MockAdapter from 'axios-mock-adapter';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import client from 'utils/client';
-import playlistMock from '@/__mocks__/playlist.json';
+import playlistMock from '../../__mocks__/playlist.json';
 import { restoreMockedWindow, mockWindowLocation } from '@/__utils__/mockWindow';
 
 import storeConfig from '@/store/config';

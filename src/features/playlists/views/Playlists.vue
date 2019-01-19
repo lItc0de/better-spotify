@@ -1,6 +1,6 @@
 <template>
   <layout>
-    <x-layout id="app">
+    <x-layout id="app" ref="scrollArea">
       <x-container>
         <x-grid-list>
           <x-grid-img
@@ -24,70 +24,24 @@ import Layout from '@/components/Layout.vue';
 export default {
   name: 'Playlists',
 
-  data() {
-    return {
-      bottomVisible: false,
-      busy: false,
-      content: null,
-    };
-  },
-
   components: {
     Layout,
   },
 
   methods: {
-    ...mapActions('playlists', ['fetchList', 'fetchNext']),
-
-    addScrollWatcher() {
-      this.content.addEventListener('scroll', () => this.getBottomVisible());
-    },
-
-    getBottomVisible() {
-      const { content } = this;
-      if (content) this.bottomVisible = content.scrollTop >= (content.scrollTopMax - 200);
-    },
-
-    async handlePageBottom() {
-      if (this.bottomVisible && !this.busy) {
-        this.busy = true;
-        const next = await this.fetchNext();
-        if (next) this.getBottomVisible();
-        window.setTimeout(() => {
-          this.busy = false;
-        }, 1000);
-      }
-    },
-
-    async init() {
-      await this.fetchList();
-      window.setTimeout(() => {
-        this.addScrollWatcher();
-        this.getBottomVisible();
-      }, 1000);
-    },
+    ...mapActions('playlists', ['fetchList', 'initEndlessScrolling']),
   },
 
   computed: {
     ...mapGetters('playlists', ['items']),
   },
 
-  mounted() {
-    this.content = document.getElementById('content');
-  },
+  mounted() { this.initEndlessScrolling(this.$refs.scrollArea); },
 
   watch: {
     $route: {
-      handler: 'init',
+      handler: 'fetchList',
       immediate: true,
-    },
-
-    bottomVisible: {
-      handler: 'handlePageBottom',
-    },
-
-    busy: {
-      handler: 'handlePageBottom',
     },
   },
 };

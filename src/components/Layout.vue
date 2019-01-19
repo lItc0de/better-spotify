@@ -7,7 +7,7 @@
         <x-navigation-list-item :to="{ name: 'Playlists' }">Playlists</x-navigation-list-item>
       </x-navigation-list>
     </x-navigation-drawer>
-    <div class="content" id="content"><slot/></div>
+    <slot/>
   </div>
 </template>
 
@@ -23,7 +23,4 @@ export default {
   display grid
   grid-template-columns auto 1fr
   height 100%
-
-  .content
-    overflow auto
 </style>

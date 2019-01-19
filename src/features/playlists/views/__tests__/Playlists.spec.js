@@ -1,6 +1,7 @@
 import Vuex from 'vuex';
 import cloneDeep from 'lodash.clonedeep';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
+
 import storeConfig from '@/store/config';
 import Playlists from '../Playlists.vue';
 
@@ -22,18 +23,23 @@ describe('Playlists View', () => {
   beforeEach(() => {
     const config = cloneDeep(storeConfig);
     store = new Vuex.Store(config);
+    store.dispatch = jest.fn();
 
     wrapper = shallowMount(Playlists, {
       localVue,
       store,
-      stubs: {
-        'x-container': '<div class="container" />',
-        'x-layout': true,
-      },
     });
   });
 
-  it('renders a container', () => {
-    expect(wrapper.find('.container').exists()).toBe(true);
+  describe('view', () => {
+    it('renders a container', () => {
+      expect(wrapper.find('.container').exists()).toBe(true);
+    });
+  });
+
+  describe('logic', () => {
+    it('calls fetchList on init', () => {
+      expect(store.dispatch).toHaveBeenCalledWith('playlists/fetchList', undefined);
+    });
   });
 });

@@ -38,10 +38,10 @@
       },
       "primary_color": null,
       "public": false,
-      "snapshot_id": "NTU4LDVlOGY4NDM1ODgwYjdlZDY2NzJjMzcwY2NmZDIzZWY0ZDNkZTkzYjc=",
+      "snapshot_id": "NTY0LDcyYTI5OGMxMjEwZmQ2ZTgxYmU1ZjRhMmQ3MTliNGRmZDg1ZDY5ZTk=",
       "tracks": {
         "href": "https://api.spotify.com/v1/playlists/4NPzziSpoSEA4dPNnSAsl9/tracks",
-        "total": 184
+        "total": 186
       },
       "type": "playlist",
       "uri": "spotify:user:basti_3:playlist:4NPzziSpoSEA4dPNnSAsl9"
@@ -96,5 +96,5 @@
   "next": "https://api.spotify.com/v1/users/basti_3/playlists?offset=2&limit=2",
   "offset": 0,
   "previous": null,
-  "total": 74
+  "total": 4
 }
