@@ -12,13 +12,19 @@
             :subtitle="playlist.owner.display_name"
           />
         </x-grid-list>
+        <x-container
+          v-if="isLoading"
+          align-items="center"
+        >
+          <x-spinner/>
+        </x-container>
       </x-container>
     </x-layout>
   </layout>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import Layout from '@/components/Layout.vue';
 
 export default {
@@ -34,6 +40,7 @@ export default {
 
   computed: {
     ...mapGetters('playlists', ['items']),
+    ...mapState('playlists', ['isLoading']),
   },
 
   mounted() { this.initEndlessScrolling(this.$refs.scrollArea); },

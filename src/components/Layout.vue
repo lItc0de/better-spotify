@@ -23,4 +23,7 @@ export default {
   display grid
   grid-template-columns auto 1fr
   height 100%
+
+  > *
+    overflow auto
 </style>
