@@ -3,7 +3,7 @@
     <x-navigation-drawer left>
       <x-navigation-list>
         <x-navigation-list-item :to="{ name: 'Home' }">Home</x-navigation-list-item>
-        <x-navigation-list-item :to="{ name: 'Albums' }">Albums</x-navigation-list-item>
+        <!-- <x-navigation-list-item :to="{ name: 'Albums' }">Albums</x-navigation-list-item> -->
         <x-navigation-list-item :to="{ name: 'Playlists' }">Playlists</x-navigation-list-item>
       </x-navigation-list>
     </x-navigation-drawer>
