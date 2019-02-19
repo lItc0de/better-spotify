@@ -9,7 +9,7 @@ config.stubs = {
   'x-grid-list': '<div><slot/></div>',
   'x-layout': '<div><slot/></div>',
   'x-navigation-drawer': '<div><slot/></div>',
-  'x-navigation-list-item': '<li><slot/></li>',
+  'x-navigation-li': '<li><slot/></li>',
   'x-navigation-list': '<ul><slot/></ul>',
   'x-spacer': '<span/>',
   'x-text': '<p/>',

@@ -7,8 +7,8 @@ import { restoreMockedWindow, mockWindowLocation } from '@/__utils__/mockWindow'
 import storeConfig from '@/store/config';
 
 import App from '@/App.vue';
-import Playlists from '../../views/Playlists.vue';
-import Playlist from '../../views/Playlist.vue';
+import Playlists from '../views/Playlists.vue';
+import Playlist from '../views/Playlist.vue';
 
 const localVue = createLocalVue();
 localVue.use(Router);
