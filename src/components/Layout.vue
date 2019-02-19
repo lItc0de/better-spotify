@@ -2,9 +2,8 @@
   <div class="layout">
     <x-navigation-drawer left>
       <x-navigation-list>
-        <x-navigation-list-item :to="{ name: 'Home' }">Home</x-navigation-list-item>
-        <!-- <x-navigation-list-item :to="{ name: 'Albums' }">Albums</x-navigation-list-item> -->
-        <x-navigation-list-item :to="{ name: 'Playlists' }">Playlists</x-navigation-list-item>
+        <x-navigation-li :to="{ name: 'Home' }">Home</x-navigation-li>
+        <x-navigation-li :to="{ name: 'Playlists' }">Playlists</x-navigation-li>
       </x-navigation-list>
     </x-navigation-drawer>
     <slot/>

@@ -3,7 +3,7 @@ import loginPath from '@/features/authenticate/services/loginPath';
 
 const instance = axios.create({
   baseURL: 'https://api.spotify.com',
-  timeout: 1000,
+  timeout: 5000,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
