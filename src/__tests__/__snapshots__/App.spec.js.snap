@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`App matches the snapshot 1`] = `
-<x-app-stub>
-  <router-view-stub name="default"></router-view-stub>
-</x-app-stub>
-`;

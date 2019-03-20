@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import config from '@/store/config';
+import config from './config';
 
 Vue.use(Vuex);
 

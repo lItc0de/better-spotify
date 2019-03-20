@@ -1,5 +1,5 @@
-import global from '@/store/global';
-import modules from '@/store/modules';
+import global from './global';
+import modules from './modules';
 
 const modulesNamespaced = Object.keys(modules).reduce((obj, module) => {
   const newObj = obj;
