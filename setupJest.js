@@ -8,6 +8,7 @@ config.stubs = {
   'x-container': '<div class="container"><slot/></div>',
   'x-grid-list': '<div><slot/></div>',
   'x-layout': '<div><slot/></div>',
+  'x-link': '<a><slot/></a>',
   'x-navigation-drawer': '<div><slot/></div>',
   'x-navigation-li': '<li><slot/></li>',
   'x-navigation-list': '<ul><slot/></ul>',

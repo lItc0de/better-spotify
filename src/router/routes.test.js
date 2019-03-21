@@ -7,26 +7,31 @@ import App from '@/App.vue';
 const localVue = createLocalVue();
 localVue.use(Router);
 
-const config = {
-  mode: 'history',
-  routes: [
-    ...routes,
-  ],
-};
-
-const router = new Router(config);
 describe('router', () => {
+  let wrapper;
+  let router;
+
   beforeAll(() => {
-    shallowMount(App, {
+    router = new Router({ routes });
+    wrapper = shallowMount(App, {
       localVue,
       router,
     });
   });
 
-  it('links to home "/"', () => {
+  it('links to home "/"', async () => {
     router.push('/');
+    await wrapper.vm.$nextTick();
 
     expect(router.currentRoute.name).toEqual('Home');
+    expect(router.currentRoute.meta.auth).toBe(true);
+  });
+
+  it('links to "/playlists"', async () => {
+    router.push('/playlists');
+    await wrapper.vm.$nextTick();
+
+    expect(router.currentRoute.name).toEqual('Playlists');
     expect(router.currentRoute.meta.auth).toBe(true);
   });
 });
