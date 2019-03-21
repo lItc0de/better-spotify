@@ -34,4 +34,12 @@ describe('router', () => {
     expect(router.currentRoute.name).toEqual('Playlists');
     expect(router.currentRoute.meta.auth).toBe(true);
   });
+
+  it('links to "/login"', async () => {
+    router.push('/login');
+    await wrapper.vm.$nextTick();
+
+    expect(router.currentRoute.name).toEqual('Login');
+    expect(router.currentRoute.meta.auth).toBe(true);
+  });
 });
