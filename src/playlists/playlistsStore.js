@@ -2,13 +2,28 @@ import api from '@/api';
 
 export default {
   state: {
-    list: {},
+    items: [],
+    limit: null,
+    offset: 0,
+    total: null,
   },
 
   /* eslint-disable no-param-reassign */
   mutations: {
-    setList(state, list) {
-      state.list = list;
+    setItems(state, items) {
+      state.items = items;
+    },
+
+    setLimit(state, limit) {
+      state.limit = limit;
+    },
+
+    setOffset(state, offset) {
+      state.offset = offset;
+    },
+
+    setTotal(state, total) {
+      state.total = total;
     },
   },
   /* eslint-enable no-param-reassign */
@@ -18,7 +33,10 @@ export default {
       const res = await api.getPlaylists();
 
       if (!res) return;
-      commit('setList', res.data);
+      commit('setItems', res.data.items);
+      commit('setLimit', res.data.limit);
+      commit('setOffset', res.data.offset);
+      commit('setTotal', res.data.total);
     },
   },
 };

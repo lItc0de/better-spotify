@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="layout">
     <page-header/>
     <slot/>
   </main>
@@ -14,3 +14,8 @@ export default {
   },
 };
 </script>
+
+<style lang="stylus" scoped>
+.layout
+  padding 1rem
+</style>
