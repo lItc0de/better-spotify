@@ -35,6 +35,14 @@ describe('router', () => {
     expect(router.currentRoute.meta.auth).toBe(true);
   });
 
+  it('links to "/playlists/:id"', async () => {
+    router.push('/playlists/playlist-id');
+    await wrapper.vm.$nextTick();
+
+    expect(router.currentRoute.name).toEqual('Playlist');
+    expect(router.currentRoute.meta.auth).toBe(true);
+  });
+
   it('links to "/login"', async () => {
     router.push('/login');
     await wrapper.vm.$nextTick();

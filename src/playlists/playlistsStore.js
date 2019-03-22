@@ -29,7 +29,7 @@ export default {
   /* eslint-enable no-param-reassign */
 
   actions: {
-    async fetchList({ commit }) {
+    async fetchPlaylists({ commit }) {
       const res = await api.getPlaylists();
 
       if (!res) return;

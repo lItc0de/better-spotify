@@ -23,12 +23,12 @@ export default {
   },
 
   methods: {
-    ...mapActions('playlists', ['fetchList']),
+    ...mapActions('playlists', ['fetchPlaylists']),
   },
 
   watch: {
     $route: {
-      handler: 'fetchList',
+      handler: 'fetchPlaylists',
       immediate: true,
     },
   },

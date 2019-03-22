@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="{ name: 'Playlist', props: { id: playlist.id } }"
+    :to="{ name: 'Playlist', params: { id: playlist.id } }"
   >
     {{ playlist.name }}
   </router-link>

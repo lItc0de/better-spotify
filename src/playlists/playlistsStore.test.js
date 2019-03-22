@@ -23,7 +23,7 @@ describe('playlistsStore', () => {
     expect(store.state.offset).toEqual(0);
     expect(store.state.total).toEqual(null);
 
-    await store.dispatch('fetchList');
+    await store.dispatch('fetchPlaylists');
 
     expect(store.state.items).toEqual(playlists.items);
     expect(store.state.limit).toEqual(2);
