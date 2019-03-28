@@ -1,0 +1,236 @@
+{
+  "collaborative": false,
+  "description": "Squelchy acid basslines and laser beams! Updated every Thursday. Visit adam-heaton.co.uk for more techno playlists.",
+  "external_urls": {
+    "spotify": "https://open.spotify.com/playlist/50L3W8NaVU3d4bKlCPi6I9"
+  },
+  "followers": {
+    "href": null,
+    "total": 12259
+  },
+  "href": "https://api.spotify.com/v1/playlists/50L3W8NaVU3d4bKlCPi6I9",
+  "id": "50L3W8NaVU3d4bKlCPi6I9",
+  "images": [
+    {
+      "height": null,
+      "url": "https://pl.scdn.co/images/pl/default/c6c6dbba407a2721923e6ab399ec37b2f8d0b220",
+      "width": null
+    }
+  ],
+  "name": "Acid Techno",
+  "owner": {
+    "display_name": "Adam Heaton",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/user/adamscottheaton"
+    },
+    "href": "https://api.spotify.com/v1/users/adamscottheaton",
+    "id": "adamscottheaton",
+    "type": "user",
+    "uri": "spotify:user:adamscottheaton"
+  },
+  "primary_color": null,
+  "public": true,
+  "snapshot_id": "MTY1OCwwMmMwOTU1NzIzNjFlNWViNWVkMDg5NmZmODFlYTZiMDZhYTNhNzJk",
+  "tracks": {
+    "href": "https://api.spotify.com/v1/playlists/50L3W8NaVU3d4bKlCPi6I9/tracks?offset=0&limit=2&market=DE",
+    "items": [
+      {
+        "added_at": "2019-01-17T22:47:29Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/adamscottheaton"
+          },
+          "href": "https://api.spotify.com/v1/users/adamscottheaton",
+          "id": "adamscottheaton",
+          "type": "user",
+          "uri": "spotify:user:adamscottheaton"
+        },
+        "is_local": false,
+        "primary_color": null,
+        "track": {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/0tVbo54pq10LDiwnqrj25U"
+                },
+                "href": "https://api.spotify.com/v1/artists/0tVbo54pq10LDiwnqrj25U",
+                "id": "0tVbo54pq10LDiwnqrj25U",
+                "name": "Linquency",
+                "type": "artist",
+                "uri": "spotify:artist:0tVbo54pq10LDiwnqrj25U"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/1IyCjrUTugN9jsG1l5gg1A"
+            },
+            "href": "https://api.spotify.com/v1/albums/1IyCjrUTugN9jsG1l5gg1A",
+            "id": "1IyCjrUTugN9jsG1l5gg1A",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/0cf8a60e9700a650d4445ac4f6089e8530ebf9e9",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/c65537cbcbff94dcd8d8773d1afcef5c2930e5d8",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/e5f136bec39880ed19b2ab4c1f1623c3d9d1d603",
+                "width": 64
+              }
+            ],
+            "name": "Desurfacing",
+            "release_date": "2019-01-05",
+            "release_date_precision": "day",
+            "total_tracks": 3,
+            "type": "album",
+            "uri": "spotify:album:1IyCjrUTugN9jsG1l5gg1A"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0tVbo54pq10LDiwnqrj25U"
+              },
+              "href": "https://api.spotify.com/v1/artists/0tVbo54pq10LDiwnqrj25U",
+              "id": "0tVbo54pq10LDiwnqrj25U",
+              "name": "Linquency",
+              "type": "artist",
+              "uri": "spotify:artist:0tVbo54pq10LDiwnqrj25U"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 204360,
+          "episode": false,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "QZ4JJ1956918"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/5HgAjBvxpuSzA9ixDzh3tg"
+          },
+          "href": "https://api.spotify.com/v1/tracks/5HgAjBvxpuSzA9ixDzh3tg",
+          "id": "5HgAjBvxpuSzA9ixDzh3tg",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Tensoil",
+          "popularity": 1,
+          "preview_url": "https://p.scdn.co/mp3-preview/d5b72279b8c966be818acafef2f4962cb35a36fa?cid=774b29d4f13844c495f206cafdad9c86",
+          "track": true,
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:5HgAjBvxpuSzA9ixDzh3tg"
+        },
+        "video_thumbnail": {
+          "url": null
+        }
+      },
+      {
+        "added_at": "2019-01-17T23:09:34Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/adamscottheaton"
+          },
+          "href": "https://api.spotify.com/v1/users/adamscottheaton",
+          "id": "adamscottheaton",
+          "type": "user",
+          "uri": "spotify:user:adamscottheaton"
+        },
+        "is_local": false,
+        "primary_color": null,
+        "track": {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/0Y0Kj7BOR5DM0UevuY7IvO"
+                },
+                "href": "https://api.spotify.com/v1/artists/0Y0Kj7BOR5DM0UevuY7IvO",
+                "id": "0Y0Kj7BOR5DM0UevuY7IvO",
+                "name": "Slam",
+                "type": "artist",
+                "uri": "spotify:artist:0Y0Kj7BOR5DM0UevuY7IvO"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/1oIeCNyTxWcylTTttBqmtl"
+            },
+            "href": "https://api.spotify.com/v1/albums/1oIeCNyTxWcylTTttBqmtl",
+            "id": "1oIeCNyTxWcylTTttBqmtl",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/d74e6ec7c0148082a32e6a50160b29336d5a6429",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/e060c122d7882aa3ef23ef4c1161697443d304f0",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/44913442fcf2b05bc15d3008e16a5fcb1f241375",
+                "width": 64
+              }
+            ],
+            "name": "Transport",
+            "release_date": "2018-12-21",
+            "release_date_precision": "day",
+            "total_tracks": 4,
+            "type": "album",
+            "uri": "spotify:album:1oIeCNyTxWcylTTttBqmtl"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0Y0Kj7BOR5DM0UevuY7IvO"
+              },
+              "href": "https://api.spotify.com/v1/artists/0Y0Kj7BOR5DM0UevuY7IvO",
+              "id": "0Y0Kj7BOR5DM0UevuY7IvO",
+              "name": "Slam",
+              "type": "artist",
+              "uri": "spotify:artist:0Y0Kj7BOR5DM0UevuY7IvO"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 394477,
+          "episode": false,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "GBBVL1805333"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/1dTdxLvAprhi6XyXrxKDaK"
+          },
+          "href": "https://api.spotify.com/v1/tracks/1dTdxLvAprhi6XyXrxKDaK",
+          "id": "1dTdxLvAprhi6XyXrxKDaK",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Strike Encounter",
+          "popularity": 18,
+          "preview_url": "https://p.scdn.co/mp3-preview/4656e800f812e82a2c5a6d333d9b8976c75aaa54?cid=774b29d4f13844c495f206cafdad9c86",
+          "track": true,
+          "track_number": 3,
+          "type": "track",
+          "uri": "spotify:track:1dTdxLvAprhi6XyXrxKDaK"
+        },
+        "video_thumbnail": {
+          "url": null
+        }
+      }
+    ],
+    "limit": 2,
+    "next": "https://api.spotify.com/v1/playlists/50L3W8NaVU3d4bKlCPi6I9/tracks?offset=2&limit=2&market=DE",
+    "offset": 0,
+    "previous": null,
+    "total": 155
+  },
+  "type": "playlist",
+  "uri": "spotify:user:adamscottheaton:playlist:50L3W8NaVU3d4bKlCPi6I9"
+}

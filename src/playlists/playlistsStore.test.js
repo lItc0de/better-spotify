@@ -17,7 +17,7 @@ describe('playlistsStore', () => {
     store = new Vuex.Store(clonedeep(playlistsStore));
   });
 
-  it('should get playlists and store them ', async () => {
+  it('should fetch playlists and store them ', async () => {
     expect(store.state.items).toEqual([]);
     expect(store.state.limit).toEqual(null);
     expect(store.state.offset).toEqual(0);
