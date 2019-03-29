@@ -1,21 +1,23 @@
 <template>
   <x-container row>
-    <x-icon-btn data-test="shuffle" icon="shuffle"/>
-    <x-icon-btn data-test="previous" icon="previous"/>
-    <x-icon-btn data-test="play" icon="play" @click="play"/>
-    <x-icon-btn data-test="next" icon="next"/>
-    <x-icon-btn data-test="repeat" icon="repeat"/>
+    <button data-test="shuffle" icon="shuffle">shuffle</button>
+    <button data-test="previous" icon="previous">previous</button>
+    <button data-test="play" icon="play" @click="handlePlay">play</button>
+    <button data-test="next" icon="next">next</button>
+    <button data-test="repeat" icon="repeat">repeat</button>
   </x-container>
 </template>
 
 <script>
-import api from '@/api';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Controls',
 
   methods: {
-    play() { api.play(); },
+    ...mapActions('player', ['play']),
+
+    handlePlay() { this.play(); },
   },
 };
 </script>

@@ -3,6 +3,8 @@ import clonedeep from 'lodash.clonedeep';
 import { createLocalVue } from '@vue/test-utils';
 
 import playerStore from './playerStore';
+import playback from '@/__mocks__/playback.json';
+import api from '@/api';
 
 jest.mock('@/api');
 
@@ -13,11 +15,18 @@ describe('playerStore', () => {
   let store;
   let connect;
   let Spotify;
+  let addListener;
 
   beforeEach(() => {
+    const params = { device_id: playback.device.id };
     store = new Vuex.Store(clonedeep(playerStore));
     connect = jest.fn();
-    class Player { connect = connect }
+    addListener = jest.fn().mockImplementation((_, callback) => callback(params));
+    class Player {
+      connect = connect
+
+      addListener = addListener
+    }
     Spotify = { Player };
     global.Spotify = Spotify;
   });
@@ -30,6 +39,48 @@ describe('playerStore', () => {
 
       expect(connect).toHaveBeenCalled();
       expect(store.state.player).toBeInstanceOf(Spotify.Player);
+    });
+
+    it('should add an event listener on ready', () => {
+      expect(store.state.deviceId).toEqual(null);
+      store.dispatch('createPlayer');
+
+      expect(addListener).toHaveBeenCalledWith('ready', expect.anything());
+      expect(store.state.deviceId).toEqual(playback.device.id);
+    });
+  });
+
+  describe('getPlayback', () => {
+    it('fetches the current playback info and commits it', async () => {
+      expect(store.state.playback).toEqual(null);
+
+      await store.dispatch('getPlayback');
+
+      expect(store.state.playback).toEqual(playback);
+    });
+  });
+
+  describe('play', () => {
+    it('calls play with the given options and device id', async () => {
+      const options = {};
+      const deviceId = 0;
+      api.play = jest.fn();
+
+      await store.dispatch('play', { options, deviceId });
+
+      expect(api.play).toHaveBeenCalledWith(options, deviceId);
+    });
+
+    it('it sets the device id if no active device was found', async () => {
+      const deviceId = playback.device.id;
+      api.play = jest.fn();
+      api.getPlayback = jest.fn()
+        .mockImplementation(() => Promise.resolve({ status: 200, data: null }));
+
+      store.dispatch('createPlayer');
+      await store.dispatch('play');
+
+      expect(api.play).toHaveBeenCalledWith(undefined, deviceId);
     });
   });
 });

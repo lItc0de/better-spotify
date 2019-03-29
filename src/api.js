@@ -8,6 +8,8 @@ export default {
   getPlaylistsTracks: (playlistId, offset) => axios
     .get(`v1/playlists/${playlistId}/tracks${offset ? `?offset=${offset}` : ''}`),
 
+  getPlayback: () => axios.get('v1/me/player'),
+
   pause: () => axios.put('v1/me/player/pause'),
 
   play: ({

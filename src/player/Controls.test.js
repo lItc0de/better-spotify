@@ -4,7 +4,6 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 
 import Controls from './Controls.vue';
 import storeConfig from '@/store/config';
-import api from '@/api';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -24,11 +23,11 @@ describe('Player Controls', () => {
   describe('Play/Pause button', () => {
     it('triggers play if playback is paused', () => {
       const playBtn = wrapper.find('[data-test="play"]');
-      api.play = jest.fn();
+      store.dispatch = jest.fn();
 
       playBtn.trigger('click');
 
-      expect(api.play).toHaveBeenCalledWith();
+      expect(store.dispatch).toHaveBeenCalledWith('player/play', undefined);
     });
   });
 });

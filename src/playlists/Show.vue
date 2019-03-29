@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import api from '@/api';
 import { mapState, mapActions } from 'vuex';
 
 export default {
@@ -21,9 +20,10 @@ export default {
 
   methods: {
     ...mapActions('playlist', ['fetchPlaylist']),
+    ...mapActions('player', ['play']),
 
     playTrack(offset) {
-      api.play({ contextUri: this.uri, offset });
+      this.play({ options: { contextUri: this.uri, offset } });
     },
   },
 
