@@ -11,6 +11,7 @@ export default {
     items: [],
     total: null,
     offset: 0,
+    uri: null,
   },
 
   /* eslint-disable no-param-reassign */
@@ -44,6 +45,10 @@ export default {
       state.total = tracks.total;
       state.offset = tracks.offset;
     },
+
+    setUri(state, uri) {
+      state.uri = uri;
+    },
   },
   /* eslint-enable no-param-reassign */
 
@@ -59,6 +64,7 @@ export default {
       commit('setName', res.data.name);
       commit('setOwner', res.data.owner);
       commit('setTracks', res.data.tracks);
+      commit('setUri', res.data.uri);
     },
   },
 };

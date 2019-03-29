@@ -27,6 +27,7 @@ describe('playlistStore', () => {
     expect(store.state.items).toEqual([]);
     expect(store.state.total).toEqual(null);
     expect(store.state.offset).toEqual(0);
+    expect(store.state.uri).toEqual(null);
 
     await store.dispatch('fetchPlaylist');
 
@@ -39,5 +40,6 @@ describe('playlistStore', () => {
     expect(store.state.items).toEqual(playlist.tracks.items);
     expect(store.state.total).toEqual(playlist.tracks.total);
     expect(store.state.offset).toEqual(playlist.tracks.offset);
+    expect(store.state.uri).toEqual(playlist.uri);
   });
 });

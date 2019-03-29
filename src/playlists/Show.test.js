@@ -5,6 +5,7 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Show from './Show.vue';
 import storeConfig from '@/store/config';
 import playlist from '@/__mocks__/playlist.json';
+import api from '@/api';
 
 jest.mock('@/api');
 
@@ -35,8 +36,27 @@ describe('Playlists Show', () => {
     });
 
     it('shows the playlist tracks', () => {
-      const track = wrapper.findAll('[data-test="track"]');
-      expect(track.length).toBe(2);
+      const tracks = wrapper.findAll('[data-test="track"]');
+      expect(tracks.length).toBe(2);
+    });
+  });
+
+  describe('track', () => {
+    it('plays a track on double click in the playlist context', () => {
+      const track = wrapper.find('[data-test="track"]');
+      const params = {
+        contextUri: playlist.uri,
+        offset: 0,
+      };
+      api.play = jest.fn();
+      jest.spyOn(wrapper.vm, 'playTrack');
+
+      expect(api.play).not.toHaveBeenCalled();
+
+      track.trigger('dblclick');
+
+      expect(wrapper.vm.playTrack).toHaveBeenCalledWith(params.offset);
+      expect(api.play).toHaveBeenCalledWith(params);
     });
   });
 });

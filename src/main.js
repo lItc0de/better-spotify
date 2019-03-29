@@ -6,6 +6,7 @@ import store from '@/store';
 import App from '@/App.vue';
 
 import '@/plugins/xstyles';
+import '@/plugins/spotifyWebPlayback';
 import '@/registerServiceWorker';
 
 Vue.config.productionTip = false;
