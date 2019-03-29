@@ -5,6 +5,7 @@ require('dotenv').config({ path: '.env.test' });
 config.stubs = {
   'x-app': '<div><slot /></div>',
   'x-btn': '<button @click="$emit(\'click\')"/>',
+  'x-icon-btn': '<button @click="$emit(\'click\')"/>',
   'x-container': '<div class="container"><slot/></div>',
   'x-grid-list': '<div><slot/></div>',
   'x-layout': '<div><slot/></div>',

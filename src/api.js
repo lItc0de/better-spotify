@@ -12,7 +12,7 @@ export default {
 
   play: ({
     contextUri, uris, offset, positionMs,
-  }, deviceId) => axios
+  } = {}, deviceId) => axios
     .put(`v1/me/player/play${deviceId ? `?device_id=${deviceId}` : ''}`, {
       ...(contextUri ? { context_uri: contextUri } : null),
       ...(uris ? { uris } : null),
