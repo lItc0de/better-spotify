@@ -3,7 +3,17 @@ import playlist from './playlist.json';
 import playback from './playback.json';
 
 export default {
-  getPlaylists: () => Promise.resolve({ status: 200, data: playlists }),
-  getPlaylist: () => Promise.resolve({ status: 200, data: playlist }),
-  getPlayback: () => Promise.resolve({ status: 200, data: playback }),
+  getPlaylists: jest.fn()
+    .mockImplementation(() => Promise.resolve({ status: 200, data: playlists })),
+  getPlaylist: jest.fn()
+    .mockImplementation(() => Promise.resolve({ status: 200, data: playlist })),
+  getPlayback: jest.fn()
+    .mockImplementation(() => Promise.resolve({ status: 200, data: playback })),
+  getPlaylistsTracks: jest.fn()
+    .mockImplementation(() => Promise.resolve({ status: 200, data: {} })),
+  pause: jest.fn().mockImplementation(() => Promise.resolve({ status: 200 })),
+  play: jest.fn().mockImplementation(() => Promise.resolve({ status: 200 })),
+  next: jest.fn().mockImplementation(() => Promise.resolve({ status: 200 })),
+  previous: jest.fn().mockImplementation(() => Promise.resolve({ status: 200 })),
+  transfer: jest.fn().mockImplementation(() => Promise.resolve({ status: 200 })),
 };

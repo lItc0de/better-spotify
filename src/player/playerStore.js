@@ -48,8 +48,18 @@ export default {
 
     async play({ state, dispatch }, { options, deviceId } = {}) {
       await dispatch('getPlayback');
-      if (!state.playback) api.play(options, state.deviceId);
-      else api.play(options, deviceId);
+
+      if (!state.playback) {
+        api.play(options, state.deviceId);
+        return;
+      }
+
+      if (state.playback.is_playing && !options) {
+        api.pause();
+        return;
+      }
+
+      api.play(options, deviceId);
     },
   },
 };
