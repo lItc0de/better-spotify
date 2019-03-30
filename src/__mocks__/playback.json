@@ -11,7 +11,83 @@
   "progress_ms": "44272",
   "is_playing": true,
   "currently_playing_type": "track",
-  "item": {},
+  "item": {
+    "album": {
+      "album_type": "single",
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3LpUervcOFfZjMgeXIabZN"
+          },
+          "href": "https://api.spotify.com/v1/artists/3LpUervcOFfZjMgeXIabZN",
+          "id": "3LpUervcOFfZjMgeXIabZN",
+          "name": "DJ HMC",
+          "type": "artist",
+          "uri": "spotify:artist:3LpUervcOFfZjMgeXIabZN"
+        }
+      ],
+      "available_markets": [],
+      "external_urls": {
+        "spotify": "https://open.spotify.com/album/7p5TSQFCw8yYPI2FqjE98d"
+      },
+      "href": "https://api.spotify.com/v1/albums/7p5TSQFCw8yYPI2FqjE98d",
+      "id": "7p5TSQFCw8yYPI2FqjE98d",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/44e137c43016750eb75635895375b920da86a822",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/9cb819bc7a59aeba0d81792a8b521f607c84c94d",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/699526019fefa0f120f941021e1fdf681f572106",
+          "width": 64
+        }
+      ],
+      "name": "6 A.M. / Maurader",
+      "release_date": "2015-11-09",
+      "release_date_precision": "day",
+      "total_tracks": 2,
+      "type": "album",
+      "uri": "spotify:album:7p5TSQFCw8yYPI2FqjE98d"
+    },
+    "artists": [
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/3LpUervcOFfZjMgeXIabZN"
+        },
+        "href": "https://api.spotify.com/v1/artists/3LpUervcOFfZjMgeXIabZN",
+        "id": "3LpUervcOFfZjMgeXIabZN",
+        "name": "DJ HMC",
+        "type": "artist",
+        "uri": "spotify:artist:3LpUervcOFfZjMgeXIabZN"
+      }
+    ],
+    "available_markets": [],
+    "disc_number": 1,
+    "duration_ms": 319622,
+    "explicit": false,
+    "external_ids": {
+      "isrc": "UKACT1560768"
+    },
+    "external_urls": {
+      "spotify": "https://open.spotify.com/track/4oiMLvhZYMov0BjrTU2jyK"
+    },
+    "href": "https://api.spotify.com/v1/tracks/4oiMLvhZYMov0BjrTU2jyK",
+    "id": "4oiMLvhZYMov0BjrTU2jyK",
+    "is_local": false,
+    "name": "6 A.M.",
+    "popularity": 23,
+    "preview_url": "https://p.scdn.co/mp3-preview/4d4b4c774503d97b4f1a54cb5521bcb9421776ba?cid=5c4aeb1c4e8f495fa3ba5e13916eb3f4",
+    "track_number": 1,
+    "type": "track",
+    "uri": "spotify:track:4oiMLvhZYMov0BjrTU2jyK"
+  },
   "shuffle_state": false,
   "repeat_state": "off",
   "context": {

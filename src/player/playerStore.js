@@ -5,6 +5,11 @@ export default {
     player: null,
     deviceId: null,
     playback: null,
+    playing: false,
+    progress: null,
+    shuffle: false,
+    repeat: 'off',
+    track: null,
   },
 
   /* eslint-disable no-param-reassign */
@@ -19,6 +24,12 @@ export default {
 
     setPlayback(state, playback) {
       state.playback = playback;
+      if (!playback) return;
+      state.playing = playback.is_playing;
+      state.progress = playback.progress_ms;
+      state.shuffle = playback.shuffle_state;
+      state.repeat = playback.repeat_state;
+      state.track = playback.item;
     },
   },
   /* eslint-enable no-param-reassign */
