@@ -31,6 +31,10 @@ describe('playerStore', () => {
     global.Spotify = Spotify;
   });
 
+  afterEach(() => {
+    Object.keys(api).forEach(key => api[key].mockClear());
+  });
+
   describe('createPlayer', () => {
     it('should create a new spotify player instance and commit it', () => {
       expect(store.state.player).toEqual(null);
@@ -77,7 +81,6 @@ describe('playerStore', () => {
       const modifiedPlayback = clonedeep(playback);
       modifiedPlayback.is_playing = false;
 
-      api.play = jest.fn();
       api.getPlayback.mockImplementationOnce(
         () => Promise.resolve({ status: 200, data: modifiedPlayback }),
       );
@@ -85,11 +88,11 @@ describe('playerStore', () => {
       await store.dispatch('play', { options, deviceId });
 
       expect(api.play).toHaveBeenCalledWith(options, deviceId);
+      expect(store.state.playing).toBe(true);
     });
 
     it('sets the device id if no active device was found', async () => {
       const deviceId = playback.device.id;
-      api.play = jest.fn();
       api.getPlayback.mockImplementationOnce(() => Promise.resolve({ status: 200, data: null }));
 
       store.dispatch('createPlayer');
@@ -99,20 +102,15 @@ describe('playerStore', () => {
     });
 
     it('calls pause if already playing', async () => {
-      api.play = jest.fn();
-      api.pause = jest.fn();
-
       await store.dispatch('play');
 
       expect(api.play).not.toHaveBeenCalled();
       expect(api.pause).toHaveBeenCalledWith();
+      expect(store.state.playing).toBe(false);
     });
 
     it('doesn‘t call pause if its a new song', async () => {
       const options = { contextUri: 'uri' };
-
-      api.play = jest.fn();
-      api.pause = jest.fn();
 
       await store.dispatch('play', { options });
 

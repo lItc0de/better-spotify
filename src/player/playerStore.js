@@ -31,6 +31,10 @@ export default {
       state.repeat = playback.repeat_state;
       state.track = playback.item;
     },
+
+    setPlaying(state, playing) {
+      state.playing = playing;
+    },
   },
   /* eslint-enable no-param-reassign */
 
@@ -57,7 +61,7 @@ export default {
       commit('setPlayback', res.data);
     },
 
-    async play({ state, dispatch }, { options, deviceId } = {}) {
+    async play({ state, dispatch, commit }, { options, deviceId } = {}) {
       await dispatch('getPlayback');
 
       if (!state.playback) {
@@ -66,11 +70,13 @@ export default {
       }
 
       if (state.playback.is_playing && !options) {
-        api.pause();
+        const res = await api.pause();
+        if (res.status === 204) commit('setPlaying', false);
         return;
       }
 
-      api.play(options, deviceId);
+      const res = await api.play(options, deviceId);
+      if (res.status === 204) commit('setPlaying', true);
     },
   },
 };
