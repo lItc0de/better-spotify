@@ -27,4 +27,6 @@ export default {
   previous: () => axios.post('v1/me/player/previous'),
 
   transfer: (deviceId, play = true) => axios.put('v1/me/player', { device_ids: [deviceId], play }),
+
+  shuffle: shuffle => axios.put(`v1/me/player/shuffle?state=${shuffle}`),
 };

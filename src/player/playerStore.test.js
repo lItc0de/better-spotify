@@ -118,4 +118,26 @@ describe('playerStore', () => {
       expect(api.play).toHaveBeenCalledWith(options, undefined);
     });
   });
+
+  describe('shuffle', () => {
+    it('sets the shuffle state', async () => {
+      expect(store.state.shuffle).toBe(false);
+      await store.dispatch('shuffle');
+      expect(api.shuffle).toHaveBeenCalledWith(true);
+      expect(store.state.shuffle).toBe(true);
+    });
+
+    it('sets false if shuffle is already true', async () => {
+      const modifiedPlayback = clonedeep(playback);
+      modifiedPlayback.shuffle_state = true;
+
+      api.getPlayback.mockImplementationOnce(
+        () => Promise.resolve({ status: 200, data: modifiedPlayback }),
+      );
+
+      await store.dispatch('shuffle');
+      expect(api.shuffle).toHaveBeenCalledWith(false);
+      expect(store.state.shuffle).toBe(false);
+    });
+  });
 });

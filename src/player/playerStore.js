@@ -35,6 +35,10 @@ export default {
     setPlaying(state, playing) {
       state.playing = playing;
     },
+
+    setShuffle(state, shuffle) {
+      state.shuffle = shuffle;
+    },
   },
   /* eslint-enable no-param-reassign */
 
@@ -77,6 +81,13 @@ export default {
 
       const res = await api.play(options, deviceId);
       if (res.status === 204) commit('setPlaying', true);
+    },
+
+    async shuffle({ dispatch, commit, state }) {
+      await dispatch('getPlayback');
+
+      const res = await api.shuffle(!state.shuffle);
+      if (res.status === 204) commit('setShuffle', !state.shuffle);
     },
   },
 };

@@ -16,4 +16,5 @@ export default {
   next: jest.fn().mockImplementation(() => Promise.resolve({ status: 200 })),
   previous: jest.fn().mockImplementation(() => Promise.resolve({ status: 200 })),
   transfer: jest.fn().mockImplementation(() => Promise.resolve({ status: 200 })),
+  shuffle: jest.fn().mockImplementation(() => Promise.resolve({ status: 204 })),
 };
