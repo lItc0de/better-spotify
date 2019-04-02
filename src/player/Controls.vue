@@ -7,7 +7,7 @@
     <button data-test="play" icon="play" @click="play">
       {{ playing ? 'pause' : 'play' }}
     </button>
-    <button data-test="next" icon="next">next</button>
+    <button data-test="next" icon="next" @click="next">next</button>
     <button data-test="repeat" icon="repeat" @click="putRepeat">{{ repeat }}</button>
   </x-container>
 </template>
@@ -23,7 +23,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('player', ['play', 'putShuffle', 'putRepeat', 'previous']),
+    ...mapActions('player', ['play', 'putShuffle', 'putRepeat', 'previous', 'next']),
   },
 };
 </script>

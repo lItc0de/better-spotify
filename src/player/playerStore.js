@@ -109,5 +109,10 @@ export default {
       await api.previous();
       dispatch('getPlayback');
     },
+
+    async next({ dispatch }) {
+      await api.next();
+      dispatch('getPlayback');
+    },
   },
 };

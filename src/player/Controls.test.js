@@ -90,4 +90,13 @@ describe('Player Controls', () => {
       expect(store.dispatch).toHaveBeenCalledWith('player/previous', expect.anything());
     });
   });
+
+  describe('Next button', () => {
+    it('plays the next song', () => {
+      store.dispatch = jest.fn();
+      nextBtn.trigger('click');
+
+      expect(store.dispatch).toHaveBeenCalledWith('player/next', expect.anything());
+    });
+  });
 });

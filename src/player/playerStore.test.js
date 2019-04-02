@@ -186,4 +186,20 @@ describe('playerStore', () => {
       expect(store.state.track.id).toEqual(modifiedPlayback.item.id);
     });
   });
+
+  describe('next', () => {
+    it('plays the next song and updates the state', async () => {
+      const modifiedPlayback = clonedeep(playback);
+
+      modifiedPlayback.item.id = 'nextSongId';
+      api.getPlayback.mockImplementationOnce(
+        () => Promise.resolve({ status: 200, data: modifiedPlayback }),
+      );
+
+      await store.dispatch('next');
+
+      expect(api.next).toHaveBeenCalled();
+      expect(store.state.track.id).toEqual(modifiedPlayback.item.id);
+    });
+  });
 });
