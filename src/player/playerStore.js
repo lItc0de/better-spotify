@@ -39,6 +39,10 @@ export default {
     setShuffle(state, shuffle) {
       state.shuffle = shuffle;
     },
+
+    setRepeat(state, repeat) {
+      state.repeat = repeat;
+    },
   },
   /* eslint-enable no-param-reassign */
 
@@ -83,11 +87,22 @@ export default {
       if (res.status === 204) commit('setPlaying', true);
     },
 
-    async shuffle({ dispatch, commit, state }) {
+    async putShuffle({ dispatch, commit, state }) {
       await dispatch('getPlayback');
 
       const res = await api.shuffle(!state.shuffle);
       if (res.status === 204) commit('setShuffle', !state.shuffle);
+    },
+
+    async putRepeat({ dispatch, commit, state }) {
+      await dispatch('getPlayback');
+
+      const repeatStates = ['off', 'context', 'track'];
+      const index = repeatStates.indexOf(state.repeat);
+      const repeat = repeatStates[index + 1] || 'off';
+
+      const res = await api.repeat(repeat);
+      if (res.status === 204) commit('setRepeat', repeat);
     },
   },
 };

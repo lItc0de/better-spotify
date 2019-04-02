@@ -122,7 +122,7 @@ describe('playerStore', () => {
   describe('shuffle', () => {
     it('sets the shuffle state', async () => {
       expect(store.state.shuffle).toBe(false);
-      await store.dispatch('shuffle');
+      await store.dispatch('putShuffle');
       expect(api.shuffle).toHaveBeenCalledWith(true);
       expect(store.state.shuffle).toBe(true);
     });
@@ -135,9 +135,39 @@ describe('playerStore', () => {
         () => Promise.resolve({ status: 200, data: modifiedPlayback }),
       );
 
-      await store.dispatch('shuffle');
+      await store.dispatch('putShuffle');
       expect(api.shuffle).toHaveBeenCalledWith(false);
       expect(store.state.shuffle).toBe(false);
+    });
+  });
+
+  describe('repeat', () => {
+    it('sets the repeat state', async () => {
+      const modifiedPlayback = clonedeep(playback);
+
+      expect(store.state.repeat).toBe('off');
+
+      await store.dispatch('putRepeat');
+      expect(api.repeat).toHaveBeenCalledWith('context');
+      expect(store.state.repeat).toBe('context');
+
+      modifiedPlayback.repeat_state = 'context';
+      api.getPlayback.mockImplementationOnce(
+        () => Promise.resolve({ status: 200, data: modifiedPlayback }),
+      );
+
+      await store.dispatch('putRepeat');
+      expect(api.repeat).toHaveBeenCalledWith('track');
+      expect(store.state.repeat).toBe('track');
+
+      modifiedPlayback.repeat_state = 'track';
+      api.getPlayback.mockImplementationOnce(
+        () => Promise.resolve({ status: 200, data: modifiedPlayback }),
+      );
+
+      await store.dispatch('putRepeat');
+      expect(api.repeat).toHaveBeenCalledWith('off');
+      expect(store.state.repeat).toBe('off');
     });
   });
 });

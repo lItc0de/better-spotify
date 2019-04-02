@@ -1,12 +1,14 @@
 <template>
   <x-container row>
-    <button data-test="shuffle" icon="shuffle">{{ shuffle ? 'shuffle' : 'no_shuffle' }}</button>
+    <button data-test="shuffle" icon="shuffle" @click="putShuffle">
+      {{ shuffle ? 'shuffle' : 'no_shuffle' }}
+    </button>
     <button data-test="previous" icon="previous">previous</button>
-    <button data-test="play" icon="play" @click="handlePlay">
+    <button data-test="play" icon="play" @click="play">
       {{ playing ? 'pause' : 'play' }}
     </button>
     <button data-test="next" icon="next">next</button>
-    <button data-test="repeat" icon="repeat">{{ repeat }}</button>
+    <button data-test="repeat" icon="repeat" @click="putRepeat">{{ repeat }}</button>
   </x-container>
 </template>
 
@@ -21,9 +23,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('player', ['play']),
-
-    handlePlay() { this.play(); },
+    ...mapActions('player', ['play', 'putShuffle', 'putRepeat']),
   },
 };
 </script>

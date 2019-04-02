@@ -60,7 +60,25 @@ describe('Player Controls', () => {
       store.dispatch = jest.fn();
       playBtn.trigger('click');
 
-      expect(store.dispatch).toHaveBeenCalledWith('player/play', undefined);
+      expect(store.dispatch).toHaveBeenCalledWith('player/play', expect.anything());
+    });
+  });
+
+  describe('Shuffle button', () => {
+    it('sets the shuffle state', () => {
+      store.dispatch = jest.fn();
+      shuffleBtn.trigger('click');
+
+      expect(store.dispatch).toHaveBeenCalledWith('player/putShuffle', expect.anything());
+    });
+  });
+
+  describe('Repeat button', () => {
+    it('sets the repeat state', () => {
+      store.dispatch = jest.fn();
+      repeatBtn.trigger('click');
+
+      expect(store.dispatch).toHaveBeenCalledWith('player/putRepeat', expect.anything());
     });
   });
 });
