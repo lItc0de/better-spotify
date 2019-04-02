@@ -170,4 +170,20 @@ describe('playerStore', () => {
       expect(store.state.repeat).toBe('off');
     });
   });
+
+  describe('previous', () => {
+    it('plays the previous song and updates the state', async () => {
+      const modifiedPlayback = clonedeep(playback);
+
+      modifiedPlayback.item.id = 'previousSongId';
+      api.getPlayback.mockImplementationOnce(
+        () => Promise.resolve({ status: 200, data: modifiedPlayback }),
+      );
+
+      await store.dispatch('previous');
+
+      expect(api.previous).toHaveBeenCalled();
+      expect(store.state.track.id).toEqual(modifiedPlayback.item.id);
+    });
+  });
 });

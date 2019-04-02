@@ -104,5 +104,10 @@ export default {
       const res = await api.repeat(repeat);
       if (res.status === 204) commit('setRepeat', repeat);
     },
+
+    async previous({ dispatch }) {
+      await api.previous();
+      dispatch('getPlayback');
+    },
   },
 };

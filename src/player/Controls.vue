@@ -3,7 +3,7 @@
     <button data-test="shuffle" icon="shuffle" @click="putShuffle">
       {{ shuffle ? 'shuffle' : 'no_shuffle' }}
     </button>
-    <button data-test="previous" icon="previous">previous</button>
+    <button data-test="previous" icon="previous" @click="previous">previous</button>
     <button data-test="play" icon="play" @click="play">
       {{ playing ? 'pause' : 'play' }}
     </button>
@@ -23,7 +23,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('player', ['play', 'putShuffle', 'putRepeat']),
+    ...mapActions('player', ['play', 'putShuffle', 'putRepeat', 'previous']),
   },
 };
 </script>

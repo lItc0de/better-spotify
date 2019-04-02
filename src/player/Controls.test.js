@@ -81,4 +81,13 @@ describe('Player Controls', () => {
       expect(store.dispatch).toHaveBeenCalledWith('player/putRepeat', expect.anything());
     });
   });
+
+  describe('Previous button', () => {
+    it('plays the previous song', () => {
+      store.dispatch = jest.fn();
+      previousBtn.trigger('click');
+
+      expect(store.dispatch).toHaveBeenCalledWith('player/previous', expect.anything());
+    });
+  });
 });

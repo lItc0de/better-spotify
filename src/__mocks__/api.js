@@ -13,9 +13,9 @@ export default {
     .mockImplementation(() => Promise.resolve({ status: 200, data: {} })),
   pause: jest.fn().mockImplementation(() => Promise.resolve({ status: 204 })),
   play: jest.fn().mockImplementation(() => Promise.resolve({ status: 204 })),
-  next: jest.fn().mockImplementation(() => Promise.resolve({ status: 200 })),
-  previous: jest.fn().mockImplementation(() => Promise.resolve({ status: 200 })),
-  transfer: jest.fn().mockImplementation(() => Promise.resolve({ status: 200 })),
+  next: jest.fn().mockImplementation(() => Promise.resolve({ status: 204 })),
+  previous: jest.fn().mockImplementation(() => Promise.resolve({ status: 204 })),
+  transfer: jest.fn().mockImplementation(() => Promise.resolve({ status: 204 })),
   shuffle: jest.fn().mockImplementation(() => Promise.resolve({ status: 204 })),
   repeat: jest.fn().mockImplementation(() => Promise.resolve({ status: 204 })),
 };
