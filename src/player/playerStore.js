@@ -107,12 +107,12 @@ export default {
 
     async previous({ dispatch }) {
       await api.previous();
-      dispatch('getPlayback');
+      setTimeout(() => dispatch('getPlayback'), 1000);
     },
 
     async next({ dispatch }) {
       await api.next();
-      dispatch('getPlayback');
+      await setTimeout(() => dispatch('getPlayback'), 1000);
     },
   },
 };

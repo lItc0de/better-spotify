@@ -16,6 +16,7 @@ describe('Player Controls', () => {
   let playBtn;
   let nextBtn;
   let repeatBtn;
+  let trackInfo;
 
   beforeEach(() => {
     store = new Vuex.Store(clonedeep(storeConfig));
@@ -29,14 +30,21 @@ describe('Player Controls', () => {
     playBtn = wrapper.find('[data-test="play"]');
     nextBtn = wrapper.find('[data-test="next"]');
     repeatBtn = wrapper.find('[data-test="repeat"]');
+    trackInfo = wrapper.find('[data-test="track-info"]');
   });
 
-  describe('control buttons state', () => {
+  describe('control state', () => {
     it('shows correct state', () => {
       const playback = {
         progress_ms: 1234,
         is_playing: true,
-        item: {},
+        item: {
+          name: 'track',
+          artists: [
+            { name: 'artist1' },
+            { name: 'artist2' },
+          ],
+        },
         shuffle_state: true,
         repeat_state: 'context',
       };
@@ -46,12 +54,14 @@ describe('Player Controls', () => {
       expect(playBtn.text()).toEqual('play');
       expect(nextBtn.text()).toEqual('next');
       expect(repeatBtn.text()).toEqual('off');
+      expect(trackInfo.text()).toEqual('');
 
       store.commit('player/setPlayback', playback);
 
       expect(shuffleBtn.text()).toEqual('shuffle');
       expect(playBtn.text()).toEqual('pause');
       expect(repeatBtn.text()).toEqual('context');
+      expect(trackInfo.text()).toEqual('track - artist1, artist2');
     });
   });
 

@@ -9,6 +9,7 @@
     </button>
     <button data-test="next" icon="next" @click="next">next</button>
     <button data-test="repeat" icon="repeat" @click="putRepeat">{{ repeat }}</button>
+    <p data-test="track-info">{{ trackInfo }}</p>
   </x-container>
 </template>
 
@@ -20,6 +21,12 @@ export default {
 
   computed: {
     ...mapState('player', ['playing', 'progress', 'shuffle', 'repeat', 'track']),
+
+    trackInfo() {
+      if (!this.track) return '';
+      const { name, artists } = this.track;
+      return `${name} - ${artists.map(artist => artist.name).join(', ')}`;
+    },
   },
 
   methods: {
