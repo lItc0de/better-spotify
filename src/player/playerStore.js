@@ -7,6 +7,7 @@ export default {
     playingDeviceId: null,
     playing: false,
     progress: null,
+    duration: null,
     shuffle: false,
     repeat: 'off',
     track: null,
@@ -27,6 +28,7 @@ export default {
       state.playingDeviceId = playback.device.id;
       state.playing = playback.is_playing;
       state.progress = playback.progress_ms;
+      state.duration = playback.item.duration_ms;
       state.shuffle = playback.shuffle_state;
       state.repeat = playback.repeat_state;
       state.track = playback.item;

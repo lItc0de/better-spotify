@@ -54,6 +54,7 @@ describe('playerStore', () => {
       expect(store.state.player).toEqual(null);
       expect(store.state.playing).toEqual(false);
       expect(store.state.progress).toEqual(null);
+      expect(store.state.duration).toEqual(null);
       expect(store.state.shuffle).toEqual(false);
       expect(store.state.repeat).toEqual('off');
       expect(store.state.track).toEqual(null);
@@ -65,6 +66,7 @@ describe('playerStore', () => {
       expect(store.state.player).toBeInstanceOf(Spotify.Player);
       expect(store.state.playing).toEqual(!webPlaybackState.paused);
       expect(store.state.progress).toEqual(webPlaybackState.position);
+      expect(store.state.duration).toEqual(null);
       expect(store.state.shuffle).toEqual(webPlaybackState.shuffle);
       expect(store.state.repeat).toEqual(repeatModes[webPlaybackState.repeat_mode]);
       expect(store.state.track).toEqual(webPlaybackState.track_window.current_track);
@@ -113,6 +115,7 @@ describe('playerStore', () => {
     it('fetches the current playback info and commits it', async () => {
       expect(store.state.playing).toEqual(false);
       expect(store.state.progress).toEqual(null);
+      expect(store.state.duration).toEqual(null);
       expect(store.state.shuffle).toEqual(false);
       expect(store.state.repeat).toEqual('off');
       expect(store.state.track).toEqual(null);
@@ -121,6 +124,7 @@ describe('playerStore', () => {
 
       expect(store.state.playing).toEqual(playback.is_playing);
       expect(store.state.progress).toEqual(playback.progress_ms);
+      expect(store.state.duration).toEqual(playback.item.duration_ms);
       expect(store.state.shuffle).toEqual(playback.shuffle_state);
       expect(store.state.repeat).toEqual(playback.repeat_state);
       expect(store.state.track).toEqual(playback.item);

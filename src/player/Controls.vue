@@ -28,7 +28,7 @@ export default {
   },
 
   computed: {
-    ...mapState('player', ['playing', 'progress', 'shuffle', 'repeat', 'track']),
+    ...mapState('player', ['playing', 'progress', 'shuffle', 'repeat', 'track', 'duration']),
 
     trackInfo() {
       if (!this.track) return '';
@@ -41,8 +41,8 @@ export default {
     ...mapActions('player', ['play', 'putShuffle', 'putRepeat', 'previous', 'next', 'getPlayback']),
 
     updateProgress() {
-      if (this.trackProgress + 100 >= this.track.duration_ms) {
-        this.trackProgress = this.track.duration_ms;
+      if (this.trackProgress + 100 >= this.duration) {
+        this.trackProgress = this.duration;
         window.clearInterval(this.intervalId);
         return;
       }
