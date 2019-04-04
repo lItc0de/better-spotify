@@ -4,6 +4,7 @@ import { createLocalVue } from '@vue/test-utils';
 
 import playerStore from './playerStore';
 import playback from '@/__mocks__/playback.json';
+import webPlaybackState from '@/__mocks__/webPlaybackState.json';
 import api from '@/api';
 
 jest.mock('@/api');
@@ -11,21 +12,33 @@ jest.mock('@/api');
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
+const repeatModes = ['off', 'context', 'track'];
+
 describe('playerStore', () => {
   let store;
-  let connect;
   let Spotify;
+  let connect;
   let addListener;
+  let getCurrentState;
+  const eventResults = {};
+  const listeners = [];
 
   beforeEach(() => {
-    const params = { device_id: playback.device.id };
     store = new Vuex.Store(clonedeep(playerStore));
+
+    eventResults.ready = jest.fn().mockImplementation(() => ({ device_id: playback.device.id }));
+    eventResults.player_state_changed = jest.fn().mockImplementation(() => webPlaybackState);
     connect = jest.fn();
-    addListener = jest.fn().mockImplementation((_, callback) => callback(params));
+    getCurrentState = jest.fn().mockImplementation(() => Promise.resolve(webPlaybackState));
+    addListener = jest.fn().mockImplementation((key, callback) => {
+      listeners[key] = () => callback(eventResults[key]());
+    });
     class Player {
       connect = connect
 
       addListener = addListener
+
+      getCurrentState = getCurrentState
     }
     Spotify = { Player };
     global.Spotify = Spotify;
@@ -37,21 +50,62 @@ describe('playerStore', () => {
   });
 
   describe('createPlayer', () => {
-    it('should create a new spotify player instance and commit it', () => {
+    it('should create a new spotify player instance and set the playback state', async () => {
       expect(store.state.player).toEqual(null);
+      expect(store.state.playing).toEqual(false);
+      expect(store.state.progress).toEqual(null);
+      expect(store.state.shuffle).toEqual(false);
+      expect(store.state.repeat).toEqual('off');
+      expect(store.state.track).toEqual(null);
 
-      store.dispatch('createPlayer');
+      await store.dispatch('createPlayer');
 
       expect(connect).toHaveBeenCalled();
+      expect(getCurrentState).toHaveBeenCalled();
       expect(store.state.player).toBeInstanceOf(Spotify.Player);
+      expect(store.state.playing).toEqual(!webPlaybackState.paused);
+      expect(store.state.progress).toEqual(webPlaybackState.position);
+      expect(store.state.shuffle).toEqual(webPlaybackState.shuffle);
+      expect(store.state.repeat).toEqual(repeatModes[webPlaybackState.repeat_mode]);
+      expect(store.state.track).toEqual(webPlaybackState.track_window.current_track);
     });
 
-    it('should add an event listener on ready', () => {
-      expect(store.state.deviceId).toEqual(null);
-      store.dispatch('createPlayer');
+    it('should add an event listener on ready', async () => {
+      await store.dispatch('createPlayer');
+      expect(addListener).toHaveBeenCalledWith('ready', expect.any(Function));
 
-      expect(addListener).toHaveBeenCalledWith('ready', expect.anything());
+      expect(store.state.deviceId).toEqual(null);
+
+      listeners.ready();
+
       expect(store.state.deviceId).toEqual(playback.device.id);
+    });
+
+    it('should add an event listener on player_state_changed', async () => {
+      getCurrentState.mockImplementationOnce(() => Promise.resolve(null));
+      expect(store.state.playing).toEqual(false);
+
+      await store.dispatch('createPlayer');
+
+      expect(addListener).toHaveBeenCalledWith('player_state_changed', expect.any(Function));
+      expect(store.state.deviceId).toEqual(null);
+      expect(store.state.playingDeviceId).toEqual(null);
+
+      listeners.ready();
+
+      expect(store.state.deviceId).toEqual(playback.device.id);
+      expect(store.state.playingDeviceId).toEqual(null);
+
+      listeners.player_state_changed();
+
+      expect(store.state.playing).toEqual(true);
+      expect(store.state.playingDeviceId).toEqual(playback.device.id);
+
+
+      eventResults.player_state_changed.mockImplementationOnce(() => null);
+      listeners.player_state_changed();
+
+      expect(store.state.playingDeviceId).toEqual(null);
     });
   });
 
@@ -93,8 +147,10 @@ describe('playerStore', () => {
     it('sets the device id if no active device was found', async () => {
       const deviceId = playback.device.id;
       api.getPlayback.mockImplementationOnce(() => Promise.resolve({ status: 200, data: null }));
+      getCurrentState.mockImplementationOnce(() => Promise.resolve(null));
 
       store.dispatch('createPlayer');
+      listeners.ready();
       await store.dispatch('play');
 
       expect(api.play).toHaveBeenCalledWith(undefined, deviceId);

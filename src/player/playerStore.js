@@ -32,14 +32,19 @@ export default {
       state.track = playback.item;
     },
 
-    // setWebPlayback(state, webPlayback) {
-    //   if (!webPlayback) return;
-    //   state.playing = playback.is_playing;
-    //   state.progress = playback.progress_ms;
-    //   state.shuffle = playback.shuffle_state;
-    //   state.repeat = playback.repeat_state;
-    //   state.track = playback.item;
-    // },
+    setWebPlayback(state, webPlayback) {
+      const repeatModes = ['off', 'context', 'track'];
+      if (!webPlayback) {
+        state.playingDeviceId = null;
+        return;
+      }
+      state.playingDeviceId = state.deviceId;
+      state.playing = !webPlayback.paused;
+      state.progress = webPlayback.position;
+      state.shuffle = webPlayback.shuffle;
+      state.repeat = repeatModes[webPlayback.repeat_mode];
+      state.track = webPlayback.track_window.current_track;
+    },
 
     setPlaying(state, playing) {
       state.playing = playing;
@@ -56,7 +61,7 @@ export default {
   /* eslint-enable no-param-reassign */
 
   actions: {
-    createPlayer({ commit }) {
+    async createPlayer({ commit }) {
       const token = window.localStorage.getItem('access_token');
 
       // eslint-disable-next-line no-undef
@@ -67,8 +72,14 @@ export default {
 
       player.addListener('ready', p => commit('setDeviceId', p.device_id));
 
+      player.addListener('player_state_changed', webPlayback => commit('setWebPlayback', webPlayback));
+
       player.connect();
 
+
+      const webPlayback = await player.getCurrentState();
+
+      commit('setWebPlayback', webPlayback);
       commit('setPlayer', player);
     },
 

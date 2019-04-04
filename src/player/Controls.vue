@@ -30,7 +30,11 @@ export default {
   },
 
   methods: {
-    ...mapActions('player', ['play', 'putShuffle', 'putRepeat', 'previous', 'next']),
+    ...mapActions('player', ['play', 'putShuffle', 'putRepeat', 'previous', 'next', 'getPlayback']),
+  },
+
+  created() {
+    this.getPlayback();
   },
 };
 </script>

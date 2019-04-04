@@ -1,0 +1,42 @@
+{
+  "context": {
+    "uri": "spotify:album:xxx",
+    "metadata": {}
+  },
+  "disallows": {
+    "pausing": false,
+    "peeking_next": false,
+    "peeking_prev": false,
+    "resuming": false,
+    "seeking": false,
+    "skipping_next": false,
+    "skipping_prev": false
+
+  },
+  "paused": false,
+  "position": 0,
+  "repeat_mode": 0,
+  "shuffle": false,
+  "track_window": {
+    "current_track": {
+      "uri": "spotify:track:xxxx",
+      "id": "xxxx",
+      "type": "track",
+      "media_type": "audio",
+      "name": "Song Name",
+      "is_playable": true,
+      "album": {
+        "uri": "spotify:album:xxxx",
+        "name": "Album Name",
+        "images": [
+          { "url": "https://image/xxxx" }
+        ]
+      },
+      "artists": [
+        { "uri": "spotify:artist:xxxx", "name": "Artist Name" }
+      ]
+    },
+    "previous_tracks": [],
+    "next_tracks": []
+  }
+}

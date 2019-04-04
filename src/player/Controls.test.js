@@ -5,6 +5,8 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import Controls from './Controls.vue';
 import storeConfig from '@/store/config';
 
+jest.mock('@/api');
+
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
@@ -20,6 +22,8 @@ describe('Player Controls', () => {
 
   beforeEach(() => {
     store = new Vuex.Store(clonedeep(storeConfig));
+    jest.spyOn(store, 'dispatch');
+
     wrapper = shallowMount(Controls, {
       localVue,
       store,
@@ -35,34 +39,13 @@ describe('Player Controls', () => {
 
   describe('control state', () => {
     it('shows correct state', () => {
-      const playback = {
-        progress_ms: 1234,
-        is_playing: true,
-        device: { id: 'device_id' },
-        item: {
-          name: 'track',
-          artists: [
-            { name: 'artist1' },
-            { name: 'artist2' },
-          ],
-        },
-        shuffle_state: true,
-        repeat_state: 'context',
-      };
+      expect(store.dispatch).toHaveBeenCalledTimes(1);
+      expect(store.dispatch).toHaveBeenCalledWith('player/getPlayback', undefined);
 
       expect(shuffleBtn.text()).toEqual('no_shuffle');
-      expect(previousBtn.text()).toEqual('previous');
-      expect(playBtn.text()).toEqual('play');
-      expect(nextBtn.text()).toEqual('next');
-      expect(repeatBtn.text()).toEqual('off');
-      expect(trackInfo.text()).toEqual('');
-
-      store.commit('player/setPlayback', playback);
-
-      expect(shuffleBtn.text()).toEqual('shuffle');
       expect(playBtn.text()).toEqual('pause');
-      expect(repeatBtn.text()).toEqual('context');
-      expect(trackInfo.text()).toEqual('track - artist1, artist2');
+      expect(repeatBtn.text()).toEqual('off');
+      expect(trackInfo.text()).toEqual('6 A.M. - DJ HMC');
     });
   });
 
