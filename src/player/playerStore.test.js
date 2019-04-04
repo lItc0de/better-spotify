@@ -57,7 +57,6 @@ describe('playerStore', () => {
 
   describe('getPlayback', () => {
     it('fetches the current playback info and commits it', async () => {
-      expect(store.state.playback).toEqual(null);
       expect(store.state.playing).toEqual(false);
       expect(store.state.progress).toEqual(null);
       expect(store.state.shuffle).toEqual(false);
@@ -66,7 +65,6 @@ describe('playerStore', () => {
 
       await store.dispatch('getPlayback');
 
-      expect(store.state.playback).toEqual(playback);
       expect(store.state.playing).toEqual(playback.is_playing);
       expect(store.state.progress).toEqual(playback.progress_ms);
       expect(store.state.shuffle).toEqual(playback.shuffle_state);

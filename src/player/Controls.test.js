@@ -38,6 +38,7 @@ describe('Player Controls', () => {
       const playback = {
         progress_ms: 1234,
         is_playing: true,
+        device: { id: 'device_id' },
         item: {
           name: 'track',
           artists: [

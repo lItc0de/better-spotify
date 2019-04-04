@@ -4,7 +4,7 @@ export default {
   state: {
     player: null,
     deviceId: null,
-    playback: null,
+    playingDeviceId: null,
     playing: false,
     progress: null,
     shuffle: false,
@@ -23,14 +23,23 @@ export default {
     },
 
     setPlayback(state, playback) {
-      state.playback = playback;
       if (!playback) return;
+      state.playingDeviceId = playback.device.id;
       state.playing = playback.is_playing;
       state.progress = playback.progress_ms;
       state.shuffle = playback.shuffle_state;
       state.repeat = playback.repeat_state;
       state.track = playback.item;
     },
+
+    // setWebPlayback(state, webPlayback) {
+    //   if (!webPlayback) return;
+    //   state.playing = playback.is_playing;
+    //   state.progress = playback.progress_ms;
+    //   state.shuffle = playback.shuffle_state;
+    //   state.repeat = playback.repeat_state;
+    //   state.track = playback.item;
+    // },
 
     setPlaying(state, playing) {
       state.playing = playing;
@@ -56,7 +65,7 @@ export default {
         getOAuthToken: (cb) => { cb(token); },
       });
 
-      player.addListener('ready', params => commit('setDeviceId', params.device_id));
+      player.addListener('ready', p => commit('setDeviceId', p.device_id));
 
       player.connect();
 
@@ -72,12 +81,12 @@ export default {
     async play({ state, dispatch, commit }, { options, deviceId } = {}) {
       await dispatch('getPlayback');
 
-      if (!state.playback) {
+      if (!state.playingDeviceId) {
         api.play(options, state.deviceId);
         return;
       }
 
-      if (state.playback.is_playing && !options) {
+      if (state.playing && !options) {
         const res = await api.pause();
         if (res.status === 204) commit('setPlaying', false);
         return;
