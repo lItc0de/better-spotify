@@ -85,6 +85,7 @@ export default {
 
     async getPlayback({ commit }) {
       const res = await api.getPlayback();
+      if (!res) return;
 
       commit('setPlayback', res.data);
     },

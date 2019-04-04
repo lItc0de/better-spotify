@@ -10,6 +10,7 @@
     <button data-test="next" icon="next" @click="next">next</button>
     <button data-test="repeat" icon="repeat" @click="putRepeat">{{ repeat }}</button>
     <p data-test="track-info">{{ trackInfo }}</p>
+    <p data-test="track-progress">{{ trackProgress }}</p>
   </x-container>
 </template>
 
@@ -18,6 +19,13 @@ import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'Controls',
+
+  data() {
+    return {
+      intervalId: null,
+      trackProgress: 0,
+    };
+  },
 
   computed: {
     ...mapState('player', ['playing', 'progress', 'shuffle', 'repeat', 'track']),
@@ -31,10 +39,48 @@ export default {
 
   methods: {
     ...mapActions('player', ['play', 'putShuffle', 'putRepeat', 'previous', 'next', 'getPlayback']),
+
+    updateProgress() {
+      if (this.trackProgress + 100 >= this.track.duration_ms) {
+        this.trackProgress = this.track.duration_ms;
+        window.clearInterval(this.intervalId);
+        return;
+      }
+
+      if (!this.playing) {
+        window.clearInterval(this.intervalId);
+        return;
+      }
+
+      this.trackProgress += 100;
+    },
+
+    setInterval() {
+      if (this.intervalId) window.clearInterval(this.intervalId);
+      if (!this.track) return;
+
+      this.intervalId = window.setInterval(this.updateProgress, 100);
+    },
+
+    setProgress() {
+      this.trackProgress = Number(this.progress || 0);
+
+      this.setInterval();
+    },
   },
 
   created() {
     this.getPlayback();
+  },
+
+  watch: {
+    progress: {
+      handler: 'setProgress',
+    },
+
+    playing: {
+      handler: 'setProgress',
+    },
   },
 };
 </script>
