@@ -1,14 +1,16 @@
+import clonedeep from 'lodash.clonedeep';
+
 import playlists from './playlists.json';
 import playlist from './playlist.json';
 import playback from './playback.json';
 
 export default {
   getPlaylists: jest.fn()
-    .mockImplementation(() => Promise.resolve({ status: 200, data: playlists })),
+    .mockImplementation(() => Promise.resolve({ status: 200, data: clonedeep(playlists) })),
   getPlaylist: jest.fn()
-    .mockImplementation(() => Promise.resolve({ status: 200, data: playlist })),
+    .mockImplementation(() => Promise.resolve({ status: 200, data: clonedeep(playlist) })),
   getPlayback: jest.fn()
-    .mockImplementation(() => Promise.resolve({ status: 200, data: playback })),
+    .mockImplementation(() => Promise.resolve({ status: 200, data: clonedeep(playback) })),
   getPlaylistsTracks: jest.fn()
     .mockImplementation(() => Promise.resolve({ status: 200, data: {} })),
   pause: jest.fn().mockImplementation(() => Promise.resolve({ status: 204 })),

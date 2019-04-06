@@ -46,6 +46,10 @@ describe('Player Controls', () => {
     trackDuration = wrapper.find('[data-test="track-duration"]');
   });
 
+  afterEach(() => {
+    Object.keys(api).forEach(key => api[key].mockClear());
+  });
+
   describe('control state', () => {
     it('shows correct state', () => {
       expect(store.dispatch).toHaveBeenCalledTimes(1);
@@ -60,11 +64,18 @@ describe('Player Controls', () => {
   });
 
   describe('progress', () => {
+    let newPlayback;
+    let newProgress;
+
+    beforeEach(() => {
+      newPlayback = clonedeep(playback);
+      newProgress = Number(newPlayback.progress_ms) + 1000;
+      newPlayback.progress_ms = newProgress;
+    });
+
     it('shows and updates the song duration', async () => {
-      const newPlayback = clonedeep(playback);
-      newPlayback.progress_ms = Number(playback.progress_ms) + 1000;
       api.getPlayback.mockImplementationOnce(() => Promise
-        .resolve({ status: 200, data: newPlayback }));
+        .resolve({ status: 200, data: clonedeep(newPlayback) }));
 
       expect(trackProgress.text()).toEqual('0:44');
 
@@ -74,13 +85,30 @@ describe('Player Controls', () => {
       expect(trackProgress.text()).toEqual('0:46');
     });
 
+    it('triggers an getPlayback when song is finished', async () => {
+      api.getPlayback.mockImplementationOnce(() => Promise
+        .resolve({ status: 200, data: clonedeep(newPlayback) }));
+
+      expect(trackInfo.text()).toEqual('6 A.M. - DJ HMC');
+
+      expect(store.dispatch).toHaveBeenCalledTimes(1);
+      expect(store.dispatch).toHaveBeenLastCalledWith('player/getPlayback', undefined);
+
+      await wrapper.vm.getPlayback();
+
+      expect(store.dispatch).toHaveBeenCalledTimes(2);
+      expect(store.dispatch).toHaveBeenLastCalledWith('player/getPlayback', undefined);
+
+      jest.runAllTimers();
+
+      expect(store.dispatch).toHaveBeenCalledTimes(3);
+      expect(store.dispatch).toHaveBeenLastCalledWith('player/getPlayback', undefined);
+    });
+
     it('doesn‘t update the duration when pause', async () => {
-      const newPlayback = clonedeep(playback);
-      const newProgress = Number(playback.progress_ms) + 1000;
-      newPlayback.progress_ms = newProgress;
       newPlayback.is_playing = false;
       api.getPlayback.mockImplementationOnce(() => Promise
-        .resolve({ status: 200, data: newPlayback }));
+        .resolve({ status: 200, data: clonedeep(newPlayback) }));
 
       expect(trackProgress.text()).toEqual('0:44');
 
@@ -91,12 +119,9 @@ describe('Player Controls', () => {
     });
 
     it('triggers the interval when playing starts', async () => {
-      const newPlayback = clonedeep(playback);
-      const newProgress = Number(playback.progress_ms) + 1000;
-      newPlayback.progress_ms = newProgress;
       newPlayback.is_playing = false;
       api.getPlayback.mockImplementationOnce(() => Promise
-        .resolve({ status: 200, data: newPlayback }));
+        .resolve({ status: 200, data: clonedeep(newPlayback) }));
 
       expect(trackProgress.text()).toEqual('0:44');
 
@@ -107,7 +132,7 @@ describe('Player Controls', () => {
 
       newPlayback.is_playing = true;
       api.getPlayback.mockImplementationOnce(() => Promise
-        .resolve({ status: 200, data: newPlayback }));
+        .resolve({ status: 200, data: clonedeep(newPlayback) }));
 
       await wrapper.vm.getPlayback();
       jest.runAllTimers();

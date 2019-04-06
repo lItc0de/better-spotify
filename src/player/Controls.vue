@@ -45,6 +45,7 @@ export default {
       if (this.trackProgress + 500 >= this.duration) {
         this.trackProgress = this.duration;
         window.clearInterval(this.intervalId);
+        this.getPlayback();
         return;
       }
 
