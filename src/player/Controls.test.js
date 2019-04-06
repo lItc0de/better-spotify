@@ -25,6 +25,7 @@ describe('Player Controls', () => {
   let repeatBtn;
   let trackInfo;
   let trackProgress;
+  let trackDuration;
 
   beforeEach(() => {
     store = new Vuex.Store(clonedeep(storeConfig));
@@ -42,6 +43,7 @@ describe('Player Controls', () => {
     repeatBtn = wrapper.find('[data-test="repeat"]');
     trackInfo = wrapper.find('[data-test="track-info"]');
     trackProgress = wrapper.find('[data-test="track-progress"]');
+    trackDuration = wrapper.find('[data-test="track-duration"]');
   });
 
   describe('control state', () => {
@@ -53,6 +55,7 @@ describe('Player Controls', () => {
       expect(playBtn.text()).toEqual('pause');
       expect(repeatBtn.text()).toEqual('off');
       expect(trackInfo.text()).toEqual('6 A.M. - DJ HMC');
+      expect(trackDuration.text()).toEqual('0:46');
     });
   });
 

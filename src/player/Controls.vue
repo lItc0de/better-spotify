@@ -11,6 +11,7 @@
     <button data-test="repeat" icon="repeat" @click="putRepeat">{{ repeat }}</button>
     <p data-test="track-info">{{ trackInfo }}</p>
     <p data-test="track-progress">{{ trackProgress | msToTime }}</p>
+    <p data-test="track-duration">{{ duration | msToTime }}</p>
   </x-container>
 </template>
 
