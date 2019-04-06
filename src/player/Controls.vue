@@ -10,7 +10,7 @@
     <button data-test="next" icon="next" @click="next">next</button>
     <button data-test="repeat" icon="repeat" @click="putRepeat">{{ repeat }}</button>
     <p data-test="track-info">{{ trackInfo }}</p>
-    <p data-test="track-progress">{{ trackProgress }}</p>
+    <p data-test="track-progress">{{ trackProgress | msToTime }}</p>
   </x-container>
 </template>
 
@@ -41,7 +41,7 @@ export default {
     ...mapActions('player', ['play', 'putShuffle', 'putRepeat', 'previous', 'next', 'getPlayback']),
 
     updateProgress() {
-      if (this.trackProgress + 100 >= this.duration) {
+      if (this.trackProgress + 500 >= this.duration) {
         this.trackProgress = this.duration;
         window.clearInterval(this.intervalId);
         return;
@@ -52,14 +52,14 @@ export default {
         return;
       }
 
-      this.trackProgress += 100;
+      this.trackProgress += 500;
     },
 
     setInterval() {
       if (this.intervalId) window.clearInterval(this.intervalId);
       if (!this.track) return;
 
-      this.intervalId = window.setInterval(this.updateProgress, 100);
+      this.intervalId = window.setInterval(this.updateProgress, 500);
     },
 
     setProgress() {

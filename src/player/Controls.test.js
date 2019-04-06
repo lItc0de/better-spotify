@@ -6,12 +6,14 @@ import Controls from './Controls.vue';
 import storeConfig from '@/store/config';
 import playback from '@/__mocks__/playback.json';
 import api from '@/api';
+import { msToTime } from '@/filters/timeFilters';
 
 jest.mock('@/api');
 jest.useFakeTimers();
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+localVue.filter('msToTime', msToTime);
 
 describe('Player Controls', () => {
   let store;
@@ -57,48 +59,48 @@ describe('Player Controls', () => {
   describe('progress', () => {
     it('shows and updates the song duration', async () => {
       const newPlayback = clonedeep(playback);
-      newPlayback.progress_ms = Number(playback.progress_ms) + 100;
+      newPlayback.progress_ms = Number(playback.progress_ms) + 1000;
       api.getPlayback.mockImplementationOnce(() => Promise
         .resolve({ status: 200, data: newPlayback }));
 
-      expect(trackProgress.text()).toEqual(playback.progress_ms);
+      expect(trackProgress.text()).toEqual('0:44');
 
       await wrapper.vm.getPlayback();
       jest.runAllTimers();
 
-      expect(trackProgress.text()).toEqual(playback.item.duration_ms.toString());
+      expect(trackProgress.text()).toEqual('0:46');
     });
 
     it('doesn‘t update the duration when pause', async () => {
       const newPlayback = clonedeep(playback);
-      const newProgress = Number(playback.progress_ms) + 100;
+      const newProgress = Number(playback.progress_ms) + 1000;
       newPlayback.progress_ms = newProgress;
       newPlayback.is_playing = false;
       api.getPlayback.mockImplementationOnce(() => Promise
         .resolve({ status: 200, data: newPlayback }));
 
-      expect(trackProgress.text()).toEqual(playback.progress_ms);
+      expect(trackProgress.text()).toEqual('0:44');
 
       await wrapper.vm.getPlayback();
       jest.runAllTimers();
 
-      expect(trackProgress.text()).toEqual(newProgress.toString());
+      expect(trackProgress.text()).toEqual('0:45');
     });
 
     it('triggers the interval when playing starts', async () => {
       const newPlayback = clonedeep(playback);
-      const newProgress = Number(playback.progress_ms) + 100;
+      const newProgress = Number(playback.progress_ms) + 1000;
       newPlayback.progress_ms = newProgress;
       newPlayback.is_playing = false;
       api.getPlayback.mockImplementationOnce(() => Promise
         .resolve({ status: 200, data: newPlayback }));
 
-      expect(trackProgress.text()).toEqual(playback.progress_ms);
+      expect(trackProgress.text()).toEqual('0:44');
 
       await wrapper.vm.getPlayback();
       jest.runAllTimers();
 
-      expect(trackProgress.text()).toEqual(newProgress.toString());
+      expect(trackProgress.text()).toEqual('0:45');
 
       newPlayback.is_playing = true;
       api.getPlayback.mockImplementationOnce(() => Promise
@@ -107,7 +109,7 @@ describe('Player Controls', () => {
       await wrapper.vm.getPlayback();
       jest.runAllTimers();
 
-      expect(trackProgress.text()).toEqual(playback.item.duration_ms.toString());
+      expect(trackProgress.text()).toEqual('0:46');
     });
   });
 
