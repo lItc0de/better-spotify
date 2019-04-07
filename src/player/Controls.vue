@@ -1,5 +1,10 @@
 <template>
-  <x-container row>
+  <x-container class="controls" row>
+    <progress-bar
+      :progress="trackProgress"
+      :duration="duration"
+      data-test="progress-bar"
+    />
     <button data-test="shuffle" icon="shuffle" @click="putShuffle">
       {{ shuffle ? 'shuffle' : 'no_shuffle' }}
     </button>
@@ -17,9 +22,14 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import ProgressBar from './ProgressBar.vue';
 
 export default {
   name: 'Controls',
+
+  components: {
+    ProgressBar,
+  },
 
   data() {
     return {
@@ -42,7 +52,7 @@ export default {
     ...mapActions('player', ['play', 'putShuffle', 'putRepeat', 'previous', 'next', 'getPlayback']),
 
     updateProgress() {
-      if (this.trackProgress + 500 >= this.duration) {
+      if (this.trackProgress + 100 >= this.duration) {
         this.trackProgress = this.duration;
         window.clearInterval(this.intervalId);
         this.getPlayback();
@@ -54,14 +64,14 @@ export default {
         return;
       }
 
-      this.trackProgress += 500;
+      this.trackProgress += 100;
     },
 
     setInterval() {
       if (this.intervalId) window.clearInterval(this.intervalId);
       if (!this.track) return;
 
-      this.intervalId = window.setInterval(this.updateProgress, 500);
+      this.intervalId = window.setInterval(this.updateProgress, 100);
     },
 
     setProgress() {
@@ -86,3 +96,8 @@ export default {
   },
 };
 </script>
+
+<style lang="stylus" scoped>
+.controls
+  position relative
+</style>

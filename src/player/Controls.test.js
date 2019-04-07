@@ -26,6 +26,7 @@ describe('Player Controls', () => {
   let trackInfo;
   let trackProgress;
   let trackDuration;
+  let progressBar;
 
   beforeEach(() => {
     store = new Vuex.Store(clonedeep(storeConfig));
@@ -44,6 +45,7 @@ describe('Player Controls', () => {
     trackInfo = wrapper.find('[data-test="track-info"]');
     trackProgress = wrapper.find('[data-test="track-progress"]');
     trackDuration = wrapper.find('[data-test="track-duration"]');
+    progressBar = wrapper.find('[data-test="progress-bar"]');
   });
 
   afterEach(() => {
@@ -78,11 +80,15 @@ describe('Player Controls', () => {
         .resolve({ status: 200, data: clonedeep(newPlayback) }));
 
       expect(trackProgress.text()).toEqual('0:44');
+      expect(progressBar.vm.duration).toEqual(playback.item.duration_ms);
+      expect(progressBar.vm.progress.toString()).toEqual(playback.progress_ms);
 
       await wrapper.vm.getPlayback();
       jest.runAllTimers();
 
       expect(trackProgress.text()).toEqual('0:46');
+      expect(progressBar.vm.duration).toEqual(playback.item.duration_ms);
+      expect(progressBar.vm.progress).toEqual(playback.item.duration_ms);
     });
 
     it('triggers an getPlayback when song is finished', async () => {
