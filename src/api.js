@@ -31,4 +31,6 @@ export default {
   shuffle: shuffle => axios.put(`v1/me/player/shuffle?state=${shuffle}`),
 
   repeat: repeat => axios.put(`v1/me/player/repeat?state=${repeat}`),
+
+  seek: positionMs => axios.put(`v1/me/player/seek?position_ms=${positionMs}`),
 };

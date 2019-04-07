@@ -241,7 +241,7 @@ describe('playerStore', () => {
       );
 
       await store.dispatch('previous');
-      jest.runAllTimers();
+      // jest.runAllTimers();
 
       expect(api.previous).toHaveBeenCalled();
       // doesn't work at the moment https://stackoverflow.com/questions/51126786/jest-fake-timers-with-promises
@@ -259,11 +259,30 @@ describe('playerStore', () => {
       );
 
       await store.dispatch('next');
-      jest.runAllTimers();
+      // jest.runAllTimers();
 
       expect(api.next).toHaveBeenCalled();
       // doesn't work at the moment https://stackoverflow.com/questions/51126786/jest-fake-timers-with-promises
       // expect(store.state.track.id).toEqual(modifiedPlayback.item.id);
+    });
+  });
+
+  describe('seek', () => {
+    it('sets new position and updates the state', async () => {
+      const modifiedPlayback = clonedeep(playback);
+      const newPosition = 123456;
+
+      modifiedPlayback.progress_ms = newPosition;
+      api.getPlayback.mockImplementationOnce(
+        () => Promise.resolve({ status: 200, data: modifiedPlayback }),
+      );
+
+      await store.dispatch('seek', newPosition);
+      // jest.runAllTimers();
+
+      expect(api.seek).toHaveBeenCalledWith(newPosition);
+      // doesn't work at the moment https://stackoverflow.com/questions/51126786/jest-fake-timers-with-promises
+      // expect(store.state.progress).toEqual(modifiedPlayback.progress_ms);
     });
   });
 });

@@ -147,6 +147,15 @@ describe('Player Controls', () => {
     });
   });
 
+  describe('progressBar', () => {
+    it('sets a new track position', () => {
+      const newPosition = '123456';
+      progressBar.vm.$emit('seek', newPosition);
+
+      expect(api.seek).toHaveBeenCalledWith(newPosition);
+    });
+  });
+
   describe('Play/Pause button', () => {
     it('triggers play if playback is paused', () => {
       store.dispatch = jest.fn();

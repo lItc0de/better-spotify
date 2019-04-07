@@ -137,5 +137,10 @@ export default {
       await api.next();
       await setTimeout(() => dispatch('getPlayback'), 200);
     },
+
+    async seek({ dispatch }, positionMs) {
+      await api.seek(positionMs);
+      await setTimeout(() => dispatch('getPlayback'), 200);
+    },
   },
 };

@@ -4,6 +4,7 @@
       :progress="trackProgress"
       :duration="duration"
       data-test="progress-bar"
+      @seek="seek"
     />
     <button data-test="shuffle" icon="shuffle" @click="putShuffle">
       {{ shuffle ? 'shuffle' : 'no_shuffle' }}
@@ -49,7 +50,8 @@ export default {
   },
 
   methods: {
-    ...mapActions('player', ['play', 'putShuffle', 'putRepeat', 'previous', 'next', 'getPlayback']),
+    ...mapActions('player', ['play', 'putShuffle', 'putRepeat', 'previous', 'next', 'getPlayback',
+      'seek']),
 
     updateProgress() {
       if (this.trackProgress + 100 >= this.duration) {
