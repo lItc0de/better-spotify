@@ -23,7 +23,8 @@ describe('Player Controls', () => {
   let playBtn;
   let nextBtn;
   let repeatBtn;
-  let trackInfo;
+  let trackName;
+  let trackArtists;
   let trackProgress;
   let trackDuration;
   let progressBar;
@@ -42,7 +43,6 @@ describe('Player Controls', () => {
     playBtn = wrapper.find('[data-test="play"]');
     nextBtn = wrapper.find('[data-test="next"]');
     repeatBtn = wrapper.find('[data-test="repeat"]');
-    trackInfo = wrapper.find('[data-test="track-info"]');
     trackProgress = wrapper.find('[data-test="track-progress"]');
     trackDuration = wrapper.find('[data-test="track-duration"]');
     progressBar = wrapper.find('[data-test="progress-bar"]');
@@ -66,7 +66,11 @@ describe('Player Controls', () => {
       expect(repeatBtn.vm.$attrs.title).toEqual('repeat-off');
       expect(repeatBtn.vm.$attrs.icon).toEqual('repeat-off');
 
-      expect(trackInfo.text()).toEqual('6 A.M. - DJ HMC');
+      trackName = wrapper.find('[data-test="track-name"]');
+      trackArtists = wrapper.find('[data-test="track-artists"]');
+
+      expect(trackName.text()).toEqual('6 A.M.');
+      expect(trackArtists.text()).toEqual('DJ HMC');
       expect(trackDuration.text()).toEqual('0:46');
     });
   });
@@ -101,7 +105,11 @@ describe('Player Controls', () => {
       api.getPlayback.mockImplementationOnce(() => Promise
         .resolve({ status: 200, data: clonedeep(newPlayback) }));
 
-      expect(trackInfo.text()).toEqual('6 A.M. - DJ HMC');
+      trackName = wrapper.find('[data-test="track-name"]');
+      trackArtists = wrapper.find('[data-test="track-artists"]');
+
+      expect(trackName.text()).toEqual('6 A.M.');
+      expect(trackArtists.text()).toEqual('DJ HMC');
 
       expect(store.dispatch).toHaveBeenCalledTimes(1);
       expect(store.dispatch).toHaveBeenLastCalledWith('player/getPlayback', undefined);

@@ -1,45 +1,65 @@
 <template>
-  <x-container class="controls" row>
+  <div class="controls">
     <progress-bar
       :progress="trackProgress"
       :duration="duration"
       data-test="progress-bar"
       @seek="seek"
     />
-    <x-icon-btn
-      data-test="shuffle"
-      :icon="shuffleState.icon"
-      :title="shuffleState.title"
-      @click="putShuffle"
-    />
-    <x-icon-btn
-      data-test="previous"
-      icon="skip-previous"
-      title="previous"
-      @click="previous"
-    />
-    <x-icon-btn
-      data-test="play"
-      :icon="playState.icon"
-      :title="playState.title"
-      @click="play"
-    />
-    <x-icon-btn
-      data-test="next"
-      icon="skip-next"
-      title="next"
-      @click="next"
-    />
-    <x-icon-btn
-      data-test="repeat"
-      :icon="repeatState.icon"
-      :title="repeatState.title"
-      @click="putRepeat"
-    />
-    <p data-test="track-info">{{ trackInfo }}</p>
-    <p data-test="track-progress">{{ trackProgress | msToTime }}</p>
-    <p data-test="track-duration">{{ duration | msToTime }}</p>
-  </x-container>
+    <div class="controls-wrapper">
+      <div class="info">
+        <template v-if="track">
+          <img :src="image" class="album-cover"/>
+          <div>
+            <p data-test="track-name" class="ma-0"><b>{{ track.name }}</b></p>
+            <p data-test="track-artists" class="ma-0 muted">
+              {{ track.artists.map(artist => artist.name).join(', ') }}
+            </p>
+          </div>
+        </template>
+      </div>
+      <div class="player">
+        <x-icon-btn
+          data-test="shuffle"
+          :icon="shuffleState.icon"
+          :title="shuffleState.title"
+          @click="putShuffle"
+        />
+        <x-icon-btn
+          data-test="previous"
+          icon="skip-previous"
+          title="previous"
+          @click="previous"
+        />
+        <x-icon-btn
+          data-test="play"
+          color="white"
+          scale="1.5rem"
+          gradient
+          :icon="playState.icon"
+          :title="playState.title"
+          @click="play"
+        />
+        <x-icon-btn
+          data-test="next"
+          icon="skip-next"
+          title="next"
+          @click="next"
+        />
+        <x-icon-btn
+          data-test="repeat"
+          :icon="repeatState.icon"
+          :title="repeatState.title"
+          @click="putRepeat"
+        />
+      </div>
+      <p class="ma-0 time">
+        <span data-test="track-progress">{{ trackProgress | msToTime }}</span>
+        /
+        <span data-test="track-duration">{{ duration | msToTime }}</span>
+      </p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -73,10 +93,10 @@ export default {
   computed: {
     ...mapState('player', ['playing', 'progress', 'shuffle', 'repeat', 'track', 'duration']),
 
-    trackInfo() {
-      if (!this.track) return '';
-      const { name, artists } = this.track;
-      return `${name} - ${artists.map(artist => artist.name).join(', ')}`;
+    image() {
+      return (this.track && this.track.album && this.track.album.images.length)
+        ? this.track.album.images[0].url
+        : '';
     },
 
     shuffleState() {
@@ -163,4 +183,29 @@ export default {
 <style lang="stylus" scoped>
 .controls
   position relative
+
+  .controls-wrapper
+    display grid
+    grid-template-columns 1fr auto 1fr
+    align-items center
+
+    .info
+      display grid
+      grid-template-columns 100px 1fr
+      align-items center
+      grid-gap 1rem
+
+      .album-cover
+        height 100px
+
+    .player
+      display grid
+      grid-template-columns repeat(5, auto)
+      grid-gap 1rem
+      align-items center
+      justify-content center
+
+    .time
+      text-align right
+      padding-right 1rem
 </style>
