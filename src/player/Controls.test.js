@@ -57,9 +57,15 @@ describe('Player Controls', () => {
       expect(store.dispatch).toHaveBeenCalledTimes(1);
       expect(store.dispatch).toHaveBeenCalledWith('player/getPlayback', undefined);
 
-      expect(shuffleBtn.text()).toEqual('no_shuffle');
-      expect(playBtn.text()).toEqual('pause');
-      expect(repeatBtn.text()).toEqual('off');
+      expect(shuffleBtn.vm.$attrs.title).toEqual('no_shuffle');
+      expect(shuffleBtn.vm.$attrs.icon).toEqual('shuffle-disabled');
+
+      expect(playBtn.vm.$attrs.title).toEqual('pause');
+      expect(playBtn.vm.$attrs.icon).toEqual('pause');
+
+      expect(repeatBtn.vm.$attrs.title).toEqual('repeat-off');
+      expect(repeatBtn.vm.$attrs.icon).toEqual('repeat-off');
+
       expect(trackInfo.text()).toEqual('6 A.M. - DJ HMC');
       expect(trackDuration.text()).toEqual('0:46');
     });
@@ -161,7 +167,7 @@ describe('Player Controls', () => {
       store.dispatch = jest.fn();
       playBtn.trigger('click');
 
-      expect(store.dispatch).toHaveBeenCalledWith('player/play', expect.anything());
+      expect(store.dispatch).toHaveBeenCalledWith('player/play', undefined);
     });
   });
 
@@ -170,7 +176,7 @@ describe('Player Controls', () => {
       store.dispatch = jest.fn();
       shuffleBtn.trigger('click');
 
-      expect(store.dispatch).toHaveBeenCalledWith('player/putShuffle', expect.anything());
+      expect(store.dispatch).toHaveBeenCalledWith('player/putShuffle', undefined);
     });
   });
 
@@ -179,7 +185,7 @@ describe('Player Controls', () => {
       store.dispatch = jest.fn();
       repeatBtn.trigger('click');
 
-      expect(store.dispatch).toHaveBeenCalledWith('player/putRepeat', expect.anything());
+      expect(store.dispatch).toHaveBeenCalledWith('player/putRepeat', undefined);
     });
   });
 
@@ -188,7 +194,7 @@ describe('Player Controls', () => {
       store.dispatch = jest.fn();
       previousBtn.trigger('click');
 
-      expect(store.dispatch).toHaveBeenCalledWith('player/previous', expect.anything());
+      expect(store.dispatch).toHaveBeenCalledWith('player/previous', undefined);
     });
   });
 
@@ -197,7 +203,7 @@ describe('Player Controls', () => {
       store.dispatch = jest.fn();
       nextBtn.trigger('click');
 
-      expect(store.dispatch).toHaveBeenCalledWith('player/next', expect.anything());
+      expect(store.dispatch).toHaveBeenCalledWith('player/next', undefined);
     });
   });
 });

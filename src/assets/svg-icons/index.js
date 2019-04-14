@@ -1,0 +1,10 @@
+/* eslint-disable */
+require('./pause')
+require('./play')
+require('./repeat-off')
+require('./repeat-once')
+require('./repeat')
+require('./shuffle-disabled')
+require('./shuffle-variant')
+require('./skip-next')
+require('./skip-previous')

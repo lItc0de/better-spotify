@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "watch": "vue-cli-service test:unit --watch"
+    "watch": "vue-cli-service test:unit --watch",
+    "generate-icons": "vsvg -s ./svg-icons -t ./src/assets/svg-icons"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -23,7 +24,7 @@
     ]
   },
   "dependencies": {
-    "@litc0de/xstyles": "^0.1.11",
+    "@litc0de/xstyles": "^1.0.1",
     "axios": "^0.18.0",
     "dotenv": "^6.2.0",
     "normalizr": "^3.3.0",
@@ -31,6 +32,7 @@
     "vue": "^2.6.10",
     "vue-head": "^2.1.1",
     "vue-router": "^3.0.2",
+    "vue-svgicon": "^3.2.5",
     "vuex": "^3.1.0",
     "vuex-router-sync": "^5.0.0"
   },
