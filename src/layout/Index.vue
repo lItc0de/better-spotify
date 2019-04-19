@@ -20,5 +20,5 @@ export default {
 
 <style lang="stylus" scoped>
 .layout
-  padding 1rem
+  padding 1rem 1rem calc(100px + 1rem)
 </style>

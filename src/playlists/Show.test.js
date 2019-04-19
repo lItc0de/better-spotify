@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import clonedeep from 'lodash.clonedeep';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { createLocalVue, mount } from '@vue/test-utils';
 
 import Show from './Show.vue';
 import storeConfig from '@/store/config';
@@ -17,7 +17,7 @@ describe('Playlists Show', () => {
 
   beforeEach(() => {
     store = new Vuex.Store(clonedeep(storeConfig));
-    wrapper = shallowMount(Show, {
+    wrapper = mount(Show, {
       localVue,
       store,
       mocks: {
@@ -37,6 +37,7 @@ describe('Playlists Show', () => {
     it('shows the playlist tracks', () => {
       const tracks = wrapper.findAll('[data-test="track"]');
       expect(tracks.length).toBe(2);
+      expect(tracks.at(0).vm.track).toEqual(playlist.tracks.items[0].track);
     });
   });
 

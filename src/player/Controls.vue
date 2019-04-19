@@ -9,7 +9,7 @@
     <div class="controls-wrapper">
       <div class="info">
         <template v-if="track">
-          <img :src="image" class="album-cover"/>
+          <img :src="artwork" class="album-cover"/>
           <div>
             <p data-test="track-name" class="ma-0"><b>{{ track.name }}</b></p>
             <p data-test="track-artists" class="ma-0 muted">
@@ -93,10 +93,12 @@ export default {
   computed: {
     ...mapState('player', ['playing', 'progress', 'shuffle', 'repeat', 'track', 'duration']),
 
-    image() {
-      return (this.track && this.track.album && this.track.album.images.length)
-        ? this.track.album.images[0].url
-        : '';
+    artwork() {
+      if (this.track && this.track.album && this.track.album.images[1]) {
+        const { images } = this.track.album;
+        return images[1].url;
+      }
+      return '';
     },
 
     shuffleState() {

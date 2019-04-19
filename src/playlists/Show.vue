@@ -1,19 +1,27 @@
 <template>
   <section>
     <h1 data-test="title">{{ name }}</h1>
-    <div
+    <playlist-track
       v-for="(item, index) in items"
       :key="item.track.id"
-      @dblclick="playTrack(index)"
+      :track="item.track"
       data-test="track"
-    >{{ item.track.name }}</div>
+      @play="playTrack(index)"
+    />
   </section>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import PlaylistTrack from './Track.vue';
 
 export default {
+  name: 'ShowPlaylist',
+
+  components: {
+    PlaylistTrack,
+  },
+
   computed: {
     ...mapState('playlist', ['name', 'items', 'uri']),
   },
